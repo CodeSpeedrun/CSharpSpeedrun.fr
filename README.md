@@ -1,5 +1,5 @@
-## Variables 
-```c#
+/* Variables 
+*/
   static void Main(string[] args)
         {
             int myInt = 7;          //Integer
@@ -15,25 +15,25 @@ static void Main(string[] args)
 }
 ```
 
-## Using Convert.ToInt32();
-```c#
+/* Using Convert.ToInt32();
+*/
 Console.WriteLine("Please enter your age: ");
 int age = Convert.ToInt32(Console.ReadLine()); //int to int
 Console.WriteLine("Age = " + age);
 ```
 
-## Console.Read()
+/* Console.Read()
 The second way to capture user input is the Console.Read() method that reads the whole input line but only returns the ASCII value of the first character. For example, the ASCII value of A is 65. Some devices still use ASCII encoding, so this method might come in handy.
-```c#
+*/
 Console.WriteLine("Enter coupon code: ");
 int code = Console.Read();
 
 Console.WriteLine("ASCII = " + code);
 ```
 
-## Console.ReadKey()
+/* Console.ReadKey()
 The third way to capture user input is the Console.ReadKey() method. This method records the first keyboard keypress and returns the ConsoleKeyInfo struct which can be used to display additional information about the key that was pressed.
-```c#
+*/
 Console.WriteLine("Press any key to continue...");
 ConsoleKeyInfo key = Console.ReadKey();
 
@@ -41,11 +41,11 @@ Console.WriteLine();
 Console.WriteLine("Key pressed = " + key.Key);
 ```
 
-##  logical Operators 
+/*  logical Operators 
 && returns true if both statements are true otherwise it will return false.
 || will return true if one of the statements is true.
 ! reverses the result, returns false if the result true and returns true if the result is false.
-```c#
+*/
 int a = 5;
 int b = 10;
 
@@ -54,9 +54,9 @@ Console.WriteLine("Logical or: " + ((a < 3) || b < 20) );
 Console.WriteLine("Logical not: " + (a != b));
 ```
 
-## operator precedence
+/* operator precedence
 The evaluation of an expression is done from left to right. If multiple operators are used, then the operators with higher priority are evaluated before the operators with lower priority. However, with additional ( ), the priority of the operators can be manually changed as illustrated below:
-```c#
+*/
 int a = 5;
 int b = 10;
 Console.WriteLine( a + b * 3 ); 
@@ -67,39 +67,39 @@ Console.WriteLine((a + b) * 3 );
 45
 ```
 
-## Task List in Visual Studio
+/* Task List in Visual Studio
 In Visual Studio, comment tokens like TODO, HACK, NOTE and UNDONE are available to track comments. Let’s say we need to develop a feature in a particular class, then we can tag that class with a comment token, and later we can easily find it with the Task List. The Task List can be activated by clicking on View > Task List.
-```c#
+*/
  
 ```
 
-## Math class in C#
+/* Math class in C#
 The C# Math class contains many methods that performs mathematical operations. The most popular methods are: Min(), Max(), Round().
-```c#
+*/
 int min = Math.Min(56, 90);
 Console.WriteLine(min);
 
 56
 ```
 
-## Math.Sqrt()
-```c#
+/* Math.Sqrt()
+*/
 double sqrt = Math.Sqrt(16);
 Console.WriteLine(sqrt );
 
 4
 ```
 
-## Math.Round()
-```c#
+/* Math.Round()
+*/
 double round = Math.Round(6.99);
 Console.WriteLine(round);
 
 7
 ```
 
-## enum
-```c#
+/* enum
+*/
  using System;
 
 namespace CSharpSpeedrun 
@@ -127,8 +127,8 @@ namespace CSharpSpeedrun
     }
 }
 ```
-## enum with a switch statement
-```c#
+/* enum with a switch statement
+*/
  
 using System;
 
@@ -171,8 +171,8 @@ namespace CSharpSpeedrun
 }
 ```
 
-## iterate an array
-```c#
+/* iterate an array
+*/
  using System;
 
 namespace CSharpSpeedrun
@@ -194,8 +194,8 @@ Array.Sort(myFavFlowers);
 Array.Reverse(myFavFlowers);
 ```
 
-## else-if statement
-```c#
+/* else-if statement
+*/
  using System;
 
 namespace CSharpSpeedrun. 
@@ -224,8 +224,8 @@ namespace CSharpSpeedrun.
 }
 ```
 
-## ternary operator in C#
-```c#
+/* ternary operator in C#
+*/
  
 using System;
 
@@ -248,9 +248,9 @@ Student has passed the module!
 
 ```
 
-## .NET aliases
+/* .NET aliases
 Since C# applications run on top of the .NET framework, it is possible to use the .NET data type alias instead of the C# data types and the output will be identical.
-```c#
+*/
  using System;
 
 namespace CSharpSpeedrun
@@ -269,10 +269,10 @@ namespace CSharpSpeedrun
 }
 ```
 
-## string interpolation
+/* string interpolation
 A better way of combining two strings is called string interpolation. The dollar $ symbol at the beginning tells the compiler it is an interpolated string. The variables are wrapped with { } and are switched when the application is executed.
 
-```c#
+*/
 using System;
 
 namespace CSharpSpeedrun
@@ -290,10 +290,10 @@ namespace CSharpSpeedrun
 }
 ```
 
-## @ operator to escape characters
+/* @ operator to escape characters
 It can be very tedious to prefix a \ for every single special character found in a piece of text. Another way to escape special characters is by using the @ operator. It tells the compiler that every special character should be treated as a normal character.
 The @ operator will escape most special characters except double-quotes. So, we’ll use it in combination with the \ to escape all the special characters found in common text.
-```c#
+*/
  using System;
 
 namespace CSharpSpeedrun
@@ -312,10 +312,10 @@ namespace CSharpSpeedrun
 //The “software” will be installed in D:\ProgramData\Adobe\Installer
 ```
 
-## implicit casting
+/* implicit casting
 Implicit casting is done automatically by the compiler. Data is copied without any data loss. For e.g., when converting a smaller data type to a larger data type. Remember that each data type takes a specific size in memory, when converting data types, size is really important.
 
-```c#
+*/
  using System;
 
 namespace CSharpSpeedrun
@@ -333,11 +333,11 @@ namespace CSharpSpeedrun
 //10
 ```
 
-## What is explicit casting?
+/* What is explicit casting?
 Explicit casting is not done automatically because the compiler knows there will be data loss. So we need to do the casting manually by putting the target type in parentheses.
 
 In other words, we have to prefix the variable with the target data type. For e.g., converting a larger numeric data type to a smaller data type.
-```c#
+*/
  using System;
 
 namespace CSharpSpeedrun
@@ -355,9 +355,9 @@ namespace CSharpSpeedrun
 //3
 ```
 
-## What is non-compatible type casting?
+/* What is non-compatible type casting?
 Sometimes we cannot use implicit or explicit conversion because the data types are too different. For example, the compiler will throw an error when converting string to int data types.
-```c#
+*/
 namespace CSharpSpeedrun
 {
     class Program
@@ -372,9 +372,9 @@ namespace CSharpSpeedrun
 }
 ```
 
-## How to declare nested for loops in C#?
+/* How to declare nested for loops in C#?
 C# allows us to put a for loop inside another for loop. This technique is called nested for loops. It is useful in scenarios we have multiple iterations.
-```c#
+*/
  
 using System;
 
@@ -396,9 +396,9 @@ namespace CSharpSpeedrun
 }
 ```
 
-## How to break a while loop in C#?
+/* How to break a while loop in C#?
 There are multiple ways to stop a while loop. Instead of using a boolean expression, the break keyword can be used.
-```c#
+*/
  using System;
 
 namespace CSharpSpeedrun
@@ -423,9 +423,9 @@ namespace CSharpSpeedrun
 }
 ```
 
-## What is a do-while loop?
+/* What is a do-while loop?
 It is a variation of the while loop with one key difference. The while loop is executed at least once even if the conditional expression is false. It always starts with the do keyword.
-```c#
+*/
  using System;
 
 namespace CSharpSpeedrun
@@ -452,9 +452,9 @@ namespace CSharpSpeedrun
 }
 ```
 
-## What is a foreach loop?
+/* What is a foreach loop?
 The foreach loop is one of the most popular loop variations available in C#. It is a simplified version of the for loop, consequently, we’ll be using it in most of our code snippets.
-```c#
+*/
  using System;
 
 namespace CSharpSpeedrun.com
@@ -477,9 +477,9 @@ Grape
 Banana
 ```
 
-## How to declare named arguments?
+/* How to declare named arguments?
 because c# is a strongly typed language When creating methods with multiple parameters, the order of the arguments and parameters needs to be respected. However, passing arguments with the key: value syntax allows us to bypass that rule. Now the order of the arguments is irrelevant.
-```c#
+*/
  using System;
 
 namespace CSharpSpeedrun
@@ -511,11 +511,11 @@ Let’s buy some health packs!
 Current weapon: Giant Spoon
 ```
 
-## What is the ref modifier?
+/* What is the ref modifier?
 The ref modifier is short for reference. Using ref, passes a reference to the original data instead of a copy. Notice the ref modifier is added in two places. Firstly, inside the method declaration GetSquared(ref myFavNumber);. Secondly, when calling the method. static void GetSquared(ref int number)
 
 This time, we get the expected result 49 instead of 7.
-```c#
+*/
  using System;
 
 namespace CSharpSpeedrun
@@ -539,9 +539,9 @@ namespace CSharpSpeedrun
 }
 ```
 
-## Constructor chaining in C#
+/* Constructor chaining in C#
 A constructor can call another constructor, this is known as constructor chaining. This technique allows code reusability. In the code snippet, : this() calls the default constructor.
-```c#
+*/
  //file 1
 using System;
 namespace CSharpSpeedrun
@@ -584,12 +584,12 @@ Default constructor activated
 Parameters ok
 ```
 
-## What access modifiers are available in C#?
+/* What access modifiers are available in C#?
 public	Public means it is accessible for all classes in the application.
 private	Private denotes that it is only accessible within the same class or the compiler will throw an error.
 protected	Protected means it is accessible within the same class, or through inheritance.
 internal	This one is used to make code accessible only within its own assembly.
-```c#
+*/
  using System;
 
 namespace CSharpSpeedrun
@@ -612,9 +612,9 @@ namespace CSharpSpeedrun
 //523
 ```
 
-## How to declare property in C#?
+/* How to declare property in C#?
 It is common practice to name the property after the private field but written in CamelCase. The code snippet below illustrates how get { return username; } returns and set { username = value; } assigns data to the private field. Notice the value keyword represents the data to be assigned.
-```c#
+*/
  using System;
 namespace CSharpSpeedrun
 {
@@ -641,9 +641,9 @@ namespace CSharpSpeedrun
 //Tom
 ```
 
-## How to implement inheritance?
+/* How to implement inheritance?
 In the code snippet, the title field is required for both Book and EBook classes. Consequently, it is better to add it in the Book class and it will also be accessible from the EBook class. Notice the colon to activate inheritance. EBook: Book
-```c#
+*/
  using System;
 
 namespace CSharpSpeedrun
@@ -670,9 +670,9 @@ namespace CSharpSpeedrun
 //Sapiens, format = Pdf
 ```
 
-## What is the sealed keyword in C#?
+/* What is the sealed keyword in C#?
 The sealed keyword blocks the inheritance of the class. C# will throw an error when trying to inherit from a sealed class.
-```c#
+*/
  using System;
 
 namespace CSharpSpeedrun
@@ -698,9 +698,9 @@ namespace CSharpSpeedrun
 }
 ```
 
-## How to implement dynamic polymorphism?
+/* How to implement dynamic polymorphism?
 For example, let’s say a base class Vehicle has a method ActivateWiper() and child classes are Car, Truck and they have their own implementation of ActivateWiper().
-```c#
+*/
  using System;
 
 namespace CSharpSpeedrun
@@ -736,9 +736,9 @@ namespace CSharpSpeedrun
 //car wiper activated
 ```
 
-## How to implement static polymorphism?
+/* How to implement static polymorphism?
 Let’s say we need a method that works well with int and double data types. The compiler automatically selects the correct method based on the data that is passed when the method is called. For example, passing AdditionCalculator(1,4) calls the method that returns the int and passing dditionCalculator(1.1,4) calls the method that returns double.
-```c#
+*/
  using System;
 
 namespace CSharpSpeedrun
@@ -763,7 +763,7 @@ namespace CSharpSpeedrun
 //5
 ```
 
-## What is abstraction?
+/* What is abstraction?
 Data abstraction is the process of showing only the crucial data to the user. For example, we can use the brakes of a car or bike without knowing how it works internally.
 Some of the ways to achieve abstraction are:
 
@@ -772,7 +772,7 @@ Note the abstract method does not contain any body, the content is provided by t
 It can only be placed inside an abstract class.
 
 Interfaces
-```c#
+*/
  using System;
 namespace CSharpSpeedrun
 {
@@ -808,10 +808,10 @@ namespace CSharpSpeedrun
 //Shut down initiated.
 ```
 
-## as-keyword
+/* as-keyword
 The as keyword converts a class instance to an interface type that it implements. We check for null values to ensure the cast was successful.
 
-```c# 
+*/ 
  using System;
 namespace CSharpSpeedrun
 {
@@ -934,9 +934,9 @@ namespace CSharpSpeedrun
 //Drawing TextBox
 ```
 
-## Generic Interface
+/* Generic Interface
 
-```c#
+*/
  using System;
 
 namespace CSharpSpeedrun
@@ -980,9 +980,9 @@ namespace CSharpSpeedrun
 //Subtraction(3.118f, 5.623f) result = 8.74
 ```
 
-## How to iterate using foreach loop in C#?
+/* How to iterate using foreach loop in C#?
 Since the List collection class implements the IEnumerable interface, we are allowed to use the foreach loop to iterate its content.
-```c#
+*/
  using System;
 using System.Collections.Generic;
 
@@ -1014,10 +1014,10 @@ namespace CSharpSpeedrun
 }
 ```
 
-## How to use the KeyValuePair struct?
+/* How to use the KeyValuePair struct?
 The KeyValuePair gives more flexibility when iterating a Dictionary because it provides many useful properties. foreach (KeyValuePair item in stockTracker)
 
-```c#
+*/
  using System;
 using System.Collections.Generic;
 
@@ -1043,10 +1043,10 @@ namespace CSharpSpeedrun
 //pen => 65 in stock.
 ```
 
-## How to retrieve the latest element in C#?
+/* How to retrieve the latest element in C#?
 The Pop() method is used to retrieve the latest element from a Stack. Notice that it retrieves and removes the element from the collection.
 
-```c#
+*/
  using System;
 using System.Collections.Generic;
 
@@ -1094,9 +1094,9 @@ The Little Prince
 */
 ```
 
-## How to iterate a Queue<T>?
+/* How to iterate a Queue<T>?
 The Queue<T> also implements the IEnumerable interface, consequently, we can use the foreach loop to iterate its content.
-```c#
+*/
 using System;
 using System.Collections.Generic;
 
@@ -1126,9 +1126,9 @@ Warren
   */
 ```
  
-## What is Single Responsibility Principle?
+/* What is Single Responsibility Principle?
 This principle recomments every software modules such as class, structures, methods among others should accomplish only one job. Hence only one reason to change. The modules should not multitask like a Swiss knife, just because we can put every line of code in a single class, doesn’t mean we should.
-```c#
+*/
  using System;
 
 namespace CSharpSpeedrun
@@ -1152,28 +1152,28 @@ namespace CSharpSpeedrun
 ```
 
 ##
-```c#
+*/
  
 ```
 
-## What is Open/Closed Principle?
+/* What is Open/Closed Principle?
 This principle advocates that a software module should be open for extension but closed for modification. In other words, new functionality should be easily added without altering existing codes which has already been tested. Inheritance is one of the techniques to accomplish this.
-```c#
+*/
  
 ```
 
-## What is Liskov Substitution Principle?
+/* What is Liskov Substitution Principle?
 It is recommended that any derived class should be interchangeble with the parent class and the output should be identical. In other words, a derived class must be substitutable for its parent class. Let’s say a mother is an Engineer while her son is a teacher, although they are related, the son cannot replace the Engineer at work.
 
-```c#
+*/
  
 ```
 
 
-## What is Interface Segregation Principle (ISP)?
+/* What is Interface Segregation Principle (ISP)?
 This principle recommends that classes should not be forced to implement methods they dont use. In other words, instead of a multipurpose interface, it is better to have multiple smaller ones.
 
-```c#
+*/
  public class Manager: Developper 
 {  
    public void MeetClients()  
@@ -1189,9 +1189,9 @@ This principle recommends that classes should not be forced to implement methods
 } 
 ```
 
-## What is Dependency Inversion Principle?
+/* What is Dependency Inversion Principle?
 DIP advocates that upper-level modules should not be dependent on low-level modules. In other words, both should depend upon abstractions, there should not be tight coupling among components of a software.
-```c#
+*/
  using System;
 
 namespace CSharpSpeedrun.com
@@ -1251,15 +1251,15 @@ Backup stopped
 */
 ```
 
-## What are design patterns?
+/* What are design patterns?
 Design patterns are conceptual solutions to common software problems. They advocate the reusability and maintainability of applications. The most popular design patterns come from the book by GOF.
-```c#
+*/
  
 ```
 
-## What is Singleton Design Pattern?
+/* What is Singleton Design Pattern?
 SDP is one of the most popular and simple design pattern. It makes sure there is only one global instance for the class.
-```c#
+*/
 using System;
 using System.Collections.Generic;
 
@@ -1311,9 +1311,9 @@ namespace CSharpSpeedrun.com
 */
 ```
 
-## What is LINQ?
+/* What is LINQ?
 LINQ or Language Integrated Query allows us to query data from various sources and formats such as file, database, xml and much more.
-```c#
+*/
 string[] myFavCars = {"Toyota", "BMW", "Tesla"};
 
 var myQuery = from car in myFavCars 
@@ -1328,9 +1328,9 @@ foreach(var car in myQuery ){
 */
 ```
 
-## What is an indexer?
+/* What is an indexer?
 Previously we have covered arrays. An indexer allows a class to be indexed and accessed like an array. Similar to a property, an indexer is defined using this keyword and square brackets [].
-```c#
+*/
 using System;
 
 namespace CSharpSpeedrun
@@ -1367,9 +1367,9 @@ namespace CSharpSpeedrun
 */
 ```
 
-## What is the partial keyword?
+/* What is the partial keyword?
 Using the partial keyword, we can break up the implementaton of classes, methods or even interfaces into several .cs files.
-```c#
+*/
 using System;
 
 namespace CSharpSpeedrun
@@ -1405,9 +1405,9 @@ namespace CSharpSpeedrun
 ```
 
   
-## What is a Tuple?
+/* What is a Tuple?
 A tuple is a data structure that stores data of different data types. It is mostly used to return multiple values from a method. Above all, Tuple can pass multiple values to a method through a single parameter.
-```c#
+*/
 using System;
 
 namespace CSharpSpeedrun
@@ -1455,7 +1455,7 @@ namespace CSharpSpeedrun
 */
 ```
 
-## What are delegates?
+/* What are delegates?
 Delegate allows passing a function as a parameter. It is also used when workng with callback functions and events.
 The delegate defines the method signature.
 
@@ -1463,7 +1463,7 @@ Delegate workflow
 Declare a delegate
 Bind methods
 Call the delegate
-```c#
+*/
 using System;
 namespace CSharpSpeedrun.
 {
@@ -1494,9 +1494,9 @@ class Program
 */
 ```
 
-## What is an Extension Method?
+/* What is an Extension Method?
 Extension methods are simply additional methods that are injected to the original class without editing or recompiling it.
-```c#
+*/
 using System;
 namespace CSharpSpeedrun
 {
@@ -1532,9 +1532,9 @@ class Program
 */
 ```
 
-## What is nullable types?
+/* What is nullable types?
 Nullable types allows assignment of null to value type variables.
-```c#
+*/
 Nullable<int> highScore = null;
 int? highScore = null;
 /*
@@ -1542,7 +1542,7 @@ int? highScore = null;
 */
 ```
 
-## What is an Event?
+/* What is an Event?
 An event is simply a delegate wrapper.
 It is recommented to use the built-in delegate EventHandler for common events.
 Events are created using Publisher classes and Subscriber classes. Publisher raises event, whereas Subscribers registers for events and implement the event handler methods.
@@ -1551,7 +1551,7 @@ Event Steps
 Define delegate
 Define event based on delegate
 Publisher raises the event
-```c#
+*/
 using System;
 
 namespace CSharpSpeedrun
@@ -1631,10 +1631,10 @@ Fax order sent for => Nutella Breakfast Bar
 */
 ```
 
-## Exception handling
+/* Exception handling
 The exceptions can be hard to understand, C# allows us to catch an exception and display understandable messages to the user. The try statement will test code for errors and the catch statement contains code to be executed if an error occurs.
 We can use properties from the Exception class to output useful information when the compiler throws an error.
-```c#
+*/
 using System;
 
 namespace CSharpSpeedrun
@@ -1664,9 +1664,9 @@ Void Main()
 */
 ```
 
-## What is Regex (Regular Expression)?
+/* What is Regex (Regular Expression)?
 A Regular Expression is a pattern that is often used to validate text. In C#, the related classes comes from the System.Text.RegularExpressions namespace.
-```c#
+*/
 using System;
 using System.Text.RegularExpressions;
 
@@ -1687,9 +1687,9 @@ Hello world warm welcome to C SharpSpeedrun com
 */
 ```
 
-## What is a Task?
+/* What is a Task?
 A Task is an asynchronous operation that needs to be done. It usually represents a single operation that executes on the thread pool.
-```c#
+*/
 using System;
 using System.Threading.Tasks;
 
@@ -1723,9 +1723,9 @@ Main Thread Ended
 */
 ```
 
-## What is Multithreading?
+/* What is Multithreading?
 A multithreading application denotes it executes several threads in paralell to conduct several tasks. For example, the Android operating system can open multiple applications like browser, music player and much more. Each application is handled by distinct threads.
-```c#
+*/
 using System;
 using System.Threading;
 
@@ -1770,11 +1770,11 @@ app2 ended
 3
 app1 ended
 */
-```
+ 
 
-## What is the Yield Keyword?
+/* What is the Yield Keyword?
 The return type of yield keyword always returns an IEnumerable object.
-```c# 
+*/ 
 using System;
 using System.Collections.Generic;
 
@@ -1817,9 +1817,9 @@ namespace CSharpSpeedrun
 */
 ```
 
-## What is IEnumerable?
+/* What is IEnumerable?
 The uppercase I in IEnumerable denotes that it is an interface. It is mostly used to iterate non-generic collections. Above all, the IEnumerable holds the GetEnumerator() method which returns an IEnumerator object.
-```c#
+*/
 public interface IEnumerator
 {
    bool MoveNext();
@@ -1861,11 +1861,11 @@ namespace CSharpSpeedrun
 */
 ```
 
-## What is StringBuilder?
+/* What is StringBuilder?
 The string data type is designed to be immutable. In other words, once it is created, it cannot be modified. When a string variable is assigned a new value, the compiler creates a new string object in memory. As you can guess, repeatedly assigning new values to variables hinders performance.
 
 The StringBuilder was introduced to solve this issue. It doesn’t create a new string objects, instead, it constantly expands memory to house the newly modified string.
-```c#
+*/
 using System;
 using System.Text;
 
@@ -1890,7 +1890,7 @@ Welcome to CSharp Speedrun.com
 ```
 
 ##
-```c#
+*/
 
 /*
   
@@ -1898,7 +1898,7 @@ Welcome to CSharp Speedrun.com
 ```
 
 ##
-```c#
+*/
 
 /*
   
@@ -1906,7 +1906,7 @@ Welcome to CSharp Speedrun.com
 ```
 
 ##
-```c#
+*/
 
 /*
   
@@ -1914,7 +1914,7 @@ Welcome to CSharp Speedrun.com
 ```
 
 ##
-```c#
+*/
 
 /*
   
