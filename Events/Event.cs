@@ -1,7 +1,10 @@
-/* What is an Event?
+/* 
+What is an Event?
 An event is simply a delegate wrapper.
 It is recommented to use the built-in delegate EventHandler for common events.
-Events are created using Publisher classes and Subscriber classes. Publisher raises event, whereas Subscribers registers for events and implement the event handler methods.
+Events are created using Publisher classes and Subscriber classes. 
+Publisher raises event, whereas Subscribers registers for 
+events and implement the event handler methods.
   
 Event Steps
 Define delegate
@@ -69,13 +72,12 @@ namespace CSharpSpeedrun
 
         protected virtual void OnProductOrdered(ProductEventArgs e)
         {
-            /*if (ProductOrdered != null)
-            {
+            /*if (ProductOrdered != null){
                 ProductOrdered(this, new ProductEventArgs() { Product = product });
             }*/ //second version
-            //del.Invoke("Hello -!");
-// or 
-            //del("Hello!");
+                //del.Invoke("Hello -!");
+                // or 
+                //del("Hello!");
             ProductOrderedEventHandler?.Invoke(this, e);
         }
     }

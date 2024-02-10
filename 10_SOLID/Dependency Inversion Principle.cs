@@ -1,7 +1,7 @@
 /* What is Dependency Inversion Principle?
 DIP advocates that upper-level modules should not be dependent on low-level modules. In other words, both should depend upon abstractions, there should not be tight coupling among components of a software.
 */
- using System;
+using System;
 
 namespace CSharpSpeedrun.com
 {
@@ -27,7 +27,6 @@ namespace CSharpSpeedrun.com
     public class BackupController
     {
         IBackupController _backupController;
-
         public BackupController(IBackupController backupController)
         {
             this._backupController = backupController;

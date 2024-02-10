@@ -1,7 +1,7 @@
 /* Generic Interface
 
 */
- using System;
+using System;
 
 namespace CSharpSpeedrun
 {
@@ -29,7 +29,7 @@ namespace CSharpSpeedrun
     class Program
     {
         static void Main(string[] args)
-        { 
+        {
             Calculator<int> c1 = new Calculator<int>();
             double result1 = c1.Addition(12, 50);
             Console.WriteLine("Addition(12, 50) result = {0}", result1);

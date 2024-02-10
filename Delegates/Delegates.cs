@@ -9,29 +9,25 @@ Bind methods
 Call the delegate
 */
 using System;
-namespace CSharpSpeedrun.
+namespace CSharpSpeedrun
 {
+    public delegate void DemoDelegate(string msg); //declaring a delegate
 
-public delegate void DemoDelegate(string msg); //declaring a delegate
-
-class Program
-{
-    static void Main(string[] args)
+    class Program
     {
-        DemoDelegate d = Greetings;
-        d("Good morning");
- 
-        d = (string txt) => Console.WriteLine("lambda expression: " + txt);
-        d("Good morning");
-    }
- 
-    public static void Greetings(string txt)
-    {
-        Console.WriteLine("Called ClassA.MethodA() with parameter: " + txt);
-    }
-}
- 
+        static void Main(string[] args)
+        {
+            DemoDelegate d = Greetings;
+            d("Good morning");
 
+            d = (string txt) => Console.WriteLine("lambda expression: " + txt);
+            d("Good morning");
+        }
+        public static void Greetings(string txt)
+        {
+            Console.WriteLine("Called ClassA.MethodA() with parameter: " + txt);
+        }
+    }
 }
 /*
   
