@@ -5,6 +5,7 @@ to query data from various sources and formats
 such as file, database, xml and much more.
 */
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace CSharpSpeedrun
@@ -15,11 +16,11 @@ namespace CSharpSpeedrun
         {
             string[] myFavCars = { "Toyota", "BMW", "Tesla" };
 
-            var myQuery = from car in myFavCars
-                          where car.Contains('s')
-                          select car;
+            IEnumerable<string> myQuery = from car in myFavCars
+                                          where car.Contains('s')
+                                          select car;
 
-            foreach (var car in myQuery)
+            foreach (string car in myQuery)
             {
                 Console.WriteLine(car);
             }
