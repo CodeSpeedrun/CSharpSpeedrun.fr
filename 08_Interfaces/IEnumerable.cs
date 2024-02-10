@@ -6,6 +6,9 @@ which returns an IEnumerator object.
 
 public interface IEnumerable<out T> : IEnumerable {
         IEnumerator<T> GetEnumerator();
+        
+public interface IEnumerable {
+    IEnumerator GetEnumerator();
 
 public interface IEnumerator {
     bool MoveNext();
@@ -15,9 +18,12 @@ public interface IEnumerator {
 using System;
 using System.Collections.Generic;
 
-namespace github.com.CodeSpeedrun.CSharpSpeedrun {
-    public class Program {
-        static void Main() {
+namespace CSharpSpeedrun
+{
+    public class Program
+    {
+        static void Main()
+        {
             int[] ballIds = { 51, 7, 83 };
             List<int> batIds = new List<int>() { 12, 29, 27 };
 
@@ -29,8 +35,10 @@ namespace github.com.CodeSpeedrun.CSharpSpeedrun {
         IEnumerable indicates that it's a collection that can be enumerated (iterated over).
         <int> specifies the type of elements in the collection, in this case, integers.
         */
-        static void DisplayIds(IEnumerable<int> values) {
-            foreach (int value in values) {
+        static void DisplayIds(IEnumerable<int> values)
+        {
+            foreach (int value in values)
+            {
                 Console.WriteLine(value);
             }
         }

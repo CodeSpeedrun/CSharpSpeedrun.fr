@@ -1,5 +1,7 @@
-/* What is a Task?
-A Task is an asynchronous operation that needs to be done. It usually represents a single operation that executes on the thread pool.
+/* 
+What is a Task?
+A Task is an asynchronous operation that needs to be done. 
+It usually represents a single operation that executes on the thread pool.
 */
 using System;
 using System.Threading.Tasks;
@@ -12,7 +14,7 @@ namespace CSharpSpeedrun
         {
             Task task1 = new Task(app1);
             task1.Start();
-            Console.WriteLine("Main thread ended"); 
+            Console.WriteLine("Main thread ended");
         }
 
         static void app1()
@@ -26,9 +28,9 @@ namespace CSharpSpeedrun
     }
 }
 /*
+Main thread ended
 10
 11
 12
 app1 thread ended
-Main Thread Ended
 */
