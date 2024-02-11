@@ -17,7 +17,7 @@ integrate seamlessly with the .NET ecosystem.
 that different implementations (like .NET Core and .NET Framework) 
 can adhere to, enabling code sharing across platforms.
 
-### Understanding Managed Code and Assemblies:**
+### Understanding Managed Code and Assemblies: 
 * **Managed code:** Code specifically designed to run 
 within the .NET Core runtime environment.
 * **Unmanaged code:** Code that cannot be directly 
@@ -30,14 +30,14 @@ representation of code (also known as IL or MSIL)
 that is platform-independent and compiled into machine code 
 by the JIT compiler (Just-In-Time).
 
-### Compiling and Executing Code:**
+### Compiling and Executing Code: 
 * **JIT Compiler:** Translates CIL code into native machine code 
 for the specific platform during runtime, optimizing performance.
 * **Metadata:** Information embedded in assemblies 
 describing types, methods, and other details, 
 used by the runtime for reflection and dynamic operations.
 
-**Essential Concepts and Utilities:**
+### Essential Concepts and Utilities: 
 * **Delegates:** Type-safe function pointers 
 allowing objects to reference methods of other objects, 
 enabling callback mechanisms and event handling.
@@ -51,7 +51,7 @@ within assemblies, improving code organization and clarity.
 * **ildasm.exe:** A utility to disassemble assemblies
  into human-readable text, revealing CIL code, metadata, and the manifest.
 
-### Additional Notes:**
+### Additional Notes: 
 * .NET Core offers a leaner base class library 
 compared to the .NET Framework, but .NET Standard 
 enables some code sharing between them.
