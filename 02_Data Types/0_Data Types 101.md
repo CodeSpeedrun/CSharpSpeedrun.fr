@@ -1,4 +1,4 @@
-```markdown
+
 # C# Data Types and Shorthand: Understanding System Types and CLS Compliance
 
 ## Introduction
