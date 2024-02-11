@@ -1,6 +1,6 @@
 /* iterate an array
 */
- using System;
+using System;
 
 namespace CSharpSpeedrun
 {

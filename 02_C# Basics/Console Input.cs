@@ -12,7 +12,7 @@ Console.WriteLine("Enter coupon code: ");
 int code = Console.Read();
 
 Console.WriteLine("ASCII = " + code);
- 
+
 
 /* Console.ReadKey()
 The third way to capture user input is the Console.ReadKey() method. This method records the first keyboard keypress and returns the ConsoleKeyInfo struct which can be used to display additional information about the key that was pressed.
@@ -22,4 +22,3 @@ ConsoleKeyInfo key = Console.ReadKey();
 
 Console.WriteLine();
 Console.WriteLine("Key pressed = " + key.Key);
- 

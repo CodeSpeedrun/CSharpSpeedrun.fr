@@ -16,17 +16,17 @@ These notes cover setting up your environment for C# development with .NET 5 and
 - **Microsoft.WindowsDesktop.App:** Targets WinForms and WPF desktop applications.
 
 ### Installing Visual Studio 2019 Workloads:
-- During installation, choose the following workloads:
-    - **.NET desktop development:** For WinForms and WPF applications.
-    - **ASP.NET and web development:** For web applications using ASP.NET Core.
-    - **Data storage and processing:** For working with databases and other data sources.
-    - **.NET Core cross-platform development:** To create applications that run on various platforms.
+During installation, choose the following workloads:
+- **.NET desktop development:** For WinForms and WPF applications.
+- **ASP.NET and web development:** For web applications using ASP.NET Core.
+- **Data storage and processing:** For working with databases and other data sources.
+- **.NET Core cross-platform development:** To create applications that run on various platforms.
 
 ### Additional Tools:
-- On the "Individual components" tab, select:
-    - **Class Designer:** Visual tool for designing classes and their relationships.
-    - **Git for Windows:** Version control system for managing code changes.
-    - **GitHub extension for Visual Studio:** Integrates GitHub services within Visual Studio.
+On the "Individual components" tab, select:
+- **Class Designer:** Visual tool for designing classes and their relationships.
+- **Git for Windows:** Version control system for managing code changes.
+- **GitHub extension for Visual Studio:** Integrates GitHub services within Visual Studio.
 
 ### Setting Up Console UI:
 - Use `Console.Title` to set the console window title (e.g., `Console.Title = "My Awesome App";`).
