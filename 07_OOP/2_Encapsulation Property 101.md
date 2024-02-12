@@ -1,115 +1,155 @@
-Although you can encapsulate a piece of field data using traditional get and set methods, .NET Core
-languages prefer to enforce data encapsulation state data using properties.
+## Encapsulation of Field Data in .NET Core using Properties
 
-// The 'int' represents the type of data this property encapsulates.
-public int Id // Note lack of parentheses.
+In .NET Core languages, properties are preferred over traditional get and set methods for encapsulating field data. Properties provide a more concise and expressive way to enforce data encapsulation and maintain control over access to class fields.
+
+### Basic Property Syntax
+
+Properties in C# consist of a getter and a setter, which allow read and write access to the encapsulated data respectively. Here's an example of a property encapsulating an employee's ID:
+
+```csharp
+public int EmployeeId // Property declaration
 {
-get { return _empId; }
-set { _empID = value; }
+    get { return _employeeId; } // Getter
+    set { _employeeId = value; } // Setter
 }
+```
 
-a token named value, which is used to represent the incoming
-value used to assign the property by the caller. This token is not a true C# keyword but is what is known as
-a contextual keyword. When the token value is within the set scope of the property, it always represents the
-value being assigned by the caller, and it will always be the same underlying data type as the property itself.
+In this example:
+- `EmployeeId` is the name of the property.
+- `_employeeId` is the underlying field storing the data.
+- `get` retrieves the value of `_employeeId`.
+- `set` sets the value of `_employeeId` to the incoming value (`value`).
 
-// New field and property.
-private int _empAge;
+### Contextual Keyword: `value`
+
+The `value` keyword represents the incoming value used to assign the property by the caller. It is a contextual keyword, specifically used within the set accessor of a property. Its type is inferred from the property type.
+
+```csharp
 public int Age
 {
-get { return _empAge; }
-set { _empAge = value; }
+    get { return _employeeAge; }
+    set { _employeeAge = value; } // 'value' represents the incoming value
 }
+```
 
-Properties As Expression-Bodied Members  
-As mentioned previously, property get and set accessors can also be written as expression-bodied
-members. The rules and syntax are the same: single-line methods can be written using the new syntax. So,
-the Age property could be written like this:
+### Expression-Bodied Members
+
+In C# 6 and later, properties can be written as expression-bodied members, providing a more concise syntax for simple getter and setter methods.
+
+```csharp
 public int Age
 {
-get => empAge;
-set => empAge = value;
+    get => _employeeAge;
+    set => _employeeAge = value;
 }
+```
 
-read-only property. To do so, simply omit the set block.
+### Read-Only Properties
 
-if the goal is to prevent the modification of the number from outside the class, then declare
-the get method as public but the set method as private, like this:
-public string SocialSecurityNumber
+To create a read-only property, omit the setter block. This ensures that the property can only be set within the class itself.
 
+```csharp
+public string SocialSecurityNumber { get; private set; }
+```
 
+In this example, `SocialSecurityNumber` can be accessed publicly for reading but can only be set within the class.
+
+### Access Modifiers
+
+Properties can have different access modifiers for their getter and setter, allowing fine-grained control over accessibility.
+
+```csharp
+public int EmployeeId
+{
+    get { return _employeeId; } // Public getter
+    private set { _employeeId = value; } // Private setter
+}
+```
+
+In this case, `EmployeeId` can be read from anywhere, but it can only be set within the class itself.
+
+ 
+ 
+# C# Properties and Fields Overview
+
+## Introduction
+In C#, properties and fields are crucial components for encapsulating data within classes. They allow for controlled access to the internal state of an object, enabling the enforcement of business rules and maintaining the integrity of the program's data.
+
+## Static Property
+```csharp
 // A static property.
 public static double InterestRate
 {
-get { return _currInterestRate; }
-set { _currInterestRate = value; }
+    get { return _currentInterestRate; }
+    set { _currentInterestRate = value; }
 }
+```
+Static properties are accessed through the class itself rather than an instance of the class. They are commonly used for values that are shared among all instances of the class, such as configuration settings or constants.
 
-
-properties to encapsulate your data, it is common to find that the set scopes
-have code to enforce business rules of your program. However, in some cases, you may not need any
-implementation logic beyond simply getting and setting the value.
-
+## Automatic Properties
+```csharp
 class Car
 {
-private string carName = "";
-public string PetName
-{
-get { return carName; }
-set { carName = value; }
-}
+    // Automatic properties! No need to define backing fields.
+    public string PetName { get; set; }
 
+    // The hidden int backing field is set to zero!
+    public int NumberOfCars { get; set; }
+
+    // The hidden Car backing field is set to null!
+    public Car MyAuto { get; set; }
+}
+```
+Automatic properties provide a concise syntax for defining properties without explicitly declaring backing fields. The compiler generates the backing field and the get/set methods automatically.
+
+## Initializing Automatic Properties
+```csharp
 class Car
 {
-// Automatic properties! No need to define backing fields.
-public string PetName { get; set; }
+    // The hidden backing field is set to 1.
+    public int NumberOfCars { get; set; } = 1;
+    
+    // The hidden backing field is set to a new Car object.
+    public Car MyAuto { get; set; } = new Car();
+}
+```
+Automatic properties can be initialized directly at the point of declaration, simplifying object initialization.
 
-// The hidden int backing field is set to zero!
-public int NumberOfCars { get; set; }
-// The hidden Car backing field is set to null!
-public Car MyAuto { get; set; }
-
-
-// The hidden backing field is set to 1.
-public int NumberOfCars { get; set; } = 1;
-// The hidden backing field is set to a new Car object.
-public Car MyAuto { get; set; } = new Car();
-
-init-Only Setters (New 9.0)
-A new feature added in C# 9.0 is init-only setters. These setters enable a property to have its value set
-during initialization, but after construction is complete on the object, the property becomes read-only.
-These types of properties are call immutable. Add a new class file named ReadOnlyPointAfterCreation.
-
+## Init-Only Setters (C# 9.0)
+```csharp
 class PointReadOnlyAfterCreation
 {
-public int X { get; init; }
-//The next two lines will not compile
-secondReadonlyPoint.X = 10;
-secondReadonlyPoint.Y = 10;
-
-
-public const double PI = 3.14;
-Closely related to constant data is the notion of read-only field data (which should not be confused with a readonly
-property).
-However, unlike a constant, the value assigned to a read-only field can be determined at
-runtime and, therefore, can legally be assigned within the scope of a constructor but nowhere else.
-class MyMathClass
-{
-// Read-only fields can be assigned in ctors,
-// but nowhere else.
-public readonly double PI;
-public MyMathClass ()
-{
-PI = 3.14;
+    public int X { get; init; }
 }
+```
+Introduced in C# 9.0, init-only setters allow properties to be set during initialization but become read-only after construction. This feature is particularly useful for creating immutable objects.
 
-Static Read-Only Fields
-Unlike a constant field, read-only fields are not implicitly static. Thus, if you want to expose PI from the class
-level, you must explicitly use the static keyword.
-
-However, if the value of a static read-only field is not known until runtime, you must use a static
-constructor as described earlier in this chapter.
+## Read-Only Fields
+```csharp
 class MyMathClass
 {
-public static readonly double PI;
+    // Read-only fields can be assigned in constructors.
+    public readonly double PI;
 
+    public MyMathClass ()
+    {
+        PI = 3.14;
+    }
+}
+```
+Read-only fields can only be assigned within constructors and are immutable once initialized. They are useful for values that should not change after object construction.
+
+## Static Read-Only Fields
+```csharp
+class MyMathClass
+{
+    // Static read-only field.
+    public static readonly double PI;
+}
+```
+Static read-only fields are shared among all instances of the class and are initialized once before any instance of the class is created. They must be explicitly marked as static.
+
+## Conclusion
+Understanding properties and fields in C# is fundamental for developing robust and maintainable code. Whether it's enforcing business rules, creating immutable objects, or managing shared data, properties and fields provide powerful tools for managing the state of your objects.
+```
+This markdown document provides an overview of C# properties and fields, explaining their syntax, usage, and advanced features such as init-only setters and read-only fields. It aims to educate university students on fundamental concepts in C# programming.
