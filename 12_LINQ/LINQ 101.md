@@ -1,4 +1,4 @@
-```sql
+```csharp
 int[] originalNumbers = {30, 40, 1, 2, 3,   };
 // LINQ query to filter numbers less than 10 from the originalNumbers array
 var filteredSubset = from num in originalNumbers where num < 10 select num;
