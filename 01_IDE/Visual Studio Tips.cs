@@ -21,4 +21,8 @@ item) to view the System namespace, you would see that all the members of the Co
 and GC classes (among others) expose all their functionality via static members. These are but a few utility
 classes found within the .NET Core base class libraries.
 
+
+If you type the word override within the scope of a class type (then hit the spacebar),
+IntelliSense will automatically display a list of all the overridable members defined in your parent classes,
+excluding methods already overridden.
 */
