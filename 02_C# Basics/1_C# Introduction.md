@@ -75,7 +75,7 @@ static void Main()
 {
     // Application logic
 }
- 
+```
 ### Asynchronous Main Method and Command-Line Argument Handling in C#
 
 In C#, the `Main()` method can now be asynchronous, allowing for asynchronous programming capabilities. Async programming is covered in depth in Chapter 15. Here, we introduce the four additional signatures for the `Main()` method:
