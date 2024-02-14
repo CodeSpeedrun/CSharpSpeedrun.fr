@@ -25,4 +25,10 @@ classes found within the .NET Core base class libraries.
 If you type the word override within the scope of a class type (then hit the spacebar),
 IntelliSense will automatically display a list of all the overridable members defined in your parent classes,
 excluding methods already overridden.
+
+Visual Studio provides a code snippet template named Exception that
+will autogenerate a new exception class that adheres to .NET best practices. To activate it, type exc in the
+editor and hit the Tab key (in Visual Studio, hit the Tab key twice).
+
+
 */
