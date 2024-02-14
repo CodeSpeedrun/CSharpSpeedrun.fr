@@ -1,4 +1,3 @@
-```markdown
 # Understanding Object Lifetime in C#
 
 In C#, the runtime manages the lifetime of objects through a process called garbage collection (GC). Objects are allocated on the managed heap, and they are automatically cleaned up by the GC when they are no longer referenced.
@@ -37,7 +36,7 @@ When the C# compiler encounters the `new` keyword, it generates Common Intermedi
 ## Conclusion
 
 Understanding object lifetime and memory management in C# is crucial for writing efficient and scalable applications. By being mindful of object allocation, references, and garbage collection, developers can optimize their code for better performance and resource utilization.
-```
+
 ```csharp
 // Sample Car class definition
 public class Car
