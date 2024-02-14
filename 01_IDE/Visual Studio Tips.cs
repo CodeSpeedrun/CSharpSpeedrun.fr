@@ -30,5 +30,8 @@ Visual Studio provides a code snippet template named Exception that
 will autogenerate a new exception class that adheres to .NET best practices. To activate it, type exc in the
 editor and hit the Tab key (in Visual Studio, hit the Tab key twice).
 
+Visual Studio and Visual Studio
+Code both add a lightbulb, which can also be invoked with the Ctrl+period (.) key combination.
+
 
 */
