@@ -1,4 +1,3 @@
-```markdown
 # System.String Member Functions
 
 ## Introduction
