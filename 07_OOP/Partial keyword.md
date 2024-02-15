@@ -1,6 +1,8 @@
-/* What is the partial keyword?
+### What is the partial keyword?
+
 Using the partial keyword, we can break up the implementaton of classes, methods or even interfaces into several .cs files.
-*/
+
+```csharp 
 using System;
 
 namespace CSharpSpeedrun
@@ -33,3 +35,4 @@ namespace CSharpSpeedrun
 /*
   
 */
+```

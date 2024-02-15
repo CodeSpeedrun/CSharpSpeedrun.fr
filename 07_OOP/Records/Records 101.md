@@ -72,6 +72,4 @@ This example demonstrates how to create instances of the `Automobile` and `Compa
 ### Note:
 - Record types in C# provide a concise syntax for declaring immutable data types.
 - Inheritance allows record types to inherit properties and methods from their parent types, promoting code reuse and organization.
-- Renaming variables, classes, and methods is essential to avoid plagiarism and maintain originality in code.
-- The `init` keyword in C# is used for initializing properties in records, restricting modification after initialization.
- 
+- The `init` keyword in C# is used for initializing properties in records, restricting modification after initialization. 

@@ -2,7 +2,7 @@
 
 ## Base Class/Derived Class Casting Rules
 
-In object-oriented programming, understanding casting rules between base and derived classes is essential. This markdown document elucidates these concepts in C#.
+In object-oriented programming, understanding casting rules between base and derived classes is essential.
 
 ### The Ultimate Base Class: `System.Object`
 

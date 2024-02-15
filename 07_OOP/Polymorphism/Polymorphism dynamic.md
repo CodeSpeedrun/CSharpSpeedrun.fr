@@ -1,7 +1,8 @@
-/* How to implement dynamic polymorphism?
+### How to implement dynamic polymorphism?
 For example, let’s say a base class Vehicle has a method ActivateWiper() and child classes are Car, Truck and they have their own implementation of ActivateWiper().
-*/
- using System;
+
+```csharp
+using System;
 
 namespace CSharpSpeedrun
 {
@@ -34,3 +35,4 @@ namespace CSharpSpeedrun
 }
 //generic wiper activated
 //car wiper activated
+```

@@ -1,7 +1,8 @@
-/* What is the sealed keyword in C#?
+### What is the sealed keyword in C#?
+
 The sealed keyword blocks the inheritance of the class. C# will throw an error when trying to inherit from a sealed class.
-*/
- using System;
+```csharp
+using System;
 
 namespace CSharpSpeedrun
 {
@@ -24,3 +25,4 @@ namespace CSharpSpeedrun
         }
     }
 }
+```

@@ -1,6 +1,6 @@
-/* Constructor chaining in C#
+### Constructor chaining in C#
 A constructor can call another constructor, this is known as constructor chaining. This technique allows code reusability. In the code snippet, : this() calls the default constructor.
-*/
+```csharp
  //file 1
 using System;
 namespace CSharpSpeedrun
@@ -43,3 +43,4 @@ namespace CSharpSpeedrun
 Default constructor activated
 Parameters ok
 */
+```

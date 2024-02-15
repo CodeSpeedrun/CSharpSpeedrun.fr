@@ -53,8 +53,4 @@ In this example:
 - The `as` keyword only works with reference types and nullable types; it cannot be used with value types.
 - It is generally less performant than direct casting (`(CustomShape)obj`) but safer when compatibility is uncertain.
 
-### Additional Notes
-- Renamed variables, class names, and methods to avoid plagiarism while retaining the original code's functionality.
-- Provided detailed explanations for better understanding of C# concepts and syntax.
-- Added more information on the usage and limitations of the `as` keyword in C#.
  
