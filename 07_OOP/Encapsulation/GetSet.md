@@ -1,3 +1,8 @@
+### Get/Set with validations
+- These accessors and mutators are commonly used to enforce encapsulation in object-oriented programming. 
+- They provide controlled access to the private members of a class, allowing for validation and data integrity checks before modification or retrieval. 
+- This ensures that the internal state of an object remains consistent and valid throughout its lifetime.
+
 ```csharp
 // Create an instance of the Employee class.
 Employee employee = new Employee();
@@ -43,4 +48,3 @@ In the provided code:
 - `GetName()` is an accessor method, also known as a "getter," which allows external code to retrieve the value of `_employeeName`.
 - `SetName(string name)` is a mutator method, also known as a "setter," which allows external code to modify the value of `_employeeName`. However, before assigning a new value, it performs a check to ensure that the length of the name does not exceed 15 characters. If it does, an error message is displayed; otherwise, the new name is assigned to the `_employeeName` field.
 
-These accessors and mutators are commonly used to enforce encapsulation in object-oriented programming. They provide controlled access to the private members of a class, allowing for validation and data integrity checks before modification or retrieval. This ensures that the internal state of an object remains consistent and valid throughout its lifetime.

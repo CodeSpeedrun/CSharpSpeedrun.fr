@@ -47,29 +47,29 @@ Here, `NumberOfPages` is directly accessible and can be modified without any res
 
 ### Techniques for Encapsulation
 
+
 There are two main techniques for encapsulating data in C#:
 
 1. **Accessor and Mutator Methods:**
+These are public methods that provide controlled access to private data. They allow the user to retrieve (`get`) or modify (`set`) the value of a private field indirectly.
 
-   These are public methods that provide controlled access to private data. They allow the user to retrieve (`get`) or modify (`set`) the value of a private field indirectly.
+```csharp
+class Book
+{
+    private int numberOfPages;
 
-   ```csharp
-   class Book
-   {
-       private int numberOfPages;
+    public int GetNumberOfPages()
+    {
+        return numberOfPages;
+    }
 
-       public int GetNumberOfPages()
-       {
-           return numberOfPages;
-       }
-
-       public void SetNumberOfPages(int pages)
-       {
-           // Optional: Add validation logic here
-           numberOfPages = pages;
-       }
-   }
-   ```
+    public void SetNumberOfPages(int pages)
+    {
+        // Optional: Add validation logic here
+        numberOfPages = pages;
+    }
+}
+```
 
 2. **Properties:**
 

@@ -1,7 +1,10 @@
-/* How to implement inheritance?
-In the code snippet, the title field is required for both Book and EBook classes. Consequently, it is better to add it in the Book class and it will also be accessible from the EBook class. Notice the colon to activate inheritance. EBook: Book
-*/
- using System;
+### How to implement inheritance?
+- In the code snippet, the title field is required for both Book and EBook classes. 
+- Consequently, it is better to add it in the Book class and it will also be accessible from the EBook class. 
+- Notice the colon to activate inheritance. EBook: Book
+
+```csharp
+using System;
 
 namespace CSharpSpeedrun
 {
@@ -25,3 +28,5 @@ namespace CSharpSpeedrun
     }
 }
 //Sapiens, format = Pdf
+
+```

@@ -151,5 +151,3 @@ Static read-only fields are shared among all instances of the class and are init
 
 ## Conclusion
 Understanding properties and fields in C# is fundamental for developing robust and maintainable code. Whether it's enforcing business rules, creating immutable objects, or managing shared data, properties and fields provide powerful tools for managing the state of your objects.
-```
-This markdown document provides an overview of C# properties and fields, explaining their syntax, usage, and advanced features such as init-only setters and read-only fields. It aims to educate university students on fundamental concepts in C# programming.
