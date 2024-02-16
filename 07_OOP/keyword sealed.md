@@ -1,28 +1,31 @@
-### What is the sealed keyword in C#?
+### La notion du mot-clé `sealed` en C#
 
-The sealed keyword blocks the inheritance of the class. C# will throw an error when trying to inherit from a sealed class.
+Le mot-clé `sealed` bloque l'héritage de la classe. En C#, une erreur sera générée si vous essayez d'hériter d'une classe scellée.
+
 ```csharp
 using System;
 
 namespace CSharpSpeedrun
 {
-    sealed class Book //parent
+    sealed class Livre // Parent
     {
-        public string title = "Sapiens"; 
+        public string Titre = "Sapiens"; 
     }
 
-    class EBook: Book //child
+    class EBook: Livre // Enfant
     {
-        public string format = "Pdf";
+        public string Format = "Pdf";
     }
 
     class Program
     {
         static void Main(string[] args)
         {
-            EBook myEBook= new EBook();  
-            Console.WriteLine(myEBook.title + ", format = " + myEBook.format);
+            EBook monEBook = new EBook();  
+            Console.WriteLine(monEBook.Titre + ", format = " + monEBook.Format);
         }
     }
 }
 ```
+
+Dans cet exemple, `Livre` est une classe scellée, ce qui signifie qu'elle ne peut pas être utilisée comme classe parente. La classe `EBook` tente d'hériter de `Livre`, mais une erreur sera générée car `Livre` est scellée.

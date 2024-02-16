@@ -1,115 +1,113 @@
-# Access Modifiers in C#
+# Modificateurs d'accès en C#
 
-## Introduction to Access Modifiers
+## Introduction aux modificateurs d'accès
 
-Access modifiers in C# determine the visibility and accessibility of types, members, and nested types within an application. Understanding access modifiers is crucial for encapsulation and controlling the accessibility of various parts of your codebase.
+Les modificateurs d'accès en C# déterminent la visibilité et l'accessibilité des types, membres et types imbriqués au sein d'une application. Comprendre les modificateurs d'accès est crucial pour l'encapsulation et le contrôle de l'accessibilité de différentes parties de votre base de code.
 
-### Public Access Modifier
+### Modificateur d'accès public
 
-Public types or type members have no access restrictions. They can be accessed from any part of the application, including objects and derived classes. Public types can also be accessed from external assemblies.
+Les types ou membres de type publics n'ont aucune restriction d'accès. Ils peuvent être accessibles depuis n'importe quelle partie de l'application, y compris les objets et les classes dérivées. Les types publics peuvent également être accessibles depuis des assemblies externes.
 
 ```csharp
-public class PublicType
+public class TypePublic
 {
-    public int PublicMember { get; set; }
+    public int MembrePublic { get; set; }
 }
 ```
 
-### Private Access Modifier
+### Modificateur d'accès privé
 
-Private type members or nested types can only be accessed by the class (or structure) that defines them.
+Les membres de type privé ou les types imbriqués ne peuvent être accédés que par la classe (ou la structure) qui les définit.
 
 ```csharp
-class PrivateType
+class TypePrive
 {
-    private int privateMember;
+    private int membrePrive;
 }
 ```
 
-### Protected Access Modifier
+### Modificateur d'accès protégé
 
-Protected type members or nested types can be accessed by the defining class and any child class. They are not accessible from outside the inheritance chain.
+Les membres de type protégé ou les types imbriqués peuvent être accédés par la classe définissante et toute classe enfant. Ils ne sont pas accessibles depuis la chaîne d'héritage extérieure.
 
 ```csharp
-class BaseClass
+class ClasseDeBase
 {
-    protected int protectedMember;
+    protected int membreProtege;
 }
 ```
 
-### Internal Access Modifier
+### Modificateur d'accès interne
 
-Internal types or type members are accessible only within the current assembly. Other assemblies can be explicitly granted permission to see internal items.
+Les types ou membres de type internes sont accessibles uniquement à l'intérieur de l'assembly actuel. D'autres assemblies peuvent se voir accorder explicitement la permission de voir les éléments internes.
 
 ```csharp
-internal class InternalType
+internal class TypeInterne
 {
-    internal int internalMember;
+    internal int membreInterne;
 }
 ```
 
-### Protected Internal Access Modifier
+### Modificateur d'accès protégé interne
 
-Protected internal type members or nested types are accessible within the defining assembly, by the defining class, and by derived classes both inside and outside of the defining assembly.
+Les membres de type protégé interne ou les types imbriqués sont accessibles à l'intérieur de l'assembly définissant, par la classe définissante et par les classes dérivées à la fois à l'intérieur et à l'extérieur de l'assembly définissant.
 
 ```csharp
-class BaseClass
+class ClasseDeBase
 {
-    protected internal int protectedInternalMember;
+    protected internal int membreProtegeInterne;
 }
 ```
 
-### Private Protected Access Modifier (C# 7.2)
+### Modificateur d'accès privé protégé (C# 7.2)
 
-Private protected type members or nested types are accessible within the defining class and by derived classes in the same assembly.
+Les membres de type privé protégé ou les types imbriqués sont accessibles à l'intérieur de la classe définissante et par les classes dérivées dans le même assembly.
 
 ```csharp
-class BaseClass
+class ClasseDeBase
 {
-    private protected int privateProtectedMember;
+    private protected int membrePriveProtege;
 }
 ```
 
-## Class Definitions and Constructors
+## Définitions de classe et constructeurs
 
-By default, a class definition is set to internal, and the type's default constructor is set to private.
+Par défaut, une définition de classe est définie comme interne et le constructeur par défaut du type est défini comme privé.
 
 ```csharp
 internal class Radio
 {
-    private Radio() {} // private default constructor
+    private Radio() {} // constructeur par défaut privé
 }
 ```
 
 ```csharp
 public class Radio
 {
-    public Radio() {} // public default constructor
+    public Radio() {} // constructeur par défaut public
 }
 ```
 
-### Note on Nested Types
+### Remarque sur les types imbriqués
 
-While it's permissible to apply the private access modifier on nested types, non-nested types must be defined with either public or internal modifiers.
+Bien qu'il soit permis d'appliquer le modificateur d'accès privé sur les types imbriqués, les types non imbriqués doivent être définis avec les modificateurs publics ou internes.
 
-### Example
+### Exemple
 
 ```csharp
-public class Library
+public class Bibliotheque
 {
-    private class Book
+    private class Livre
     {
-        public int numberOfPages;
+        public int nombreDePages;
     }
 
-    public void CheckOutBook()
+    public void EmprunterLivre()
     {
-        Book miniNovel = new Book();
-        miniNovel.numberOfPages = 30000000; // Setting number of pages for a book
+        Livre miniRoman = new Livre();
+        miniRoman.nombreDePages = 30000000; // Définition du nombre de pages pour un livre
     }
 }
 ```
 
-In the above example, `numberOfPages` is accessed within the `Library` class, demonstrating encapsulation and access control.
-
- 
+Dans l'exemple ci-dessus, `nombreDePages` est accessible dans la classe `Bibliotheque`, démontrant l'encapsulation et le contrôle d'accès.

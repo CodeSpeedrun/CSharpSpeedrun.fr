@@ -1,33 +1,31 @@
-**Default Behavior with `get` and `set`:**
+**Comportement par Défaut avec `get` et `set`:**
 
-- **Automatic `Clone` and `with` Methods:** When you declare both `get` and `set` accessors for a property in a record, the compiler automatically generates these methods:
-    - `Clone()`: Creates a deep copy of the record instance.
-    - `with { ... }`: Enables creation of a new record instance with modified property values based on the original one.
-- **Non-Destructive Access and Modification:** The generated accessors ensure non-destructive behavior, meaning accessing or modifying a property doesn't alter the original record instance. It creates a new instance or modified copy as needed.
+- **Méthodes `Clone` et `with` Automatiques:** Lorsque vous déclarez à la fois des accesseurs `get` et `set` pour une propriété dans un enregistrement, le compilateur génère automatiquement ces méthodes :
+    - `Clone()`: Crée une copie profonde de l'instance de l'enregistrement.
+    - `with { ... }`: Permet la création d'une nouvelle instance d'enregistrement avec des valeurs de propriété modifiées basées sur l'originale.
+- **Accès et Modification Non-Destructifs:** Les accesseurs générés garantissent un comportement non-destructif, ce qui signifie que l'accès ou la modification d'une propriété n'altère pas l'instance originale de l'enregistrement. Cela crée une nouvelle instance ou une copie modifiée si nécessaire.
 
-**Key Considerations:**
+**Considérations Clés:**
 
-- **Immutability and `readonly`:** For truly immutable records, use the `readonly` keyword in the record declaration. This prevents the compiler from generating `set` accessors, enforcing immutability. If you accidentally add `set` accessors to a `readonly` record, the compiler will raise an error.
-- **Calculated Properties:** You can define properties with only a `get` accessor to compute values based on other properties or external data. These properties behave like read-only fields and cannot be modified using `set`.
-- **Custom Behavior:** If you need to implement specific logic for property access or modification, you can override the automatically generated methods (`Clone()` and the synthesized `get` and `set` accessors). However, it's essential to carefully consider the implications of overriding these methods in terms of record semantics and behavior.
+- **Immuabilité et `readonly`:** Pour des enregistrements vraiment immuables, utilisez le mot-clé `readonly` dans la déclaration de l'enregistrement. Cela empêche le compilateur de générer des accesseurs `set`, ce qui garantit l'immutabilité. Si vous ajoutez accidentellement des accesseurs `set` à un enregistrement `readonly`, le compilateur générera une erreur.
+- **Propriétés Calculées:** Vous pouvez définir des propriétés avec uniquement un accesseur `get` pour calculer des valeurs en fonction d'autres propriétés ou de données externes. Ces propriétés se comportent comme des champs en lecture seule et ne peuvent pas être modifiées à l'aide de `set`.
+- **Comportement Personnalisé:** Si vous devez implémenter une logique spécifique pour l'accès ou la modification d'une propriété, vous pouvez substituer les méthodes générées automatiquement (`Clone()` et les accesseurs `get` et `set` synthétisés). Cependant, il est essentiel de considérer attentivement les implications de la substitution de ces méthodes en termes de sémantique et de comportement de l'enregistrement.
 
-**Example:**
+**Exemple:**
 
 ```csharp
 public record Person(string Name, int Age)
 {
-    public string Nickname { get; set; } // Both get and set for optional nickname
+    public string Nickname { get; set; } // À la fois get et set pour le surnom facultatif
 
     private string CalculateFullName() => $"{Name} (Age: {Age})";
 
-    public string FullName => CalculateFullName(); // Calculated property with only get
+    public string FullName => CalculateFullName(); // Propriété calculée avec uniquement get
 }
 ```
 
-**In summary:**
+**En Résumé:**
 
-- Declaring `get` and `set` in a record property enables reading and writing values, providing accessors for modifying the record's state.
-- However, for immutable records, use `readonly` to prevent unintended modification and maintain data integrity.
-- Be mindful of the generated methods and override them cautiously if necessary.
-
- 
+- Déclarer `get` et `set` dans une propriété d'enregistrement permet la lecture et l'écriture de valeurs, fournissant des accesseurs pour modifier l'état de l'enregistrement.
+- Cependant, pour les enregistrements immuables, utilisez `readonly` pour éviter toute modification non intentionnelle et maintenir l'intégrité des données.
+- Soyez attentif aux méthodes générées et remplacez-les avec prudence si nécessaire.

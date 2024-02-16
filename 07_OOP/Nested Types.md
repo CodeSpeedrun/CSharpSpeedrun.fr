@@ -1,118 +1,117 @@
-# Nested Types in C#
+# Types imbriqués en C#
 
-In C#, it is possible to define a type (such as enum, class, interface, struct, or delegate) directly within the scope of another class or structure. This feature is known as nested types.
+En C#, il est possible de définir un type (tel qu'une énumération, une classe, une interface, une structure ou un délégué) directement dans la portée d'une autre classe ou structure. Cette fonctionnalité est connue sous le nom de types imbriqués.
 
-## Nested Type Definition
+## Définition des types imbriqués
 
-Nested types can be defined within the curly braces `{}` of an outer class or structure. These nested types can have different access modifiers, such as `public`, `private`, `protected`, or `internal`, defining their visibility and accessibility.
+Les types imbriqués peuvent être définis à l'intérieur des accolades `{}` d'une classe ou structure externe. Ces types imbriqués peuvent avoir différents modificateurs d'accès, tels que `public`, `private`, `protected` ou `internal`, définissant leur visibilité et leur accessibilité.
 
 ```csharp
-public class OuterClass
+public class ClasseExterne
 {
-    // Definition of a public nested class.
-    public class PublicInnerClass {}
+    // Définition d'une classe imbriquée publique.
+    public class ClasseInternePublique {}
     
-    // Example usage of the public inner class.
-    OuterClass.PublicInnerClass inner = new OuterClass.PublicInnerClass();
+    // Exemple d'utilisation de la classe interne publique.
+    ClasseExterne.ClasseInternePublique interne = new ClasseExterne.ClasseInternePublique();
 }
 ```
 
-## Accessing Nested Types
+## Accès aux types imbriqués
 
-Nested types can be accessed using their fully qualified names, which include the name of the outer class followed by a dot (`.`) and then the name of the nested type.
+Les types imbriqués peuvent être accédés en utilisant leur nom entièrement qualifié, qui inclut le nom de la classe externe suivi d'un point (`.`) puis le nom du type imbriqué.
 
 ```csharp
-OuterClass.PublicInnerClass inner = new OuterClass.PublicInnerClass();
+ClasseExterne.ClasseInternePublique interne = new ClasseExterne.ClasseInternePublique();
 ```
 
-## Visibility of Nested Types
+## Visibilité des types imbriqués
 
-The visibility of a nested type determines where it can be accessed from. For instance, a public nested type can be accessed by any code that has access to the outer class, while a private nested type is only accessible within the containing class.
+La visibilité d'un type imbriqué détermine où il peut être accédé. Par exemple, un type imbriqué public peut être accédé par n'importe quel code ayant accès à la classe externe, tandis qu'un type imbriqué privé n'est accessible qu'à l'intérieur de la classe conteneur.
 
-## Benefits of Nested Types
+## Avantages des types imbriqués
 
 ### Encapsulation
 
-Nested types allow for encapsulation of related functionality within a single class or structure. This helps in organizing code and reducing namespace clutter.
+Les types imbriqués permettent d'encapsuler des fonctionnalités connexes au sein d'une seule classe ou structure. Cela aide à organiser le code et à réduire l'encombrement de l'espace de noms.
 
-### Information Hiding
+### Masquage d'informations
 
-By making certain nested types private, you can hide implementation details and only expose the necessary functionality to the outside world.
+En rendant certains types imbriqués privés, vous pouvez masquer les détails d'implémentation et ne rendre accessible que la fonctionnalité nécessaire à l'extérieur.
 
-### Enhanced Readability
+### Amélioration de la lisibilité
 
-Nested types can improve code readability by grouping related types together, making it easier for developers to understand the relationships between them.
+Les types imbriqués peuvent améliorer la lisibilité du code en regroupant des types connexes, ce qui facilite la compréhension des relations entre eux pour les développeurs.
 
-## Examples
+## Exemples
 
-### Nested Classes
+### Classes imbriquées
 
 ```csharp
-public class OuterClass
+public class ClasseExterne
 {
-    // Nested class for representing a point in 2D space.
+    // Classe imbriquée pour représenter un point dans l'espace 2D.
     public class Point
     {
         public int X { get; set; }
         public int Y { get; set; }
     }
     
-    // Usage example:
-    Point origin = new Point { X = 0, Y = 0 };
+    // Exemple d'utilisation :
+    Point origine = new Point { X = 0, Y = 0 };
 }
 ```
 
-### Nested Enums
+### Énumérations imbriquées
 
 ```csharp
-public class OuterClass
+public class ClasseExterne
 {
-    // Nested enum for representing the days of the week.
-    public enum DaysOfWeek
+    // Énumération imbriquée pour représenter les jours de la semaine.
+    public enum JoursDeLaSemaine
     {
-        Monday,
-        Tuesday,
-        Wednesday,
-        Thursday,
-        Friday,
-        Saturday,
-        Sunday
+        Lundi,
+        Mardi,
+        Mercredi,
+        Jeudi,
+        Vendredi,
+        Samedi,
+        Dimanche
     }
     
-    // Usage example:
-    DaysOfWeek today = DaysOfWeek.Monday;
+    // Exemple d'utilisation :
+    JoursDeLaSemaine aujourdHui = JoursDeLaSemaine.Lundi;
 }
 ```
 
-### Nested Interfaces
+### Interfaces imbriquées
 
 ```csharp
-public class OuterClass
+public class ClasseExterne
 {
-    // Nested interface for representing a shape.
-    public interface IShape
+    // Interface imbriquée pour représenter une forme.
+    public interface IForme
     {
-        double CalculateArea();
+        double CalculerSurface();
     }
     
-    // Nested class implementing the IShape interface.
-    public class Circle : IShape
+    // Classe imbriquée implémentant l'interface IForme.
+    public class Cercle : IForme
     {
-        public double Radius { get; set; }
+        public double Rayon { get; set; }
         
-        public double CalculateArea()
+        public double CalculerSurface()
         {
-            return Math.PI * Math.Pow(Radius, 2);
+            return Math.PI * Math.Pow(Rayon, 2);
         }
     }
     
-    // Usage example:
-    IShape shape = new Circle { Radius = 5 };
-    double area = shape.CalculateArea();
+    // Exemple d'utilisation :
+    IForme forme = new Cercle { Rayon = 5 };
+    double surface = forme.CalculerSurface();
 }
 ```
 
 ## Conclusion
 
-Nested types are a powerful feature in C# that allows for better organization, encapsulation, and readability of code. By nesting types within other types, you can create more modular and maintainable software solutions.
- 
+Les types imbriqués sont une fonctionnalité puissante en C# qui permet une meilleure organisation, encapsulation et lisibilité du code. En imbriquant des types les uns dans les autres, vous pouvez créer des solutions logicielles plus modulaires et maintenables.

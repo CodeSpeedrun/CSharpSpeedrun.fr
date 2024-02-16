@@ -1,81 +1,81 @@
-# C# Classes vs Records
+# Classes C# vs Enregistrements
 
 ## Introduction
 
-In C#, classes and records are both used to define data structures, but they have different characteristics and use cases. Understanding the differences between them is crucial for writing efficient and maintainable code. In this guide, we'll explore the distinctions between classes and records in C#, along with examples to illustrate their usage.
+En C#, les classes et les enregistrements sont tous deux utilisés pour définir des structures de données, mais ils présentent des caractéristiques et des cas d'utilisation différents. Comprendre les différences entre eux est crucial pour écrire un code efficace et maintenable. Dans ce guide, nous explorerons les distinctions entre les classes et les enregistrements en C#, avec des exemples pour illustrer leur utilisation.
 
 ## Classes
 
-### Definition
+### Définition
 
-A class in C# is a blueprint for creating objects. It encapsulates data for the object and behavior through methods. Here's a simple example of a class in C#:
+Une classe en C# est un modèle pour créer des objets. Elle encapsule des données pour l'objet et un comportement via des méthodes. Voici un exemple simple d'une classe en C# :
 
 ```csharp
-public class Car
+public class Voiture
 {
-    public string Make { get; set; }
-    public string Model { get; set; }
-    public int Year { get; set; }
+    public string Marque { get; set; }
+    public string Modèle { get; set; }
+    public int Année { get; set; }
     
-    public void StartEngine()
+    public void DémarrerMoteur()
     {
-        Console.WriteLine("Engine started!");
+        Console.WriteLine("Moteur démarré !");
     }
 }
 ```
 
-In the above code:
-- The `Car` class has three properties: `Make`, `Model`, and `Year`.
-- It also has a method `StartEngine()` which prints a message indicating the engine has started.
+Dans le code ci-dessus :
+- La classe `Voiture` a trois propriétés : `Marque`, `Modèle` et `Année`.
+- Elle a également une méthode `DémarrerMoteur()` qui affiche un message indiquant que le moteur a démarré.
 
-### Usage
+### Utilisation
 
-You can create instances of the `Car` class and access its properties and methods like this:
+Vous pouvez créer des instances de la classe `Voiture` et accéder à ses propriétés et méthodes comme ceci :
 
 ```csharp
-Car myCar = new Car();
-myCar.Make = "Toyota";
-myCar.Model = "Camry";
-myCar.Year = 2022;
+Voiture maVoiture = new Voiture();
+maVoiture.Marque = "Toyota";
+maVoiture.Modèle = "Camry";
+maVoiture.Année = 2022;
 
-Console.WriteLine($"My car is a {myCar.Year} {myCar.Make} {myCar.Model}");
-myCar.StartEngine();
+Console.WriteLine($"Ma voiture est une {maVoiture.Année} {maVoiture.Marque} {maVoiture.Modèle}");
+maVoiture.DémarrerMoteur();
 ```
 
-## Records
+## Enregistrements
 
-### Definition
+### Définition
 
-Records are a new feature introduced in C# 9.0. They are similar to classes but are primarily intended for immutable data types. Records provide a concise syntax for defining immutable types. Here's an example:
+Les enregistrements sont une nouvelle fonctionnalité introduite en C# 9.0. Ils sont similaires aux classes mais sont principalement destinés aux types de données immuables. Les enregistrements offrent une syntaxe concise pour définir des types immuables. Voici un exemple :
 
 ```csharp
-public record Person
+public record Personne
 {
-    public string FirstName { get; init; }
-    public string LastName { get; init; }
-    public int Age { get; init; }
+    public string Prénom { get; init; }
+    public string Nom { get; init; }
+    public int Âge { get; init; }
 }
 ```
 
-In the above code:
-- The `Person` record defines properties for `FirstName`, `LastName`, and `Age`.
-- The `init` accessor ensures that these properties can only be set during initialization and cannot be modified afterward.
+Dans le code ci-dessus :
+- L'enregistrement `Personne` définit des propriétés pour `Prénom`, `Nom` et `Âge`.
+- L'accessoir `init` garantit que ces propriétés ne peuvent être définies que lors de l'initialisation et ne peuvent pas être modifiées par la suite.
 
-### Usage
+### Utilisation
 
-Records are often used for representing data transfer objects (DTOs) or immutable data structures. You can create instances of a record like this:
+Les enregistrements sont souvent utilisés pour représenter des objets de transfert de données (DTO) ou des structures de données immuables. Vous pouvez créer des instances d'un enregistrement comme ceci :
 
 ```csharp
-Person person = new Person
+Personne personne = new Personne
 {
-    FirstName = "John",
-    LastName = "Doe",
-    Age = 30
+    Prénom = "Jean",
+    Nom = "Dupont",
+    Âge = 30
 };
 
-Console.WriteLine($"Hello, {person.FirstName} {person.LastName}! You are {person.Age} years old.");
+Console.WriteLine($"Bonjour, {personne.Prénom} {personne.Nom} ! Vous avez {personne.Âge} ans.");
 ```
 
 ## Conclusion
 
-In summary, classes and records are both essential tools for defining data structures in C#. Classes are more flexible and suitable for objects with mutable state and behavior, while records are optimized for immutable data and provide a more concise syntax. Understanding when to use each is crucial for writing efficient and maintainable code.
+En résumé, les classes et les enregistrements sont tous deux des outils essentiels pour définir des structures de données en C#. Les classes sont plus flexibles et adaptées aux objets à état mutable et comportement, tandis que les enregistrements sont optimisés pour les données immuables et offrent une syntaxe plus concise. Comprendre quand utiliser chacun est crucial pour écrire un code efficace et maintenable.
