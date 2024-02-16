@@ -1,6 +1,6 @@
-/* Generic Interface
+## Generic Interface
 
-*/
+```csharp
 using System;
 
 namespace CSharpSpeedrun
@@ -42,3 +42,4 @@ namespace CSharpSpeedrun
 }
 //Addition(12, 50) result = 62
 //Subtraction(3.118f, 5.623f) result = 8.74
+```

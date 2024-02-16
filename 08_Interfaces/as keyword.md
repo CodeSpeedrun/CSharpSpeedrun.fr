@@ -1,11 +1,8 @@
-/* 
-
-as-keyword
-The as keyword converts a class instance to an interface 
-type that it implements. We check for null values 
+## as-keyword
+The as keyword converts a class instance to an interface type that it implements. We check for null values 
 to ensure the cast was successful.
 
-*/
+```csharp
 using System;
 namespace CSharpSpeedrun
 {
@@ -41,3 +38,4 @@ namespace CSharpSpeedrun
     }
 }
 //I am ready to rock and roll!
+```

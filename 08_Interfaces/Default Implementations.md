@@ -1,14 +1,14 @@
 ```csharp
-// Interface Default Implementations
+// Implémentations par défaut d'interfaces
 
-// Define an interface for regular pointy shapes
+// Définir une interface pour les formes pointues régulières
 interface IPointy
 {
     byte Points { get; }
 }
 
-// Extend the IPointy interface to include properties for side length and number of sides,
-// as well as a default implementation for calculating the perimeter
+// Étendre l'interface IPointy pour inclure les propriétés de longueur de côté et de nombre de côtés,
+// ainsi qu'une implémentation par défaut pour calculer le périmètre
 interface IRegularPointy : IPointy
 {
     int SideLength { get; set; }
@@ -16,7 +16,7 @@ interface IRegularPointy : IPointy
     int Perimeter => SideLength * NumberOfSides;
 }
 
-// Define a base class for shapes
+// Définir une classe de base pour les formes
 class Shape
 {
     public string Name { get; }
@@ -28,27 +28,27 @@ class Shape
 
     public virtual void Draw()
     {
-        Console.WriteLine("Drawing a shape");
+        Console.WriteLine("Dessiner une forme");
     }
 }
 
-// Implement the IRegularPointy interface in a class for a square shape
+// Implémenter l'interface IRegularPointy dans une classe pour une forme carrée
 class QuadShape : Shape, IRegularPointy
 {
     public QuadShape() { }
     
     public QuadShape(string name) : base(name) { }
 
-    // Override the Draw method to specify how a square is drawn
+    // Remplacer la méthode Draw pour spécifier comment dessiner un carré
     public override void Draw()
     {
-        Console.WriteLine("Drawing a square");
+        Console.WriteLine("Dessiner un carré");
     }
 
-    // Implement the Points property from the IPointy interface
+    // Implémenter la propriété Points de l'interface IPointy
     public byte Points => 4;
 
-    // Implement properties for side length and number of sides from the IRegularPointy interface
+    // Implémenter les propriétés de longueur de côté et de nombre de côtés de l'interface IRegularPointy
     public int SideLength { get; set; }
     public int NumberOfSides { get; set; }
 }
@@ -57,25 +57,25 @@ class Program
 {
     static void Main(string[] args)
     {
-        // Create a square object with a name "Boxy" and set the number of sides and side length
+        // Créer un objet carré avec un nom "Boxy" et définir le nombre de côtés et la longueur des côtés
         var quad = new QuadShape("Boxy") { NumberOfSides = 4, SideLength = 4 };
 
-        // Draw the square
+        // Dessiner le carré
         quad.Draw();
 
-        // Output the properties of the square
-        Console.WriteLine($"{quad.Name} has {quad.NumberOfSides} sides of length {quad.SideLength} and a perimeter of {quad.Perimeter}");
+        // Afficher les propriétés du carré
+        Console.WriteLine($"{quad.Name} a {quad.NumberOfSides} côtés de longueur {quad.SideLength} et un périmètre de {quad.Perimeter}");
     }
 }
 ```
-This code demonstrates the usage of interfaces and default implementations in C#. Here's a breakdown:
+Ce code illustre l'utilisation des interfaces et des implémentations par défaut en C#. Voici une analyse détaillée :
 
-- **Interfaces**: Interfaces define a contract for classes to implement. In this code, `IPointy` and `IRegularPointy` are interfaces defining properties for pointy shapes and regular pointy shapes respectively.
+- **Interfaces** : Les interfaces définissent un contrat que les classes doivent implémenter. Dans ce code, `IPointy` et `IRegularPointy` sont des interfaces définissant respectivement les propriétés des formes pointues et des formes pointues régulières.
 
-- **Default Implementations**: The `Perimeter` property in the `IRegularPointy` interface provides a default implementation for calculating the perimeter of a regular pointy shape.
+- **Implémentations par défaut** : La propriété `Perimeter` dans l'interface `IRegularPointy` fournit une implémentation par défaut pour calculer le périmètre d'une forme pointue régulière.
 
-- **Base Class**: The `Shape` class serves as a base class for different types of shapes. It contains a `Name` property and a virtual `Draw` method which can be overridden by derived classes.
+- **Classe de base** : La classe `Shape` sert de classe de base pour différents types de formes. Elle contient une propriété `Name` et une méthode `Draw` virtuelle qui peut être redéfinie par les classes dérivées.
 
-- **Derived Class**: The `QuadShape` class implements the `IRegularPointy` interface to represent a square shape. It inherits from the `Shape` class and provides an implementation for the `Draw` method.
+- **Classe dérivée** : La classe `QuadShape` implémente l'interface `IRegularPointy` pour représenter une forme carrée. Elle hérite de la classe `Shape` et fournit une implémentation pour la méthode `Draw`.
 
-- **Main Method**: In the `Main` method, a `QuadShape` object named "Boxy" is created with a specified number of sides and side length. It is then drawn and its properties are outputted, including its name, number of sides, side length, and perimeter.
+- **Méthode principale** : Dans la méthode `Main`, un objet `QuadShape` nommé "Boxy" est créé avec un nombre spécifié de côtés et une longueur de côté donnée. Il est ensuite dessiné et ses propriétés sont affichées, y compris son nom, son nombre de côtés, sa longueur de côté et son périmètre.

@@ -1,9 +1,12 @@
-/*What is IEnumerable?
-The uppercase I in IEnumerable denotes that it is an interface. 
-It is mostly used to iterate non-generic collections. 
-Above all, the IEnumerable holds the GetEnumerator() method 
-which returns an IEnumerator object.
+### Qu'est-ce que IEnumerable ?
 
+- La majuscule I dans `IEnumerable` indique qu'il s'agit d'une interface. 
+Elle est principalement utilisée pour itérer sur des collections non génériques. 
+- Avant tout, `IEnumerable` contient la méthode `GetEnumerator()`
+qui renvoie un objet `IEnumerator`.
+
+```csharp
+/*
 public interface IEnumerable<out T> : IEnumerable {
         IEnumerator<T> GetEnumerator();
         
@@ -32,8 +35,8 @@ namespace CSharpSpeedrun
         }
 
         /*
-        IEnumerable indicates that it's a collection that can be enumerated (iterated over).
-        <int> specifies the type of elements in the collection, in this case, integers.
+        IEnumerable indique qu'il s'agit d'une collection pouvant être énumérée.
+        <int> spécifie le type d'éléments dans la collection, dans ce cas, des entiers.
         */
         static void DisplayIds(IEnumerable<int> values)
         {
@@ -52,3 +55,4 @@ namespace CSharpSpeedrun
 29
 27
 */
+```  

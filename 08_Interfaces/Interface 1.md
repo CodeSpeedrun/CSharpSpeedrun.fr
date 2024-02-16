@@ -1,3 +1,4 @@
+```csharp
 using System;
 using System.Collections.Generic;
 
@@ -32,3 +33,4 @@ namespace CSharpSpeedrun {
     }
 }
 //35
+```
