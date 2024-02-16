@@ -3,9 +3,6 @@
 **Introduction**
 
 In C#, custom properties and custom sort types offer powerful mechanisms for organizing and manipulating data in a flexible and meaningful way. 
-
-** Key Concepts**
-
 - **Custom Properties:**
     - Allow you to define properties that return instances of the `IComparer` interface, enabling custom sorting behavior directly within objects.
     - Enhance code readability and maintainability by encapsulating sorting logic within the relevant classes.
