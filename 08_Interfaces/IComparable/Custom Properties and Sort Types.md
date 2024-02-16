@@ -1,4 +1,4 @@
-**Custom Properties and Custom Sort Types in C#**
+###Custom Properties and Custom Sort Types in C#
 
 **Introduction**
 
