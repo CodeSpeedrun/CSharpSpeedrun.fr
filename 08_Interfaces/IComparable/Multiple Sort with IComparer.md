@@ -1,10 +1,10 @@
-** Multiple Sort Orders with `IComparer` in C#: A Comprehensive Guide**
+## Multiple Sort Orders with `IComparer` in C#: A Comprehensive Guide**
 
-** Introduction**
+### **Introduction**
 
 In C#, when you need to sort items based on more than one attribute or in varying orders, the `IComparer` interface comes in handy. This guide delves into its usage, providing clear explanations, detailed examples, and additional considerations for PhD students like yourself.
 
-** Understanding `IComparer`**
+## **Understanding `IComparer`**
 
 - **Purpose:** Provides a mechanism to define customized sorting criteria beyond the default behavior inherent in certain types.
 - **Implementation:** Create a class that implements `IComparer<T>`, where `T` is the type of objects you want to compare. This class must have a `Compare(T x, T y)` method that returns:
@@ -13,7 +13,7 @@ In C#, when you need to sort items based on more than one attribute or in varyin
     - A negative value if `x` is "less than" `y`.
 - **Usage:** Pass an instance of your `IComparer` implementation to sorting methods (e.g., `List<T>.Sort()`, `Array.Sort(T[], IComparer<T>)`) to apply your custom sorting logic.
 
-** Example: Sorting Vehicles by Type and Model**
+### **Example: Sorting Vehicles by Type and Model**
 
 ```csharp
 class Vehicle
@@ -51,7 +51,7 @@ foreach (Vehicle vehicle in vehicles)
 }
 ```
 
-** Output:**
+### **Output:**
 
 ```
 Car - Honda Civic
@@ -60,7 +60,7 @@ Truck - Ford F-150
 Truck - Chevrolet Silverado
 ```
 
-** Key Points and Further Considerations**
+### **Key Points and Further Considerations**
 
 - **Nested `IComparer` Classes:** For multiple sort criteria, create nested `IComparer` classes, each implementing its own `Compare` method.
 - **Performance:** Use efficient comparison logic within `Compare` to avoid performance bottlenecks.
