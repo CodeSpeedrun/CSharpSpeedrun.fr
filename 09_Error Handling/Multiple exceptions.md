@@ -1,88 +1,89 @@
-To provide a more detailed explanation and implementation, let's create a simplified scenario where we have a `Vehicle` class hierarchy with a base class `Vehicle` and a derived class `Car`. We'll implement exception handling for speeding up a car and demonstrate how to handle and rethrow exceptions.
 
-First, let's define the `Vehicle` and `Car` classes:
+Pour fournir une explication et une implémentation plus détaillées, créons un scénario simplifié où nous avons une hiérarchie de classes `Véhicule` avec une classe de base `Véhicule` et une classe dérivée `Voiture`. Nous implémenterons la gestion des exceptions pour accélérer une voiture et démontrerons comment gérer et relancer les exceptions.
+
+Tout d'abord, définissons les classes `Véhicule` et `Voiture` :
 
 ```csharp
 using System;
 
-public class Vehicle
+public class Véhicule
 {
-    public virtual void SpeedUp(int speedIncrement)
+    public virtual void Accélérer(int incrémentVitesse)
     {
-        // Base implementation for speeding up a vehicle.
-        Console.WriteLine("Accelerating the vehicle...");
-        if (speedIncrement < 0)
+        // Implémentation de base pour accélérer un véhicule.
+        Console.WriteLine("Accélération du véhicule...");
+        if (incrémentVitesse < 0)
         {
-            throw new ArgumentOutOfRangeException("speedIncrement", "Speed increment must be non-negative.");
+            throw new ArgumentOutOfRangeException("incrémentVitesse", "L'incrément de vitesse doit être non négatif.");
         }
     }
 }
 
-public class Car : Vehicle
+public class Voiture : Véhicule
 {
-    public override void SpeedUp(int speedIncrement)
+    public override void Accélérer(int incrémentVitesse)
     {
-        // Additional logic for speeding up a car.
-        base.SpeedUp(speedIncrement); // Call base method for basic functionality.
-        Console.WriteLine("Speeding up the car...");
-        if (speedIncrement > 100)
+        // Logique supplémentaire pour accélérer une voiture.
+        base.Accélérer(incrémentVitesse); // Appel de la méthode de base pour la fonctionnalité de base.
+        Console.WriteLine("Accélération de la voiture...");
+        if (incrémentVitesse > 100)
         {
-            throw new VehicleMalfunctionException("Car malfunction: Speed increment too high.");
+            throw new ExceptionMauvaisFonctionnementVéhicule("Défaillance de la voiture : Incrément de vitesse trop élevé.");
         }
     }
 }
 
-public class VehicleMalfunctionException : Exception
+public class ExceptionMauvaisFonctionnementVéhicule : Exception
 {
-    public VehicleMalfunctionException(string message) : base(message)
+    public ExceptionMauvaisFonctionnementVéhicule(string message) : base(message)
     {
     }
 }
 ```
 
-In this implementation:
+Dans cette implémentation :
 
-- We have a `Vehicle` class with a virtual method `SpeedUp`, representing the action of increasing the speed of any vehicle. It includes basic functionality and throws an `ArgumentOutOfRangeException` if the speed increment is negative.
-- The `Car` class inherits from `Vehicle` and overrides the `SpeedUp` method to include specific logic for cars. It first calls the base implementation to handle basic speeding up functionality and then adds additional checks specific to cars. If the speed increment exceeds 100, it throws a `VehicleMalfunctionException`.
-- We've defined a custom exception `VehicleMalfunctionException` to represent malfunctions specific to vehicles.
+- Nous avons une classe `Véhicule` avec une méthode virtuelle `Accélérer`, représentant l'action d'augmenter la vitesse de n'importe quel véhicule. Il inclut une fonctionnalité de base et lance une `ArgumentOutOfRangeException` si l'incrément de vitesse est négatif.
+- La classe `Voiture` hérite de `Véhicule` et remplace la méthode `Accélérer` pour inclure une logique spécifique aux voitures. Elle appelle d'abord l'implémentation de base pour gérer la fonctionnalité de base de l'accélération, puis ajoute des vérifications supplémentaires spécifiques aux voitures. Si l'incrément de vitesse dépasse 100, elle lance une `ExceptionMauvaisFonctionnementVéhicule`.
+- Nous avons défini une exception personnalisée `ExceptionMauvaisFonctionnementVéhicule` pour représenter les dysfonctionnements spécifiques aux véhicules.
 
-Now, let's demonstrate exception handling:
+Maintenant, démontrons la gestion des exceptions :
 
 ```csharp
-class Program
+class Programme
 {
     static void Main(string[] args)
     {
-        Car myCar = new Car();
+        Voiture maVoiture = new Voiture();
 
         try
         {
-            // Trigger an argument out of range exception.
-            myCar.SpeedUp(-10);
+            // Déclencher une exception hors de la plage d'arguments.
+            maVoiture.Accélérer(-10);
         }
-        catch (VehicleMalfunctionException ex)
+        catch (ExceptionMauvaisFonctionnementVéhicule ex)
         {
-            Console.WriteLine("Vehicle malfunction: " + ex.Message);
+            Console.WriteLine("Défaillance du véhicule : " + ex.Message);
         }
         catch (ArgumentOutOfRangeException ex)
         {
-            Console.WriteLine("Argument out of range: " + ex.Message);
+            Console.WriteLine("Argument hors de portée : " + ex.Message);
         }
         catch (Exception ex)
         {
-            Console.WriteLine("Unhandled exception: " + ex.Message);
+            Console.WriteLine("Exception non gérée : " + ex.Message);
         }
 
-        Console.WriteLine("Continuing with program execution...");
+        Console.WriteLine("Poursuite de l'exécution du programme...");
     }
 }
 ```
 
-In this `Main` method:
+Dans cette méthode `Main` :
 
-- We create an instance of the `Car` class.
-- We attempt to speed up the car with a negative speed increment, which triggers an `ArgumentOutOfRangeException`, caught by the respective catch block.
-- If a `VehicleMalfunctionException` occurs due to a speed increment exceeding 100, it's caught and handled accordingly.
-- Finally, any other exception is caught by the generic `Exception` handler.
+- Nous créons une instance de la classe `Voiture`.
+- Nous essayons d'accélérer la voiture avec un incrément de vitesse négatif, ce qui déclenche une `ArgumentOutOfRangeException`, capturée par le bloc catch respectif.
+- Si une `ExceptionMauvaisFonctionnementVéhicule` se produit en raison d'un incrément de vitesse dépassant 100, elle est capturée et traitée en conséquence.
+- Enfin, toute autre exception est capturée par le gestionnaire `Exception` générique.
 
-This example provides a detailed illustration of exception handling in C#, demonstrating how to handle specific exceptions and how to perform partial processing and rethrowing of exceptions when necessary.
+Cet exemple fournit une illustration détaillée de la gestion des exceptions en C#, démontrant comment gérer des exceptions spécifiques et comment effectuer un traitement partiel et relancer des exceptions si nécessaire.

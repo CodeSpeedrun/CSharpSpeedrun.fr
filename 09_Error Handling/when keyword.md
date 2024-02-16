@@ -1,54 +1,54 @@
-# Exceptions and the `when` Keyword in C#
+# Exceptions et le mot-clé `when` en C#
 
-Exceptions are a crucial aspect of programming in C#, allowing developers to handle unexpected errors or exceptional conditions in their code gracefully. The `when` keyword is a feature introduced in C# 6.0 that provides a flexible way to filter exceptions, allowing for more granular control over exception handling.
+Les exceptions sont un aspect crucial de la programmation en C#, permettant aux développeurs de gérer élégamment les erreurs inattendues ou les conditions exceptionnelles dans leur code. Le mot-clé `when` est une fonctionnalité introduite dans C# 6.0 qui offre un moyen flexible de filtrer les exceptions, permettant un contrôle plus granulaire sur la gestion des exceptions.
 
-## Exception Handling Basics
+## Principes de gestion des exceptions
 
-In C#, exceptions are objects that represent errors that occur during the execution of a program. When an exceptional condition arises, the runtime system creates an exception object and throws it. The execution of the program then shifts to the nearest enclosing `catch` block that can handle the type of exception thrown.
+En C#, les exceptions sont des objets qui représentent des erreurs survenant pendant l'exécution d'un programme. Lorsqu'une condition exceptionnelle se présente, le système d'exécution crée un objet d'exception et le lance. L'exécution du programme est ensuite déplacée vers le bloc `catch` le plus proche qui peut gérer le type d'exception levé.
 
-### Syntax of a `try-catch` Block
+### Syntaxe d'un bloc `try-catch`
 
 ```csharp
 try
 {
-    // Code that may throw an exception
+    // Code pouvant générer une exception
 }
-catch (ExceptionType1 ex)
+catch (TypeException1 ex)
 {
-    // Handle ExceptionType1
+    // Gérer TypeException1
 }
-catch (ExceptionType2 ex)
+catch (TypeException2 ex)
 {
-    // Handle ExceptionType2
+    // Gérer TypeException2
 }
 finally
 {
-    // Optional cleanup code
+    // Code de nettoyage facultatif
 }
 ```
 
-## Introducing the `when` Keyword
+## Introduction du mot-clé `when`
 
-The `when` keyword extends the `catch` clause in a `try-catch` block, allowing for additional conditions to be checked before executing the catch block's code. This provides more control over when a catch block should be executed.
+Le mot-clé `when` étend la clause `catch` dans un bloc `try-catch`, permettant de vérifier des conditions supplémentaires avant d'exécuter le code du bloc catch. Cela offre un contrôle plus précis sur le moment où un bloc catch doit être exécuté.
 
-### Syntax of a `catch` Clause with `when`
+### Syntaxe d'une clause `catch` avec `when`
 
 ```csharp
 try
 {
-    // Code that may throw an exception
+    // Code pouvant générer une exception
 }
-catch (ExceptionType ex) when (Condition)
+catch (TypeException ex) when (Condition)
 {
-    // Handle ExceptionType if Condition is true
+    // Gérer TypeException si Condition est vraie
 }
 ```
 
-## Example Usage
+## Exemple d'utilisation
 
-Consider a scenario where we have a custom exception `CarIsDeadException`, which represents a situation where a car has encountered a critical failure. We want to handle this exception differently based on the day of the week when it occurred.
+Considérons un scénario où nous avons une exception personnalisée `CarIsDeadException`, qui représente une situation où une voiture a rencontré une défaillance critique. Nous voulons gérer cette exception différemment en fonction du jour de la semaine où elle s'est produite.
 
-### Custom Exception Class
+### Classe d'exception personnalisée
 
 ```csharp
 public class CarIsDeadException : Exception
@@ -63,31 +63,31 @@ public class CarIsDeadException : Exception
 }
 ```
 
-### Exception Handling with `when` Clause
+### Gestion des exceptions avec la clause `when`
 
 ```csharp
 try
 {
-    // Code that may throw CarIsDeadException
+    // Code pouvant générer CarIsDeadException
 }
 catch (CarIsDeadException ex) when (ex.ErrorTimeStamp.DayOfWeek != DayOfWeek.Monday)
 {
-    // Handle CarIsDeadException if not occurred on Monday
-    Console.WriteLine("Catching car is dead!");
+    // Gérer CarIsDeadException si elle ne s'est pas produite un lundi
+    Console.WriteLine("Attraper la voiture en panne !");
     Console.WriteLine(ex.Message);
 }
 ```
 
-In this example, the `catch` block will only execute if the `ErrorTimeStamp` property of the `CarIsDeadException` object indicates a day of the week other than Monday. This allows for more nuanced handling of exceptions based on additional criteria.
+Dans cet exemple, le bloc `catch` s'exécutera uniquement si la propriété `ErrorTimeStamp` de l'objet `CarIsDeadException` indique un jour de la semaine autre que lundi. Cela permet une gestion plus nuancée des exceptions en fonction de critères supplémentaires.
 
-## Benefits of Using `when` Keyword
+## Avantages de l'utilisation du mot-clé `when`
 
-- **Fine-grained Control**: Developers can specify additional conditions for exception handling, providing more precise control over how exceptions are handled.
+- **Contrôle précis**: Les développeurs peuvent spécifier des conditions supplémentaires pour la gestion des exceptions, offrant un contrôle plus précis sur la façon dont les exceptions sont traitées.
   
-- **Readability**: Using `when` clauses can improve the readability of code by expressing exception handling logic more directly inline with the catch block.
+- **Lisibilité**: L'utilisation de clauses `when` peut améliorer la lisibilité du code en exprimant la logique de gestion des exceptions de manière plus directe en ligne avec le bloc catch.
 
-- **Reduced Code Duplication**: Instead of duplicating code within multiple catch blocks, `when` clauses allow developers to consolidate common exception handling logic while still providing conditional variations.
+- **Réduction de la duplication du code**: Au lieu de dupliquer le code dans plusieurs blocs catch, les clauses `when` permettent aux développeurs de consolider la logique de gestion des exceptions courantes tout en fournissant des variations conditionnelles.
 
 ## Conclusion
 
-The `when` keyword in C# enhances the flexibility and expressiveness of exception handling, enabling developers to write more robust and maintainable code. By incorporating additional conditions into catch blocks, developers can tailor exception handling logic to specific scenarios, improving the overall reliability and readability of their applications.
+Le mot-clé `when` en C# améliore la flexibilité et l'expressivité de la gestion des exceptions, permettant aux développeurs d'écrire un code plus robuste et maintenable. En incorporant des conditions supplémentaires dans les blocs catch, les développeurs peuvent adapter la logique de gestion des exceptions à des scénarios spécifiques, améliorant ainsi la fiabilité et la lisibilité globale de leurs applications.

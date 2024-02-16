@@ -1,43 +1,42 @@
+# LINQ (Language Integrated Query) en C#
+
+## Introduction
+LINQ est une fonctionnalité puissante en C# qui permet aux développeurs de interroger des données à partir de diverses sources de données en utilisant une syntaxe similaire à SQL directement dans le langage C#. Il fournit une manière uniforme d'interroger des données à partir de collections, de bases de données, de documents XML, etc.
+
+## Requête LINQ
+Dans le extrait de code fourni, une requête LINQ est utilisée pour filtrer les nombres inférieurs à 10 à partir d'un tableau appelé `originalNumbers`. Cela est fait en utilisant la clause `where` dans la requête LINQ, qui agit comme une condition de filtre.
+
 ```csharp
 int[] originalNumbers = {30, 40, 1, 2, 3};
-// LINQ query to filter numbers less than 10 from the originalNumbers array
+// Requête LINQ pour filtrer les nombres inférieurs à 10 du tableau originalNumbers
 var filteredSubset =    from num in originalNumbers
                         where num < 10
                         select num;
-Console.Write("Values in filtered subset: ");
-// Printing the filtered numbers
+Console.Write("Valeurs dans le sous-ensemble filtré : ");
+// Affichage des nombres filtrés
 foreach (var num in filteredSubset)
 {
     Console.Write("{0} ", num);
 }
 ```
 
-# LINQ (Language Integrated Query) in C#
+## Analyse Syntaxique
+- `from num in originalNumbers` : Cette partie de la requête LINQ configure une variable de plage `num` pour itérer sur les éléments du tableau `originalNumbers`.
+- `where num < 10` : Il s'agit de la condition de filtre qui sélectionne uniquement les éléments du tableau `originalNumbers` qui sont inférieurs à 10.
+- `select num` : Cette partie de la requête spécifie les éléments qui doivent être inclus dans l'ensemble de résultats.
 
-## Introduction
-LINQ is a powerful feature in C# that allows developers to query data from various data sources using a SQL-like syntax directly within the C# language. It provides a uniform way of querying data from collections, databases, XML documents, and more.
+## Exécution
+- La requête LINQ sélectionne les nombres inférieurs à 10 du tableau `originalNumbers`.
+- Les nombres sélectionnés sont ensuite affichés dans la console.
 
-## LINQ Query
-In the provided code snippet, a LINQ query is used to filter numbers less than 10 from an array called `originalNumbers`. This is done using the `where` clause in the LINQ query, which acts as a filter condition. 
-
-## Syntax Breakdown
-- `from num in originalNumbers`: This part of the LINQ query sets up a range variable `num` to iterate over the elements in the `originalNumbers` array.
-- `where num < 10`: This is the filter condition that selects only those elements from the `originalNumbers` array which are less than 10.
-- `select num`: This part of the query specifies the elements that should be included in the result set.
-
-## Execution
-- The LINQ query selects the numbers less than 10 from the `originalNumbers` array.
-- The selected numbers are then printed to the console.
-
-## Output
-The output of this code will be:
+## Sortie
+La sortie de ce code sera :
 ```
-Values in filtered subset: 1 2 3 
+Valeurs dans le sous-ensemble filtré : 1 2 3
 ```
 
-## Further Learning
-- **LINQ Operators**: Learn about various LINQ operators such as `where`, `select`, `group by`, `order by`, etc.
-- **Query Expressions vs. Method Syntax**: Understand the difference between query expressions (as shown in this example) and method syntax for writing LINQ queries.
-- **LINQ to Objects, SQL, XML**: Explore how LINQ can be used to query different data sources like collections, databases, and XML documents.
-- **Performance Considerations**: Learn about the performance implications of using LINQ and how to optimize LINQ queries for better performance.
-```
+## Apprentissage Complémentaire
+- **Opérateurs LINQ** : Apprenez sur les différents opérateurs LINQ tels que `where`, `select`, `group by`, `order by`, etc.
+- **Expressions de Requête vs. Syntaxe de Méthode** : Comprenez la différence entre les expressions de requête (comme montré dans cet exemple) et la syntaxe de méthode pour écrire des requêtes LINQ.
+- **LINQ vers les Objets, SQL, XML** : Explorez comment LINQ peut être utilisé pour interroger différentes sources de données comme les collections, les bases de données et les documents XML.
+- **Considérations de Performance** : Apprenez sur les implications de performance de l'utilisation de LINQ et comment optimiser les requêtes LINQ pour de meilleures performances.

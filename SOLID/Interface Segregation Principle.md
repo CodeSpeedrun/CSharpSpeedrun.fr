@@ -1,8 +1,9 @@
-/* What is Interface Segregation Principle (ISP)?
+## What is Interface Segregation Principle (ISP)?
 This principle recommends that classes should not 
 be forced to implement methods they dont use. In other words, 
 instead of a multipurpose interface, it is better to have multiple smaller ones.
-*/
+
+```csharp
 public class Manager : Developper
 {
    public void MeetClients()
@@ -16,3 +17,4 @@ public class Manager : Developper
       throw new Exception(" ");
    }
 }
+```

@@ -1,19 +1,18 @@
-```markdown
-# Structure (Value Type)
+# Structure (Type de valeur)
 
-In C#, structures (also known as value types) are lightweight alternatives to classes. They are used to encapsulate small groups of related variables. Structures are particularly useful when you want to work with simple data types efficiently.
+En C#, les structures (également connues sous le nom de types de valeur) sont des alternatives légères aux classes. Elles sont utilisées pour encapsuler de petits groupes de variables liées. Les structures sont particulièrement utiles lorsque vous souhaitez travailler efficacement avec des types de données simples.
 
-## Definition
+## Définition
 
 ```csharp
-struct Coordinate
+struct Coordonnée
 {
-    // Fields of the structure.
+    // Champs de la structure.
     public int X;
     public int Y;
     
-    // Increment both X and Y coordinates by 1.
-    public void Move()
+    // Incrémente à la fois les coordonnées X et Y de 1.
+    public void Déplacer()
     {
         X++;
         Y++;
@@ -21,29 +20,29 @@ struct Coordinate
 }
 ```
 
-## Characteristics
+## Caractéristiques
 
-- **Lightweight:** Structures consume less memory than classes as they are stored on the stack rather than on the heap.
-- **Encapsulation:** Like classes, structures can encapsulate data and behavior.
-- **Value Type:** Structures are passed by value, meaning they are copied when passed as arguments to methods.
+- **Légèreté :** Les structures consomment moins de mémoire que les classes car elles sont stockées sur la pile plutôt que sur le tas.
+- **Encapsulation :** Comme les classes, les structures peuvent encapsuler des données et des comportements.
+- **Type de valeur :** Les structures sont passées par valeur, ce qui signifie qu'elles sont copiées lorsqu'elles sont passées en tant qu'arguments à des méthodes.
 
-## Usage
+## Utilisation
 
-Structures are commonly used for representing simple data types such as points, rectangles, and other small data aggregates. Here's an example of how a structure representing a 2D point can be used:
+Les structures sont couramment utilisées pour représenter des types de données simples tels que des points, des rectangles et d'autres agrégats de données de petite taille. Voici un exemple de l'utilisation d'une structure représentant un point 2D :
 
 ```csharp
-Coordinate point = new Coordinate();
+Coordonnée point = new Coordonnée();
 point.X = 5;
 point.Y = 10;
-point.Move(); // Moves the point to (6, 11)
+point.Déplacer(); // Déplace le point en (6, 11)
 ```
 
-## Private Data
+## Données Privées
 
-If you need to include private data in your structure, you can achieve this by using properties:
+Si vous devez inclure des données privées dans votre structure, vous pouvez le faire en utilisant des propriétés :
 
 ```csharp
-struct Coordinate
+struct Coordonnée
 {
     private int x;
     private int y;
@@ -60,8 +59,8 @@ struct Coordinate
         set { y = value; }
     }
 
-    // Increment both X and Y coordinates by 1.
-    public void Move()
+    // Incrémente à la fois les coordonnées X et Y de 1.
+    public void Déplacer()
     {
         X++;
         Y++;
@@ -69,21 +68,21 @@ struct Coordinate
 }
 ```
 
-## Ref Modifier
+## Modificateur Ref
 
-The `ref` modifier can be used with structures to ensure they are stack allocated. This prevents them from being assigned as properties of another class.
+Le modificateur `ref` peut être utilisé avec les structures pour garantir qu'elles sont allouées sur la pile. Cela les empêche d'être assignées en tant que propriétés d'une autre classe.
 
 ```csharp
-public class Container
+public class Conteneur
 {
-    public ref Coordinate Coordinate { get; }
+    public ref Coordonnée Coordonnée { get; }
     
-    public Container(ref Coordinate coordinate)
+    public Conteneur(ref Coordonnée coordonnée)
     {
-        Coordinate = ref coordinate;
+        Coordonnée = ref coordonnée;
     }
 }
 ```
 
-In this example, the `Coordinate` property of the `Container` class is a reference to a `Coordinate` structure, ensuring it's stack-allocated and cannot be assigned as a property of another class.
-```
+Dans cet exemple, la propriété `Coordonnée` de la classe `Conteneur` est une référence à une structure `Coordonnée`, garantissant qu'elle est allouée sur la pile et ne peut pas être assignée en tant que propriété d'une autre classe.
+ 

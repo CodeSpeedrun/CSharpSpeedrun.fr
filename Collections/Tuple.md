@@ -1,6 +1,7 @@
-/* What is a Tuple?
-A tuple is a data structure that stores data of different data types. It is mostly used to return multiple values from a method. Above all, Tuple can pass multiple values to a method through a single parameter.
-*/
+### Qu'est-ce qu'un Tuple ?
+Un tuple est une structure de données qui stocke des données de différents types. Il est principalement utilisé pour retourner plusieurs valeurs à partir d'une méthode. Surtout, un Tuple peut transmettre plusieurs valeurs à une méthode via un seul paramètre.
+
+```csharp
 using System;
 
 namespace CSharpSpeedrun
@@ -46,3 +47,4 @@ namespace CSharpSpeedrun
 /*
   
 */
+```

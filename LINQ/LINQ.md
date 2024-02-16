@@ -1,9 +1,5 @@
-/*
-What is LINQ?
-LINQ or Language Integrated Query allows us 
-to query data from various sources and formats 
-such as file, database, xml and much more.
-*/
+
+```csharp 
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,3 +24,4 @@ namespace CSharpSpeedrun
     }
 }
 //Tesla
+```
