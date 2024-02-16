@@ -1,19 +1,19 @@
-### Custom Properties and Custom Sort Types in C#
+### Propriétés personnalisées et types de tri personnalisés en C#
 
 **Introduction**
 
-In C#, custom properties and custom sort types offer powerful mechanisms for organizing and manipulating data in a flexible and meaningful way. 
-- **Custom Properties:**
-    - Allow you to define properties that return instances of the `IComparer` interface, enabling custom sorting behavior directly within objects.
-    - Enhance code readability and maintainability by encapsulating sorting logic within the relevant classes.
+En C#, les propriétés personnalisées et les types de tri personnalisés offrent des mécanismes puissants pour organiser et manipuler les données de manière flexible et significative.
+- **Propriétés personnalisées :**
+    - Permettent de définir des propriétés renvoyant des instances de l'interface `IComparer`, permettant un comportement de tri personnalisé directement au sein des objets.
+    - Améliorent la lisibilité et la maintenabilité du code en encapsulant la logique de tri au sein des classes pertinentes.
 
-- **Custom Sort Types:**
-    - Implement the `IComparer` interface to define custom sorting criteria based on specific object properties or other logic.
-    - Provide fine-grained control over sorting operations and cater to diverse requirements.
+- **Types de tri personnalisés :**
+    - Implémentent l'interface `IComparer` pour définir des critères de tri personnalisés basés sur des propriétés d'objet spécifiques ou d'autres logiques.
+    - Offrent un contrôle précis sur les opérations de tri et répondent à des exigences diverses.
 
-**Example:**
+**Exemple :**
 
-Consider the scenario of managing `Car` objects and sorting them by various criteria, such as pet name, year of manufacture, or mileage. Traditionally, you might create individual `IComparer` implementations for each criterion:
+Considérons le scénario de gestion d'objets `Voiture` et de les trier selon divers critères, tels que le nom d'animal de compagnie, l'année de fabrication ou le kilométrage. Traditionnellement, vous pourriez créer des implémentations `IComparer` individuelles pour chaque critère :
 
 ```csharp
 public class CarYearComparer : IComparer<Car>
@@ -27,68 +27,68 @@ public class CarYearComparer : IComparer<Car>
 public class CarMileageComparer : IComparer<Car>
 {
     public int Compare(Car x, Car y)
-{
-    return x.Mileage.CompareTo(y.Mileage);
-}
-}
-```
-
-However, with custom properties, you can embed these comparisons directly within the `Car` class:
-
-```csharp
-public class Car : IComparable<Car>
-{
-    public string PetName { get; set; }
-    public int YearManufactured { get; set; }
-    public double Mileage { get; set; }
-
-    public static IComparer<Car> SortByPetName => new PetNameComparer();
-    public static IComparer<Car> SortByYearManufactured => new CarYearComparer();
-    public static IComparer<Car> SortByMileage => new CarMileageComparer();
-
-    // Implement IComparable<Car> interface for default sorting (e.g., by pet name)
-    public int CompareTo(Car other)
     {
-        return PetName.CompareTo(other.PetName);
+        return x.Mileage.CompareTo(y.Mileage);
     }
 }
 ```
 
-**Customization and Clarity**
-
-- **Clear Property Names:** Use meaningful names like `SortByPetName`, `SortByYearManufactured`, and `SortByMileage` for custom properties.
-- **Encapsulation:** Encapsulate custom sorting logic within the `Car` class, improving code organization and clarity.
-- **Flexibility:** Provide multiple sorting options without cluttering the `Car` class itself.
-- **Standalone Usages:** Allow sorting using either custom properties or standalone `IComparer` implementations for flexibility.
-
-**Advanced Considerations**
-
-- **Multiple Interfaces:** For comprehensive sorting capabilities, implement sorting behavior on several interfaces (`IComparer`, `IComparable<Car>`, and potentially others).
-- **Complex Comparisons:** Utilize custom sort types for intricate comparisons involving multiple properties or external factors.
-- **Performance:** Be mindful of potential performance implications when choosing between static methods and property access for sort types.
-
-**Example Usage:**
+Cependant, avec des propriétés personnalisées, vous pouvez intégrer ces comparaisons directement dans la classe `Voiture` :
 
 ```csharp
-var cars = new List<Car>
+public class Car : IComparable<Car>
 {
-    new Car { PetName = "Zoom", YearManufactured = 2020, Mileage = 50000 },
-    new Car { PetName = "Lightning", YearManufactured = 2018, Mileage = 80000 },
-    new Car { PetName = "Sparky", YearManufactured = 2022, Mileage = 20000 }
-};
+    public string NomAnimalCompagnie { get; set; }
+    public int AnnéeFabrication { get; set; }
+    public double Kilométrage { get; set; }
 
-// Sort by pet name (default behavior)
-cars.Sort();
+    public static IComparer<Car> TrierParNomAnimalCompagnie => new ComparateurNomAnimalCompagnie();
+    public static IComparer<Car> TrierParAnnéeFabrication => new ComparateurAnnéeFabrication();
+    public static IComparer<Car> TrierParKilométrage => new ComparateurKilométrage();
 
-// Sort by year of manufacture
-cars.Sort(Car.SortByYearManufactured);
-
-// Sort by mileage in descending order
-cars.Sort((c1, c2) => c2.Mileage.CompareTo(c1.Mileage)); // Custom lambda expression
-
-// Use standalone comparator
-var mileageDescendingComparer = new CarMileageComparerDescending();
-cars.Sort(mileageDescendingComparer);
+    // Implémenter l'interface IComparable<Car> pour le tri par défaut (par exemple, par nom d'animal de compagnie)
+    public int CompareTo(Car autre)
+    {
+        return NomAnimalCompagnie.CompareTo(autre.NomAnimalCompagnie);
+    }
+}
 ```
 
-By effectively leveraging custom properties and custom sort types, you can streamline data management, enhance code maintainability, and express sorting logic in a clear and flexible manner, making your C# code more tailored to diverse sorting requirements.
+**Personnalisation et Clarté**
+
+- **Noms de propriétés clairs :** Utilisez des noms significatifs comme `TrierParNomAnimalCompagnie`, `TrierParAnnéeFabrication` et `TrierParKilométrage` pour les propriétés personnalisées.
+- **Encapsulation :** Encapsulez la logique de tri personnalisée dans la classe `Voiture`, améliorant ainsi l'organisation et la clarté du code.
+- **Flexibilité :** Fournissez plusieurs options de tri sans encombrer la classe `Voiture` elle-même.
+- **Utilisations autonomes :** Permettez le tri à l'aide de propriétés personnalisées ou d'implémentations `IComparer` autonomes pour plus de flexibilité.
+
+**Considérations Avancées**
+
+- **Interfaces Multiples :** Pour des capacités de tri complètes, implémentez le comportement de tri sur plusieurs interfaces (`IComparer`, `IComparable<Car>`, et éventuellement d'autres).
+- **Comparaisons Complexes :** Utilisez des types de tri personnalisés pour des comparaisons complexes impliquant plusieurs propriétés ou des facteurs externes.
+- **Performance :** Soyez attentif aux éventuelles implications de performance lors du choix entre des méthodes statiques et l'accès par propriété pour les types de tri.
+
+**Exemple d'utilisation :**
+
+```csharp
+var voitures = new List<Car>
+{
+    new Car { NomAnimalCompagnie = "Zoom", AnnéeFabrication = 2020, Kilométrage = 50000 },
+    new Car { NomAnimalCompagnie = "Lightning", AnnéeFabrication = 2018, Kilométrage = 80000 },
+    new Car { NomAnimalCompagnie = "Sparky", AnnéeFabrication = 2022, Kilométrage = 20000 }
+};
+
+// Trier par nom d'animal de compagnie (comportement par défaut)
+voitures.Sort();
+
+// Trier par année de fabrication
+voitures.Sort(Car.TrierParAnnéeFabrication);
+
+// Trier par kilométrage en ordre décroissant
+voitures.Sort((c1, c2) => c2.Kilométrage.CompareTo(c1.Kilométrage)); // Expression lambda personnalisée
+
+// Utiliser un comparateur autonome
+var comparateurKilométrageDécroissant = new ComparateurKilométrageDécroissant();
+voitures.Sort(comparateurKilométrageDécroissant);
+```
+
+En exploitant efficacement les propriétés personnalisées et les types de tri personnalisés, vous pouvez rationaliser la gestion des données, améliorer la maintenabilité du code et exprimer la logique de tri de manière claire et flexible, rendant votre code C# plus adapté aux exigences de tri diverses.

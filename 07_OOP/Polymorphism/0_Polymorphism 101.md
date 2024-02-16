@@ -1,18 +1,18 @@
-## Polymorphism in C#
+## Polymorphisme en C#
 
-Polymorphism is a fundamental concept in object-oriented programming that allows objects of different types to be treated as objects of a common base type. This trait captures a language’s ability to treat related objects in a similar manner.
+Le polymorphisme est un concept fondamental en programmation orientée objet qui permet à des objets de types différents d'être traités comme des objets d'un type de base commun. Cette caractéristique capture la capacité d'un langage à traiter des objets liés de manière similaire.
 
-### Virtual Members vs Abstract Methods
+### Membres virtuels vs Méthodes abstraites
 
-#### Virtual Members
-A virtual member in a base class defines a default implementation that can be changed (overridden) by a derived class. This allows derived classes to provide their own implementation while still utilizing the base class's behavior as needed.
+#### Membres virtuels
+Un membre virtuel dans une classe de base définit une implémentation par défaut pouvant être modifiée (surclassée) par une classe dérivée. Cela permet aux classes dérivées de fournir leur propre implémentation tout en utilisant le comportement de la classe de base selon les besoins.
 
-#### Abstract Methods
-An abstract method, on the other hand, is a member in a base class that does not provide a default implementation but does provide a signature. When a class derives from a base class defining an abstract method, it must provide its own implementation. Abstract methods enforce derived classes to implement the method, ensuring consistency in behavior across different derived types.
+#### Méthodes abstraites
+Une méthode abstraite, en revanche, est un membre dans une classe de base qui ne fournit pas d'implémentation par défaut mais fournit une signature. Lorsqu'une classe dérive d'une classe de base définissant une méthode abstraite, elle doit fournir sa propre implémentation. Les méthodes abstraites obligent les classes dérivées à implémenter la méthode, garantissant ainsi la cohérence du comportement à travers différents types dérivés.
 
-### Example Code
+### Exemple de code
 
-Consider the following C# code snippet, which demonstrates polymorphism by instructing an array of `Shape`-derived types to render themselves using the `Draw()` method:
+Considérez le fragment de code C# suivant, qui démontre le polymorphisme en instruisant un tableau de types dérivés de `Shape` à se rendre en utilisant la méthode `Draw()` :
 
 ```csharp
 Shape[] shapes = new Shape[3];
@@ -22,39 +22,39 @@ shapes[2] = new Hexagon();
 
 foreach (Shape shape in shapes)
 {
-    // Use the polymorphic interface!
+    // Utiliser l'interface polymorphe !
     shape.Draw();
 }
 ```
 
-In this example:
-- `Shape` is a base class representing a geometric shape.
-- `Hexagon` and `Circle` are derived classes inheriting from `Shape`.
-- Each shape in the array `shapes` is treated uniformly through polymorphism, despite being different types.
+Dans cet exemple :
+- `Shape` est une classe de base représentant une forme géométrique.
+- `Hexagon` et `Circle` sont des classes dérivées héritant de `Shape`.
+- Chaque forme dans le tableau `shapes` est traitée uniformément grâce au polymorphisme, malgré les types différents.
 
-### Implementation Details
+### Détails de l'implémentation
 
-1. **Shape Base Class**: This class serves as the base for various geometric shapes and defines a virtual method `Draw()`.
-   
+1. **Classe de base Shape** : Cette classe sert de base pour différentes formes géométriques et définit une méthode virtuelle `Draw()`.
+
    ```csharp
    public abstract class Shape
    {
-       // Virtual method
+       // Méthode virtuelle
        public virtual void Draw()
        {
-           Console.WriteLine("Drawing a shape.");
+           Console.WriteLine("Dessiner une forme.");
        }
    }
    ```
 
-2. **Derived Classes**: `Hexagon` and `Circle` are derived from `Shape` and provide their own implementations of the `Draw()` method.
-   
+2. **Classes dérivées** : `Hexagon` et `Circle` sont dérivées de `Shape` et fournissent leurs propres implémentations de la méthode `Draw()`.
+
    ```csharp
    public class Hexagon : Shape
    {
        public override void Draw()
        {
-           Console.WriteLine("Drawing a hexagon.");
+           Console.WriteLine("Dessiner un hexagone.");
        }
    }
 
@@ -62,13 +62,13 @@ In this example:
    {
        public override void Draw()
        {
-           Console.WriteLine("Drawing a circle.");
+           Console.WriteLine("Dessiner un cercle.");
        }
    }
    ```
 
-3. **Polymorphic Usage**: In the main code, an array of `Shape` objects is created and populated with instances of `Hexagon` and `Circle`. The `foreach` loop iterates through each shape in the array and invokes the `Draw()` method, which dynamically calls the appropriate implementation based on the actual type of each shape.
+3. **Utilisation polymorphe** : Dans le code principal, un tableau d'objets `Shape` est créé et rempli avec des instances de `Hexagon` et de `Circle`. La boucle `foreach` itère à travers chaque forme dans le tableau et invoque la méthode `Draw()`, qui appelle dynamiquement l'implémentation appropriée en fonction du type réel de chaque forme.
 
 ### Conclusion
 
-Polymorphism enhances code flexibility and extensibility by allowing different objects to be treated uniformly through a common interface. Virtual members and abstract methods play key roles in enabling polymorphic behavior in object-oriented programming languages like C#. Understanding these concepts is essential for developing robust and maintainable software systems.
+Le polymorphisme améliore la flexibilité et l'extensibilité du code en permettant à différents objets d'être traités uniformément via une interface commune. Les membres virtuels et les méthodes abstraites jouent un rôle clé dans la création de comportements polymorphes dans les langages de programmation orientés objet tels que C#. Comprendre ces concepts est essentiel pour développer des systèmes logiciels robustes et maintenables.

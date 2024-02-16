@@ -1,7 +1,12 @@
-### How to implement static polymorphism?
+### Comment implémenter le polymorphisme statique?
 
-- Let’s say we need a method that works well with int and double data types. The compiler automatically selects the correct method based on the data that is passed when the method is called. 
-- For example, passing AdditionCalculator(1,4) calls the method that returns the int and passing dditionCalculator(1.1,4) calls the method that returns double.
+Le polymorphisme statique est une technique de la programmation orientée objet dans laquelle une méthode peut avoir plusieurs formes mais la résolution se fait au moment de la compilation, contrairement au polymorphisme dynamique où la résolution se fait au moment de l'exécution.
+
+#### Qu'est-ce que le polymorphisme statique?
+
+Le polymorphisme statique, également connu sous le nom de surcharge de méthode, permet à une classe d'avoir plusieurs méthodes avec le même nom mais avec différents paramètres. La méthode appropriée est sélectionnée par le compilateur en fonction des types de paramètres passés lors de l'appel de la méthode.
+
+#### Exemple de code:
 
 ```csharp
 using System;
@@ -22,5 +27,8 @@ namespace CSharpSpeedrun
         }
     }
 }
-//5
 ```
+
+Dans cet exemple, nous avons deux méthodes `AdditionCalculator` avec le même nom mais des types de paramètres différents. Lorsque nous appelons `AdditionCalculator(1, 4)`, le compilateur sélectionne automatiquement la méthode prenant deux entiers comme paramètres. Cela retourne 5, car 1 + 4 est égal à 5.
+
+Ce code illustre le polymorphisme statique en action. Le compilateur choisit la méthode appropriée en fonction des types de paramètres fournis lors de l'appel de la méthode.

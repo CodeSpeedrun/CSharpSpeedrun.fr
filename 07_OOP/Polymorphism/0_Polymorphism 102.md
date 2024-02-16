@@ -1,94 +1,94 @@
-# Polymorphism in C#
+# Polymorphisme en C#
 
-Polymorphism is a fundamental concept in object-oriented programming (OOP) that allows objects of different types to be treated as objects of a common base type. In C#, polymorphism is achieved through method overriding and method overloading.
+Le polymorphisme est un concept fondamental en programmation orientée objet (POO) qui permet à des objets de différents types d'être traités comme des objets d'un type de base commun. En C#, le polymorphisme est réalisé grâce au remplacement de méthode et à la surcharge de méthode.
 
-## Method Overriding and Virtual Methods
+## Remplacement de méthode et méthodes virtuelles
 
-Method overriding is a feature that allows a subclass to provide a specific implementation of a method that is already defined in its superclass. This is achieved using the `override` keyword in C#. To enable method overriding, the superclass method must be declared as `virtual`.
+Le remplacement de méthode est une fonctionnalité qui permet à une sous-classe de fournir une implémentation spécifique d'une méthode déjà définie dans sa superclasse. Cela est réalisé en utilisant le mot-clé `override` en C#. Pour activer le remplacement de méthode, la méthode de la superclasse doit être déclarée comme `virtual`.
 
-### Example:
+### Exemple :
 
 ```csharp
-public class Employee
+public class Employé
 {
-    // A virtual method that can be overridden by derived classes.
-    public virtual void GiveBonus(float amount)
+    // Une méthode virtuelle pouvant être remplacée par des classes dérivées.
+    public virtual void DonnerBonus(float montant)
     {
-        // Base implementation of giving bonus.
+        // Implémentation de base pour donner un bonus.
     }
 }
 ```
 
-In the above code snippet, the `GiveBonus` method is declared as `virtual` in the `Employee` class, indicating that it can be overridden by subclasses.
+Dans le code ci-dessus, la méthode `DonnerBonus` est déclarée comme `virtual` dans la classe `Employé`, ce qui indique qu'elle peut être remplacée par des sous-classes.
 
-## Method Overriding in Derived Classes
+## Remplacement de méthode dans les classes dérivées
 
-When a subclass wants to provide its own implementation of a method that is already defined in its superclass, it uses the `override` keyword.
+Lorsqu'une sous-classe souhaite fournir sa propre implémentation d'une méthode déjà définie dans sa superclasse, elle utilise le mot-clé `override`.
 
-### Example:
+### Exemple :
 
 ```csharp
-public class SalesPerson : Employee
+public class Vendeur : Employé
 {
-    // Overrides the GiveBonus method to provide a specific implementation for SalesPerson.
-    public override void GiveBonus(float amount)
+    // Remplace la méthode DonnerBonus pour fournir une implémentation spécifique pour les Vendeurs.
+    public override void DonnerBonus(float montant)
     {
-        // Custom implementation of giving bonus for SalesPerson.
+        // Implémentation personnalisée pour donner un bonus aux Vendeurs.
     }
 }
 ```
 
-In this example, the `SalesPerson` class inherits from the `Employee` class and overrides the `GiveBonus` method to provide a different implementation specific to salespersons.
+Dans cet exemple, la classe `Vendeur` hérite de la classe `Employé` et remplace la méthode `DonnerBonus` pour fournir une implémentation différente spécifique aux vendeurs.
 
-## Additional Concepts
+## Concepts supplémentaires
 
-### Base Keyword
+### Mot-clé Base
 
-The `base` keyword in C# is used to access members of the base class from within a derived class. It is often used to call the constructor, methods, or properties of the base class.
+Le mot-clé `base` en C# est utilisé pour accéder aux membres de la classe de base depuis une classe dérivée. Il est souvent utilisé pour appeler le constructeur, les méthodes ou les propriétés de la classe de base.
 
-### Example:
+### Exemple :
 
 ```csharp
-public override void DisplayStats()
+public override void AfficherStatistiques()
 {
-    base.DisplayStats(); // Calls the DisplayStats method of the base class.
-    Console.WriteLine("Number of Sales: {0}", SalesNumber);
+    base.AfficherStatistiques(); // Appelle la méthode AfficherStatistiques de la classe de base.
+    Console.WriteLine("Nombre de Ventes : {0}", NombreVentes);
 }
 ```
 
-In this snippet, `base.DisplayStats()` calls the `DisplayStats` method of the base class before adding additional functionality specific to the `SalesPerson` class.
+Dans cet extrait, `base.AfficherStatistiques()` appelle la méthode `AfficherStatistiques` de la classe de base avant d'ajouter des fonctionnalités supplémentaires spécifiques à la classe `Vendeur`.
 
-### Abstract Classes and Methods
+### Classes et méthodes abstraites
 
-In addition to `virtual` and `override`, C# also supports `abstract` classes and methods. Abstract methods are declared without implementation and must be overridden by derived classes. Abstract classes cannot be instantiated and are often used as base classes for other classes.
+En plus de `virtual` et `override`, C# prend également en charge les classes et les méthodes `abstract`. Les méthodes abstraites sont déclarées sans implémentation et doivent être remplacées par des classes dérivées. Les classes abstraites ne peuvent pas être instanciées et sont souvent utilisées comme classes de base pour d'autres classes.
 
-### Example:
+### Exemple :
 
 ```csharp
-public abstract class Shape
+public abstract class Forme
 {
-    // Abstract method to calculate the area of a shape.
-    public abstract float CalculateArea();
+    // Méthode abstraite pour calculer la superficie d'une forme.
+    public abstract float CalculerSuperficie();
 }
 ```
 
-In the above code, `Shape` is an abstract class with an abstract method `CalculateArea()`. Any class inheriting from `Shape` must provide an implementation for `CalculateArea()`.
+Dans le code ci-dessus, `Forme` est une classe abstraite avec une méthode abstraite `CalculerSuperficie()`. Toute classe héritant de `Forme` doit fournir une implémentation pour `CalculerSuperficie()`.
 
 ### Interfaces
 
-Interfaces in C# define a contract that classes can implement. They contain only method signatures, properties, events, or indexers. Implementing an interface ensures that the implementing class provides concrete implementations for all members of the interface.
+Les interfaces en C# définissent un contrat que les classes peuvent implémenter. Elles ne contiennent que des signatures de méthode, des propriétés, des événements ou des indexeurs. Implémenter une interface garantit que la classe implémentant l'interface fournit des implémentations concrètes pour tous les membres de l'interface.
 
-### Example:
+### Exemple :
 
 ```csharp
-public interface IRenderable
+public interface IAffichable
 {
-    void Render();
+    void Afficher();
 }
 ```
 
-In this example, `IRenderable` is an interface with a single method `Render()`. Any class implementing `IRenderable` must provide an implementation for the `Render` method.
+Dans cet exemple, `IAffichable` est une interface avec une seule méthode `Afficher()`. Toute classe implémentant `IAffichable` doit fournir une implémentation pour la méthode `Afficher`.
 
 ## Conclusion
 
-Polymorphism is a powerful concept in C# that enables code reusability, flexibility, and extensibility in object-oriented programming. By understanding method overriding, virtual methods, abstract classes, interfaces, and related concepts, developers can write more maintainable and scalable code.
+Le polymorphisme est un concept puissant en C# qui permet la réutilisation de code, la flexibilité et l'extensibilité en programmation orientée objet. En comprenant le remplacement de méthode, les méthodes virtuelles, les classes abstraites, les interfaces et les concepts connexes, les développeurs peuvent écrire un code plus maintenable et évolutif.

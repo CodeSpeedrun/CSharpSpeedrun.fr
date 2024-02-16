@@ -1,40 +1,40 @@
-## Encapsulation of Field Data in .NET Core using Properties
+## Encapsulation des Données de Champ dans .NET Core en Utilisant les Propriétés
 
-In .NET Core languages, properties are preferred over traditional get and set methods for encapsulating field data. Properties provide a more concise and expressive way to enforce data encapsulation and maintain control over access to class fields.
+Dans les langages .NET Core, les propriétés sont préférées aux méthodes traditionnelles `get` et `set` pour encapsuler les données de champ. Les propriétés offrent une manière plus concise et expressive d'imposer l'encapsulation des données et de maintenir le contrôle sur l'accès aux champs de classe.
 
-### Basic Property Syntax
+### Syntaxe de Base des Propriétés
 
-Properties in C# consist of a getter and a setter, which allow read and write access to the encapsulated data respectively. Here's an example of a property encapsulating an employee's ID:
+Les propriétés en C# se composent d'un accesseur (getter) et d'un mutateur (setter), qui permettent respectivement d'accéder en lecture et en écriture aux données encapsulées. Voici un exemple d'une propriété encapsulant l'identifiant d'un employé :
 
 ```csharp
-public int EmployeeId // Property declaration
+public int EmployeeId // Déclaration de la propriété
 {
     get { return _employeeId; } // Getter
     set { _employeeId = value; } // Setter
 }
 ```
 
-In this example:
-- `EmployeeId` is the name of the property.
-- `_employeeId` is the underlying field storing the data.
-- `get` retrieves the value of `_employeeId`.
-- `set` sets the value of `_employeeId` to the incoming value (`value`).
+Dans cet exemple :
+- `EmployeeId` est le nom de la propriété.
+- `_employeeId` est le champ sous-jacent stockant les données.
+- `get` récupère la valeur de `_employeeId`.
+- `set` définit la valeur de `_employeeId` à la valeur entrante (`value`).
 
-### Contextual Keyword: `value`
+### Mot-Clé Contextuel : `value`
 
-The `value` keyword represents the incoming value used to assign the property by the caller. It is a contextual keyword, specifically used within the set accessor of a property. Its type is inferred from the property type.
+Le mot-clé `value` représente la valeur entrante utilisée pour attribuer la propriété par l'appelant. C'est un mot-clé contextuel, utilisé spécifiquement dans l'accesseur `set` d'une propriété. Son type est inféré à partir du type de propriété.
 
 ```csharp
 public int Age
 {
     get { return _employeeAge; }
-    set { _employeeAge = value; } // 'value' represents the incoming value
+    set { _employeeAge = value; } // 'value' représente la valeur entrante
 }
 ```
 
-### Expression-Bodied Members
+### Membres de Corps d'Expression
 
-In C# 6 and later, properties can be written as expression-bodied members, providing a more concise syntax for simple getter and setter methods.
+En C# 6 et ultérieur, les propriétés peuvent être écrites sous forme de membres de corps d'expression, offrant une syntaxe plus concise pour les méthodes getter et setter simples.
 
 ```csharp
 public int Age
@@ -44,110 +44,110 @@ public int Age
 }
 ```
 
-### Read-Only Properties
+### Propriétés en Lecture Seule
 
-To create a read-only property, omit the setter block. This ensures that the property can only be set within the class itself.
+Pour créer une propriété en lecture seule, omettez le bloc setter. Cela garantit que la propriété ne peut être définie que dans la classe elle-même.
 
 ```csharp
 public string SocialSecurityNumber { get; private set; }
 ```
 
-In this example, `SocialSecurityNumber` can be accessed publicly for reading but can only be set within the class.
+Dans cet exemple, `SocialSecurityNumber` peut être accédé publiquement en lecture mais ne peut être défini que dans la classe.
 
-### Access Modifiers
+### Modificateurs d'Accès
 
-Properties can have different access modifiers for their getter and setter, allowing fine-grained control over accessibility.
+Les propriétés peuvent avoir différents modificateurs d'accès pour leur getter et leur setter, permettant un contrôle précis de l'accessibilité.
 
 ```csharp
 public int EmployeeId
 {
-    get { return _employeeId; } // Public getter
-    private set { _employeeId = value; } // Private setter
+    get { return _employeeId; } // Getter public
+    private set { _employeeId = value; } // Setter privé
 }
 ```
 
-In this case, `EmployeeId` can be read from anywhere, but it can only be set within the class itself.
+Dans ce cas, `EmployeeId` peut être lu de n'importe où, mais il ne peut être défini que dans la classe elle-même.
 
- 
- 
-# C# Properties and Fields Overview
+## Aperçu des Propriétés et Champs en C#
 
-## Introduction
-In C#, properties and fields are crucial components for encapsulating data within classes. They allow for controlled access to the internal state of an object, enabling the enforcement of business rules and maintaining the integrity of the program's data.
+### Introduction
+En C#, les propriétés et les champs sont des composants cruciaux pour encapsuler des données au sein de classes. Ils permettent un accès contrôlé à l'état interne d'un objet, permettant l'application de règles métier et maintenant l'intégrité des données du programme.
 
-## Static Property
+### Propriété Statique
 ```csharp
-// A static property.
-public static double InterestRate
+// Une propriété statique.
+public static double TauxInteret
 {
-    get { return _currentInterestRate; }
-    set { _currentInterestRate = value; }
+    get { return _tauxInteretActuel; }
+    set { _tauxInteretActuel = value; }
 }
 ```
-Static properties are accessed through the class itself rather than an instance of the class. They are commonly used for values that are shared among all instances of the class, such as configuration settings or constants.
+Les propriétés statiques sont accessibles à travers la classe elle-même plutôt qu'une instance de la classe. Elles sont couramment utilisées pour des valeurs partagées entre toutes les instances de la classe, telles que les paramètres de configuration ou les constantes.
 
-## Automatic Properties
+### Propriétés Automatiques
 ```csharp
-class Car
+class Voiture
 {
-    // Automatic properties! No need to define backing fields.
-    public string PetName { get; set; }
+    // Propriétés automatiques ! Pas besoin de définir des champs de sauvegarde.
+    public string NomAnimal { get; set; }
 
-    // The hidden int backing field is set to zero!
-    public int NumberOfCars { get; set; }
+    // Le champ de sauvegarde int caché est défini à zéro !
+    public int NombreDeVoitures { get; set; }
 
-    // The hidden Car backing field is set to null!
-    public Car MyAuto { get; set; }
+    // Le champ de sauvegarde Car caché est défini à null !
+    public Voiture MonAuto { get; set; }
 }
 ```
-Automatic properties provide a concise syntax for defining properties without explicitly declaring backing fields. The compiler generates the backing field and the get/set methods automatically.
+Les propriétés automatiques fournissent une syntaxe concise pour définir des propriétés sans déclarer explicitement les champs de sauvegarde. Le compilateur génère automatiquement le champ de sauvegarde et les méthodes get/set.
 
-## Initializing Automatic Properties
+### Initialisation des Propriétés Automatiques
 ```csharp
-class Car
+class Voiture
 {
-    // The hidden backing field is set to 1.
-    public int NumberOfCars { get; set; } = 1;
+    // Le champ de sauvegarde caché est défini à 1.
+    public int NombreDeVoitures { get; set; } = 1;
     
-    // The hidden backing field is set to a new Car object.
-    public Car MyAuto { get; set; } = new Car();
+    // Le champ de sauvegarde caché est défini à un nouvel objet Car.
+    public Voiture MonAuto { get; set; } = new Voiture();
 }
 ```
-Automatic properties can be initialized directly at the point of declaration, simplifying object initialization.
+Les propriétés automatiques peuvent être initialisées directement au point de déclaration, simplifiant ainsi l'initialisation des objets.
 
-## Init-Only Setters (C# 9.0)
+### Setters Uniquement pour l'Initialisation (C# 9.0)
 ```csharp
-class PointReadOnlyAfterCreation
+class PointLectureSeuleApresCreation
 {
     public int X { get; init; }
 }
 ```
-Introduced in C# 9.0, init-only setters allow properties to be set during initialization but become read-only after construction. This feature is particularly useful for creating immutable objects.
+Introduits dans C# 9.0, les setters uniquement pour l'initialisation permettent aux propriétés d'être définies lors de l'initialisation mais deviennent en lecture seule après la construction. Cette fonctionnalité est particulièrement utile pour créer des objets immuables.
 
-## Read-Only Fields
+### Champs en Lecture Seule
 ```csharp
-class MyMathClass
+class MaClasseMath
 {
-    // Read-only fields can be assigned in constructors.
+    // Les champs en lecture seule peuvent être assignés dans les constructeurs.
     public readonly double PI;
 
-    public MyMathClass ()
+    public MaClasseMath()
     {
         PI = 3.14;
     }
 }
 ```
-Read-only fields can only be assigned within constructors and are immutable once initialized. They are useful for values that should not change after object construction.
+Les champs en lecture seule ne peuvent être assignés qu'à l'intérieur des constructeurs et sont immuables une fois initialisés. Ils sont utiles pour les valeurs qui ne doivent pas changer après la construction de l'objet.
 
-## Static Read-Only Fields
+### Champs Statiques en Lecture Seule
 ```csharp
-class MyMathClass
+class MaClasseMath
 {
-    // Static read-only field.
+    // Champ statique en lecture seule.
     public static readonly double PI;
 }
 ```
-Static read-only fields are shared among all instances of the class and are initialized once before any instance of the class is created. They must be explicitly marked as static.
+Les champs statiques en lecture seule sont partagés entre toutes les instances de la classe et sont initialisés une fois avant que toute instance de la classe ne soit créée. Ils doivent être explicitement marqués comme statiques.
 
-## Conclusion
-Understanding properties and fields in C# is fundamental for developing robust and maintainable code. Whether it's enforcing business rules, creating immutable objects, or managing shared data, properties and fields provide powerful tools for managing the state of your objects.
+### Conclusion
+Comprendre les propriétés et les champs en
+
+ C# est fondamental pour développer un code robuste et maintenable. Que ce soit pour appliquer des règles métier, créer des objets immuables ou gérer des données partagées, les propriétés et les champs fournissent des outils puissants pour gérer l'état de vos objets.

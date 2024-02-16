@@ -1,29 +1,29 @@
-# The IComparable Interface
-The `IComparable` interface specifies a behavior that allows an object to be sorted based on some specified key.
+# L'Interface IComparable
+L'interface `IComparable` spécifie un comportement qui permet à un objet d'être trié en fonction d'une clé spécifiée.
 
-## Formal Definition
+## Définition Formelle
 ```csharp
-// This interface allows an object to specify its relationship between other like objects.
+// Cette interface permet à un objet de spécifier sa relation avec d'autres objets similaires.
 public interface IComparable
 {
     int CompareTo(object o);
 }
 ```
 
-The generic version of this interface (`IComparable<T>`) provides a more type-safe manner to handle comparisons between objects.
+La version générique de cette interface (`IComparable<T>`) offre une manière plus sûre en termes de type pour gérer les comparaisons entre les objets.
 
-## Implementation Example
+## Exemple d'Implémentation
 ```csharp
 namespace ComparableVehicle
 {
     public class Vehicle : IComparable
     {
-        // Properties
+        // Propriétés
         public string Name { get; set; }
         public int CurrentSpeed { get; set; }
         public int VehicleID { get; set; }
 
-        // Constructor
+        // Constructeur
         public Vehicle(string name, int speed, int id)
         {
             Name = name;
@@ -31,14 +31,14 @@ namespace ComparableVehicle
             VehicleID = id;
         }
 
-        // CompareTo method implementation
+        // Implémentation de la méthode CompareTo
         int IComparable.CompareTo(object obj)
         {
             if (obj is Vehicle otherVehicle)
             {
                 return this.VehicleID.CompareTo(otherVehicle.VehicleID);
             }
-            throw new ArgumentException("Parameter is not a Vehicle!");
+            throw new ArgumentException("Le paramètre n'est pas un véhicule !");
         }
     }
 
@@ -46,25 +46,25 @@ namespace ComparableVehicle
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("***** Fun with Object Sorting *****\n");
+            Console.WriteLine("***** Amusement avec le Tri d'Objets *****\n");
 
-            // Make an array of Vehicle objects.
+            // Création d'un tableau d'objets Vehicle.
             Vehicle[] myVehicles = new Vehicle[5];
-            myVehicles[0] = new Vehicle("Car A", 80, 1);
-            myVehicles[1] = new Vehicle("Car B", 40, 2);
+            myVehicles[0] = new Vehicle("Voiture A", 80, 1);
+            myVehicles[1] = new Vehicle("Voiture B", 40, 2);
 
-            // Display current array.
-            Console.WriteLine("Here is the unordered set of vehicles:");
+            // Affichage du tableau actuel.
+            Console.WriteLine("Voici l'ensemble non trié de véhicules :");
             foreach (Vehicle v in myVehicles)
             {
                 Console.WriteLine("{0} {1}", v.VehicleID, v.Name);
             }
 
-            // Now, sort them using IComparable!
+            // Tri à l'aide de IComparable !
             Array.Sort(myVehicles);
 
-            // Display sorted array.
-            Console.WriteLine("\nHere is the ordered set of vehicles:");
+            // Affichage du tableau trié.
+            Console.WriteLine("\nVoici l'ensemble trié de véhicules :");
             foreach (Vehicle v in myVehicles)
             {
                 Console.WriteLine("{0} {1}", v.VehicleID, v.Name);
@@ -74,9 +74,9 @@ namespace ComparableVehicle
 }
 ```
 
-In this implementation:
-- `Vehicle` class represents a generic vehicle with properties like Name, CurrentSpeed, and VehicleID.
-- `IComparable.CompareTo` method is implemented to compare vehicles based on their VehicleID.
-- In the `Main` method, an array of `Vehicle` objects is created and sorted using `Array.Sort` method.
+Dans cette implémentation :
+- La classe `Vehicle` représente un véhicule générique avec des propriétés telles que Name, CurrentSpeed et VehicleID.
+- La méthode `IComparable.CompareTo` est implémentée pour comparer les véhicules en fonction de leur VehicleID.
+- Dans la méthode `Main`, un tableau d'objets `Vehicle` est créé et trié à l'aide de la méthode `Array.Sort`.
 
-This allows custom types like `Vehicle` to be sorted in arrays using the `IComparable` interface.
+Cela permet aux types personnalisés comme `Vehicle` d'être triés dans des tableaux en utilisant l'interface `IComparable`.

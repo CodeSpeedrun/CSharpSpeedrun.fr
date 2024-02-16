@@ -1,50 +1,50 @@
-# Record Type Inheritance in C#
+# L'héritage des types de record en C#
 
-Record types in C# support inheritance, allowing for the creation of specialized types based on existing ones. In this example, we'll explore how record inheritance works and its application in object-oriented programming.
+Les types de record en C# prennent en charge l'héritage, ce qui permet de créer des types spécialisés basés sur des types existants. Dans cet exemple, nous explorerons comment fonctionne l'héritage des records et son application en programmation orientée objet.
 
-## Car Record Type
+## Type de record Automobile
 ```csharp
 namespace RecordInheritance
 {
-    // Definition of the Car record type
+    // Définition du type de record Automobile
     public record Automobile
     {
-        public string Brand { get; init; }
-        public string Model { get; init; }
-        public string Color { get; init; }
+        public string Marque { get; init; }
+        public string Modèle { get; init; }
+        public string Couleur { get; init; }
 
-        // Constructor to initialize the Car object
-        public Automobile(string brand, string model, string color)
+        // Constructeur pour initialiser l'objet Automobile
+        public Automobile(string marque, string modèle, string couleur)
         {
-            Brand = brand;
-            Model = model;
-            Color = color;
+            Marque = marque;
+            Modèle = modèle;
+            Couleur = couleur;
         }
     }
 }
 ```
-Here, we've renamed the `Car` class to `Automobile` to avoid plagiarism and maintain clarity.
+Ici, nous avons renommé la classe `Car` en `Automobile` pour éviter le plagiat et maintenir la clarté.
 
-## MiniVan Record Type
+## Type de record MiniVan
 ```csharp
 namespace RecordInheritance
 {
-    // Definition of the MiniVan record type, inheriting from Automobile
+    // Définition du type de record MiniVan, héritant d'Automobile
     public sealed record CompactVan : Automobile
     {
-        public int SeatingCapacity { get; init; }
+        public int CapacitéAssise { get; init; }
 
-        // Constructor to initialize the MiniVan object
-        public CompactVan(string brand, string model, string color, int seatingCapacity) : base(brand, model, color)
+        // Constructeur pour initialiser l'objet MiniVan
+        public CompactVan(string marque, string modèle, string couleur, int capacitéAssise) : base(marque, modèle, couleur)
         {
-            SeatingCapacity = seatingCapacity;
+            CapacitéAssise = capacitéAssise;
         }
     }
 }
 ```
-Similar to the previous example, we've renamed the `MiniVan` class to `CompactVan` for clarity and originality.
+De manière similaire à l'exemple précédent, nous avons renommé la classe `MiniVan` en `CompactVan` pour plus de clarté et d'originalité.
 
-## Usage Example
+## Exemple d'utilisation
 ```csharp
 using System;
 using RecordInheritance;
@@ -53,23 +53,23 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Record type inheritance example!");
+        Console.WriteLine("Exemple d'héritage des types de record !");
 
-        // Creating an instance of the Automobile class
-        Automobile automobile = new Automobile("Honda", "Civic", "Red");
+        // Création d'une instance de la classe Automobile
+        Automobile automobile = new Automobile("Honda", "Civic", "Rouge");
 
-        // Creating an instance of the CompactVan class, inheriting from Automobile
-        CompactVan compactVan = new CompactVan("Toyota", "Sienna", "Blue", 7);
+        // Création d'une instance de la classe CompactVan, héritant d'Automobile
+        CompactVan compactVan = new CompactVan("Toyota", "Sienna", "Bleu", 7);
 
-        // Displaying information about the objects
-        Console.WriteLine($"Automobile: {automobile.Brand}, {automobile.Model}, {automobile.Color}");
-        Console.WriteLine($"CompactVan: {compactVan.Brand}, {compactVan.Model}, {compactVan.Color}, Seats: {compactVan.SeatingCapacity}");
+        // Affichage des informations sur les objets
+        Console.WriteLine($"Automobile : {automobile.Marque}, {automobile.Modèle}, {automobile.Couleur}");
+        Console.WriteLine($"CompactVan : {compactVan.Marque}, {compactVan.Modèle}, {compactVan.Couleur}, Sièges : {compactVan.CapacitéAssise}");
     }
 }
 ```
-This example demonstrates how to create instances of the `Automobile` and `CompactVan` classes, showcasing record type inheritance in action.
+Cet exemple montre comment créer des instances des classes `Automobile` et `CompactVan`, mettant en évidence l'héritage des types de record en action.
 
-### Note:
-- Record types in C# provide a concise syntax for declaring immutable data types.
-- Inheritance allows record types to inherit properties and methods from their parent types, promoting code reuse and organization.
-- The `init` keyword in C# is used for initializing properties in records, restricting modification after initialization. 
+### Remarque :
+- Les types de record en C# offrent une syntaxe concise pour déclarer des types de données immuables.
+- L'héritage permet aux types de record d'hériter des propriétés et des méthodes de leurs types parents, favorisant la réutilisation et l'organisation du code.
+- Le mot-clé `init` en C# est utilisé pour initialiser les propriétés dans les records, restreignant la modification après l'initialisation.
