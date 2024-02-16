@@ -2,7 +2,7 @@
 
 **Introduction**
 
-In C#, custom properties and custom sort types offer powerful mechanisms for organizing and manipulating data in a flexible and meaningful way. This concept is particularly valuable for PhD students delving into object-oriented programming and advanced language features.
+In C#, custom properties and custom sort types offer powerful mechanisms for organizing and manipulating data in a flexible and meaningful way. 
 
 ** Key Concepts**
 
