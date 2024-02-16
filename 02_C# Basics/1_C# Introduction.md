@@ -1,11 +1,8 @@
-
-# C# Speedrun
-
 ## Introduction
-In this tutorial, we'll go through the process of creating a C# console application using .NET 5.0. We'll cover topics such as setting up a solution, creating a console application project, and understanding the structure of a simple C# program.
+Dans ce tutoriel, nous allons parcourir le processus de création d'une application console en C# en utilisant .NET 5.0. Nous aborderons des sujets tels que la configuration d'une solution, la création d'un projet d'application console et la compréhension de la structure d'un programme C# simple.
 
-## Setting Up the Solution and Project
-First, let's create a new solution named `AllProjects` and add a console application project named `CSharpApp` to it.
+## Configuration de la Solution et du Projet
+Tout d'abord, créons une nouvelle solution nommée `AllProjects` et ajoutons un projet d'application console nommé `CSharpApp` à celle-ci.
 
 ```bash
 dotnet new sln -n AllProjects
@@ -13,8 +10,8 @@ dotnet new console -lang c# -n CSharpApp -o .\CSharpApp -f net5.0
 dotnet sln .\AllProjects.sln add .\CSharpApp
 ```
 
-## Understanding the Program Structure
-Let's dive into the structure of the C# program created in `CSharpApp/Program.cs`.
+## Compréhension de la Structure du Programme
+Plongeons dans la structure du programme C# créé dans `CSharpApp/Program.cs`.
 
 ```csharp
 using System;
@@ -35,108 +32,103 @@ namespace CSharpApp
 }
 ```
 
-### Main Method
-The `Main` method serves as the entry point of the application. It accepts an array of strings (`args`) as parameters, which can contain command-line arguments passed to the program.
+### Méthode Main
+La méthode `Main` sert de point d'entrée de l'application. Elle accepte un tableau de chaînes de caractères (`args`) en tant que paramètres, qui peuvent contenir des arguments de ligne de commande passés au programme.
 
 ```csharp
 static void Main(string[] args)
 {
-    // Application logic
+    // Logique de l'application
 }
 ```
 
-### Command-Line Arguments
-The `args` parameter allows access to command-line arguments passed when running the program. These arguments can be accessed within the `Main` method, as demonstrated in the code snippet above.
+### Arguments de Ligne de Commande
+Le paramètre `args` permet d'accéder aux arguments de ligne de commande passés lors de l'exécution du programme. Ces arguments peuvent être utilisés à l'intérieur de la méthode `Main`, comme démontré dans l'extrait de code ci-dessus.
 
-## Application Object
-The class containing the `Main` method serves as the application object. It is possible for an application to have multiple application objects, useful for scenarios like unit testing. Specifying the startup object can be done via the project file or Visual Studio project properties.
+## Objet Application
+La classe contenant la méthode `Main` sert d'objet d'application. Il est possible pour une application d'avoir plusieurs objets d'application, utiles pour des scénarios tels que les tests unitaires. La spécification de l'objet de démarrage peut être effectuée via le fichier de projet ou les propriétés du projet Visual Studio.
 
-### Startup Object
-To specify the startup object, you can use the `<StartupObject>` element in the project file or the Startup Object dropdown in Visual Studio.
+### Objet de Démarrage
+Pour spécifier l'objet de démarrage, vous pouvez utiliser l'élément `<StartupObject>` dans le fichier de projet ou le menu déroulant Objet de Démarrage dans Visual Studio.
 
-## Static Members
-Static members are scoped to the class level rather than the object level. They can be invoked without the need to create a new class instance.
+## Membres Statiques
+Les membres statiques sont définis au niveau de la classe plutôt qu'au niveau de l'objet. Ils peuvent être invoqués sans avoir besoin de créer une nouvelle instance de classe.
 
-### Main Method Variations
-The `Main` method can have variations in its signature. It can return an integer or void and accept command-line arguments or not.
+### Variations de la Méthode Main
+La méthode `Main` peut avoir des variations dans sa signature. Elle peut retourner un entier ou void et accepter des arguments de ligne de commande ou non.
 
-#### Main Method with Integer Return Type
+#### Méthode Main avec Type de Retour Integer
 ```csharp
 static int Main(string[] args)
 {
-    // Application logic
-    return 0; // Must return a value before exiting
+    // Logique de l'application
+    return 0; // Doit retourner une valeur avant de quitter
 }
 ```
 
-#### Main Method with Void Return Type and No Parameters
+#### Méthode Main avec Type de Retour Void et Aucun Paramètre
 ```csharp
 static void Main()
 {
-    // Application logic
+    // Logique de l'application
 }
 ```
-### Asynchronous Main Method and Command-Line Argument Handling in C#
 
-In C#, the `Main()` method can now be asynchronous, allowing for asynchronous programming capabilities. Async programming is covered in depth in Chapter 15. Here, we introduce the four additional signatures for the `Main()` method:
+### Méthode Main Asynchrone et Gestion des Arguments de Ligne de Commande en C#
+En C#, la méthode `Main()` peut maintenant être asynchrone, permettant ainsi des capacités de programmation asynchrones. La programmation asynchrone est couverte en détail dans le chapitre 15. Ici, nous présentons les quatre signatures supplémentaires pour la méthode `Main()` :
 
 - `static Task Main()`
 - `static Task<int> Main()`
 - `static Task Main(string[])`
 - `static Task<int> Main(string[])`
 
-It's noteworthy that both the class (`Program`) and `Main()` methods can be removed. However, be aware that even if you construct a `Main()` method prototyped to return `void`, the value `0` is automatically returned.
+Il est à noter que à la fois la classe (`Programme`) et les méthodes `Main()` peuvent être supprimées. Cependant, notez que même si vous construisez une méthode `Main()` prototypée pour retourner `void`, la valeur `0` est automatiquement retournée.
 
-### Accessing Command-Line Arguments
-
-You can access command-line arguments using the static `GetCommandLineArgs()` method of the `System.Environment` type. Example:
+### Accès aux Arguments de Ligne de Commande
+Vous pouvez accéder aux arguments de ligne de commande en utilisant la méthode statique `GetCommandLineArgs()` du type `System.Environment`. Exemple :
 
 ```csharp
-string[] theArgs = Environment.GetCommandLineArgs();
-foreach(string arg in theArgs)
+string[] lesArgs = Environment.GetCommandLineArgs();
+foreach(string arg in lesArgs)
 {
     Console.WriteLine("Arg: {0}", arg);
 }
 ```
 
-### Specifying Command-Line Flags
+### Spécification des Drapeaux de Ligne de Commande
+Pour des besoins de test, vous pouvez spécifier des drapeaux de ligne de commande possibles. Dans Visual Studio, vous pouvez le faire en :
 
-For testing purposes, you may want to specify possible command-line flags. In Visual Studio, you can do this by:
+1. Cliquant avec le bouton droit sur le nom du projet dans l'Explorateur de Solutions.
+2. Sélectionnant Propriétés.
+3. Accédant à l'onglet Déboguer sur le côté gauche.
+4. Spécifiant les valeurs en utilisant la zone de texte "Arguments de l'application".
 
-1. Right-clicking the project name in Solution Explorer.
-2. Selecting Properties.
-3. Navigating to the Debug tab on the left side.
-4. Specifying values using the “Application arguments” text box.
-
-### Showing Environment Details
-
-To access and display environment details, you can use methods from the `Environment` class. Example:
+### Affichage des Détails de l'Environnement
+Pour accéder et afficher les détails de l'environnement, vous pouvez utiliser des méthodes de la classe `Environment`. Exemple :
 
 ```csharp
-static void ShowEnvironmentDetails()
+static void AfficherDetailsEnvironnement()
 {
-    // Print out the drives on this machine,
-    foreach (string drive in Environment.GetLogicalDrives())
+    // Afficher les disques sur cette machine,
+    foreach (string disque in Environment.GetLogicalDrives())
     {
-        Console.WriteLine("Drive: {0}", drive);
+        Console.WriteLine("Disque: {0}", disque);
     }
     Console.WriteLine("OS: {0}", Environment.OSVersion);
-    Console.WriteLine("Number of processors: {0}", Environment.ProcessorCount);
-    Console.WriteLine(".NET Core Version: {0}", Environment.Version);
+    Console.WriteLine("Nombre de processeurs: {0}", Environment.ProcessorCount);
+    Console.WriteLine("Version .NET Core: {0}", Environment.Version);
 }
 ```
 
-### Console Class Usage
-
-The `Console` class encapsulates input, output, and error-stream manipulations for console-based applications. Example usage:
+### Utilisation de la Classe Console
+La classe `Console` encapsule les manipulations d'entrée, de sortie et de flux d'erreur pour les applications basées sur la console. Exemple d'utilisation :
 
 ```csharp
-Console.WriteLine("{0}, Number {0}, Number {0}", 7);
-Console.WriteLine("c format: {0:c}", 7777);
-// Output: c format: $7,777.00
+Console.WriteLine("{0}, Numéro {0}, Numéro {0}", 7);
+Console.WriteLine("Format c: {0:c}", 7777);
+// Sortie: Format c: 7 777,00 €
 ```
 
 
  ## Conclusion
-Understanding the structure of a C# console application is essential for building robust and efficient programs. By grasping concepts like the `Main` method and application object, you can effectively create and manage C# projects.
- 
+Comprendre la structure d'une application console en C# est essentiel pour créer des programmes robustes et efficaces. En saisissant des concepts tels que la méthode `Main` et l'objet d'application, vous pouvez créer et gérer efficacement des projets C#.

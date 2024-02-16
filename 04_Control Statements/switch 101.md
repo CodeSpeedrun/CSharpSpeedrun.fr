@@ -1,27 +1,24 @@
-## C# Switch Statements Example
-
-Switch statements in C# are a powerful control flow construct that allows for efficient selection among multiple options based on the value of an expression. Let's explore a practical example of using switch statements in a method for giving bonuses to employees based on their pay types.
+Les déclarations switch en C# sont une structure de contrôle puissante qui permet une sélection efficace parmi plusieurs options en fonction de la valeur d'une expression. Explorons un exemple pratique de l'utilisation des déclarations switch dans une méthode pour accorder des bonus aux employés en fonction de leurs types de rémunération.
 
 ```csharp
-public void ProvideIncentive(float bonusAmount)
+public void AccorderPrime(float montantBonus)
 {
-    Incentive = this switch
+    Prime = this switch
     {
-        { PaymentCategory: EmployeePaymentCategoryEnum.Commission } => Incentive + 0.10F * bonusAmount,
-        { PaymentCategory: EmployeePaymentCategoryEnum.Hourly } => Incentive + 40F * bonusAmount / 2080F,
-        { PaymentCategory: EmployeePaymentCategoryEnum.Salaried } => Incentive + bonusAmount,
-        _ => Incentive + 0 // Default case: no bonus
+        { CatégoriePaiement: CatégoriePaiementEmployéEnum.Commission } => Prime + 0.10F * montantBonus,
+        { CatégoriePaiement: CatégoriePaiementEmployéEnum.Horaire } => Prime + 40F * montantBonus / 2080F,
+        { CatégoriePaiement: CatégoriePaiementEmployéEnum.Salarié } => Prime + montantBonus,
+        _ => Prime + 0 // Cas par défaut : aucun bonus
     };
 }
 ```
 
-## In this example:
+## Dans cet exemple :
 
-- The method `ProvideIncentive` takes a `bonusAmount` parameter, representing the amount of bonus to be given.
-- The `switch` statement is used to evaluate the `PaymentCategory` property of the current object instance.
-- For each case, different bonus calculation formulas are applied based on the employee's payment category:
-  - For employees with a payment category of `Commission`, the bonus is increased by 10% of the bonus amount.
-  - For employees with a payment category of `Hourly`, the bonus is increased by a fraction of the bonus amount calculated based on the number of hours worked.
-  - For employees with a payment category of `Salaried`, the bonus is increased by the entire bonus amount.
-- The `_` case represents the default case, where no bonus is added.
-
+- La méthode `AccorderPrime` prend un paramètre `montantBonus`, représentant le montant du bonus à accorder.
+- La déclaration `switch` est utilisée pour évaluer la propriété `CatégoriePaiement` de l'instance d'objet actuelle.
+- Pour chaque cas, différentes formules de calcul de bonus sont appliquées en fonction de la catégorie de paiement de l'employé :
+  - Pour les employés avec une catégorie de paiement `Commission`, le bonus est augmenté de 10 % du montant du bonus.
+  - Pour les employés avec une catégorie de paiement `Horaire`, le bonus est augmenté d'une fraction du montant du bonus calculée en fonction du nombre d'heures travaillées.
+  - Pour les employés avec une catégorie de paiement `Salarié`, le bonus est augmenté du montant total du bonus.
+- Le cas `_` représente le cas par défaut, où aucun bonus n'est ajouté.
