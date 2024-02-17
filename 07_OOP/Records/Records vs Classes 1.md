@@ -1,8 +1,8 @@
-# Classes C# vs Enregistrements
+# Classes C# vs Records
 
 ## Introduction
 
-En C#, les classes et les enregistrements sont tous deux utilisés pour définir des structures de données, mais ils présentent des caractéristiques et des cas d'utilisation différents. Comprendre les différences entre eux est crucial pour écrire un code efficace et maintenable. Dans ce guide, nous explorerons les distinctions entre les classes et les enregistrements en C#, avec des exemples pour illustrer leur utilisation.
+En C#, les classes et les Records sont tous deux utilisés pour définir des structures de données, mais ils présentent des caractéristiques et des cas d'utilisation différents. Comprendre les différences entre eux est crucial pour écrire un code efficace et maintenable. Dans ce guide, nous explorerons les distinctions entre les classes et les Records en C#, avec des exemples pour illustrer leur utilisation.
 
 ## Classes
 
@@ -42,11 +42,11 @@ Console.WriteLine($"Ma voiture est une {maVoiture.Année} {maVoiture.Marque} {ma
 maVoiture.DémarrerMoteur();
 ```
 
-## Enregistrements
+## Records
 
 ### Définition
 
-Les enregistrements sont une nouvelle fonctionnalité introduite en C# 9.0. Ils sont similaires aux classes mais sont principalement destinés aux types de données immuables. Les enregistrements offrent une syntaxe concise pour définir des types immuables. Voici un exemple :
+Les Records sont une nouvelle fonctionnalité introduite en C# 9.0. Ils sont similaires aux classes mais sont principalement destinés aux types de données immuables. Les Records offrent une syntaxe concise pour définir des types immuables. Voici un exemple :
 
 ```csharp
 public record Personne
@@ -63,7 +63,7 @@ Dans le code ci-dessus :
 
 ### Utilisation
 
-Les enregistrements sont souvent utilisés pour représenter des objets de transfert de données (DTO) ou des structures de données immuables. Vous pouvez créer des instances d'un enregistrement comme ceci :
+Les Records sont souvent utilisés pour représenter des objets de transfert de données (DTO) ou des structures de données immuables. Vous pouvez créer des instances d'un enregistrement comme ceci :
 
 ```csharp
 Personne personne = new Personne
@@ -78,4 +78,4 @@ Console.WriteLine($"Bonjour, {personne.Prénom} {personne.Nom} ! Vous avez {pers
 
 ## Conclusion
 
-En résumé, les classes et les enregistrements sont tous deux des outils essentiels pour définir des structures de données en C#. Les classes sont plus flexibles et adaptées aux objets à état mutable et comportement, tandis que les enregistrements sont optimisés pour les données immuables et offrent une syntaxe plus concise. Comprendre quand utiliser chacun est crucial pour écrire un code efficace et maintenable.
+En résumé, les classes et les Records sont tous deux des outils essentiels pour définir des structures de données en C#. Les classes sont plus flexibles et adaptées aux objets à état mutable et comportement, tandis que les Records sont optimisés pour les données immuables et offrent une syntaxe plus concise. Comprendre quand utiliser chacun est crucial pour écrire un code efficace et maintenable.

@@ -120,9 +120,7 @@ switch (emp)
         break;
 }
 ```
-Cette instruction switch démontre l'utilisation des discards (`Employé _`) aux côtés du mot-clé `is`. Le `_` est utilisé pour ignorer l'instance spécifique de la classe `Employé` dans le dernier cas, où
-
- il affiche un message indiquant que l'employé ne peut pas être promu en raison d'un mauvais type.
+Cette instruction switch démontre l'utilisation des discards (`Employé _`) aux côtés du mot-clé `is`. Le `_` est utilisé pour ignorer l'instance spécifique de la classe `Employé` dans le dernier cas, où il affiche un message indiquant que l'employé ne peut pas être promu en raison d'un mauvais type.
 
 ### Conclusion
 Le mot-clé `is` en C# est un outil puissant pour effectuer des vérifications de type, permettant aux développeurs d'écrire un code plus robuste et sûr en termes de types. Il joue un rôle crucial dans la logique conditionnelle et les instructions switch, permettant au code de s'adapter dynamiquement en fonction des types d'objets traités. En comprenant comment utiliser efficacement le mot-clé `is`, les développeurs peuvent écrire un code plus propre, plus efficace et moins sujet aux erreurs.
