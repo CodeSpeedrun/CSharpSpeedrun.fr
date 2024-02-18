@@ -43,20 +43,69 @@ public IEnumerator GetCarEnumerator()
 ### Exemple d'Utilisation :
 
 ```csharp
-var carCollection = new CarCollection();
-try
-{
-    var enumerator = carCollection.GetCarEnumerator();
-    while (enumerator.MoveNext())
-    {
-        var currentCar = enumerator.Current;
-        Console.WriteLine($"Voiture : {currentCar}");
+using System;
+using System.Collections;
+
+public class Car {
+    public string Model { get; set; }
+
+    public Car(string model) {
+        Model = model;
+    }
+
+    public override string ToString() {
+        return Model;
     }
 }
-catch (Exception ex)
-{
-    Console.WriteLine($"Une exception s'est produite : {ex.Message}");
+
+public class CarCollection {
+    private Car[] carArray;
+
+    public CarCollection(Car[] cars) {
+        carArray = cars;
+    }
+
+    public IEnumerator GetCarEnumerator() {
+        if (carArray == null || carArray.Length == 0) {
+            throw new Exception("Le tableau de voitures est vide");
+        }
+
+        IEnumerator ActualCarEnumerator() {
+            foreach (var car in carArray) {
+                yield return car;
+            }
+        }
+
+        return ActualCarEnumerator();
+    }
 }
+
+class Program {
+    static void Main(string[] args) {
+        var cars = new Car[]
+        {
+            new Car("Toyota"),
+            new Car("Honda"),
+            new Car("Ford")
+        };
+
+        var carCollection = new CarCollection(cars);
+        try {
+            var enumerator = carCollection.GetCarEnumerator();
+            while (enumerator.MoveNext()) {
+                var currentCar = enumerator.Current;
+                Console.WriteLine($"Voiture : {currentCar}");
+            }
+        } catch (Exception ex) {
+            Console.WriteLine($"Une exception s'est produite : {ex.Message}");
+        }
+    }
+}
+/*
+Voiture : Toyota
+Voiture : Honda
+Voiture : Ford
+*/
 ```
 
 Dans cet exemple, nous créons une instance de `CarCollection` et tentons de récupérer un énumérateur à l'aide de la méthode `GetCarEnumerator`. Si la méthode rencontre des problèmes tels qu'un tableau de voitures vide, une exception sera attrapée et gérée avec élégance. Sinon, nous itérons sur les voitures de la collection et effectuons une action avec chaque voiture.

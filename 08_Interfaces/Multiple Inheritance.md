@@ -1,16 +1,16 @@
 ## Héritage Multiple avec les Types d'Interface en C#
 
-## Libérer la Flexibilité et la Réutilisabilité à travers les Interfaces
+### Libérer la Flexibilité et la Réutilisabilité à travers les Interfaces
 
 Bien que C# ne supporte pas l'héritage de classe multiple, il embrasse l'héritage multiple à travers les interfaces, offrant ainsi un moyen puissant d'atteindre la flexibilité et la réutilisation du code.
 
 
-## Concepts Clés :
+### Concepts Clés :
 * **Interfaces :** Schémas pour les classes, définissant un ensemble de membres (méthodes, propriétés, événements) que les classes doivent implémenter.
 * **Héritage d'Interfaces Multiples :** Une interface peut étendre plusieurs interfaces de base, créant ainsi un contrat riche pour les classes à remplir.
 * **Implémentation Explicite :** Résout les conflits de noms de membres lorsque plusieurs interfaces définissent des membres avec la même signature.
 
-## Exemple :
+### Exemple :
 
 ```csharp
 interface IVisualizable : ICanShowOnScreen, ICanPrint
@@ -38,7 +38,7 @@ class Rectangle : IVisualizable
 }
 ```
 
-## Explication :
+### Explication :
 
 1. **Interfaces :**
    - `IVisualizable` étend `ICanShowOnScreen` et `ICanPrint`, définissant une interface polyvalente pour les objets pouvant être à la fois affichés et imprimés.

@@ -7,19 +7,55 @@ En C#, le mot-clé `yield` est utilisé pour créer des méthodes d'itérateur, 
 Un itérateur est une méthode qui renvoie une séquence de valeurs une par une, permettant à l'appelant de les itérer à l'aide d'une boucle `foreach` ou en récupérant manuellement chaque valeur.
 
 ```csharp
-public class VehicleCollection : IEnumerable
-{
-    private List<Vehicle> vehicles = new List<Vehicle>();
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
+public class Vehicle {
+    public string Marque { get; set; }
+    public string Modèle { get; set; }
+    public int Année { get; set; }
+}
+
+public class VehicleCollection : IEnumerable {
+    private List<Vehicle> véhicules = new List<Vehicle>();
 
     // Méthode d'itérateur.
-    public IEnumerator GetEnumerator()
-    {
-        foreach (Vehicle v in vehicles)
-        {
+    public IEnumerator GetEnumerator() {
+        foreach (Vehicle v in véhicules) {
             yield return v;
         }
     }
+
+    // Méthode pour ajouter un véhicule à la collection.
+    public void AjouterVéhicule(Vehicle véhicule) {
+        véhicules.Add(véhicule);
+    }
 }
+
+class Program {
+    static void Main(string[] args) {
+        // Création d'une collection de véhicules.
+        VehicleCollection collectionVéhicules = new VehicleCollection();
+
+        // Ajout de quelques véhicules.
+        collectionVéhicules.AjouterVéhicule(new Vehicle { Marque = "Toyota", Modèle = "Corolla", Année = 2020 });
+        collectionVéhicules.AjouterVéhicule(new Vehicle { Marque = "Honda", Modèle = "Civic", Année = 2019 });
+        collectionVéhicules.AjouterVéhicule(new Vehicle { Marque = "Ford", Modèle = "F-150", Année = 2021 });
+
+        // Affichage des véhicules dans la collection.
+        Console.WriteLine("Véhicules dans la collection:");
+        foreach (Vehicle véhicule in collectionVéhicules) {
+            Console.WriteLine($"Marque: {véhicule.Marque}, Modèle: {véhicule.Modèle}, Année: {véhicule.Année}");
+        }
+    }
+}
+/* 
+Véhicules dans la collection:
+Marque: Toyota, Modèle: Corolla, Année: 2020
+Marque: Honda, Modèle: Civic, Année: 2019
+Marque: Ford, Modèle: F-150, Année: 2021
+*/
 ```
 
 Dans cet exemple, `VehicleCollection` implémente l'interface `IEnumerable`, ce qui lui permet d'être utilisée dans une boucle `foreach`. La méthode `GetEnumerator()` est une méthode d'itérateur qui renvoie chaque objet `Vehicle` de la collection un par un.

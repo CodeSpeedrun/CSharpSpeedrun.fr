@@ -74,6 +74,93 @@ foreach (Item item in itemList.RetrieveItems(true))
 
 Ici, nous démontrons deux façons de parcourir `itemList`. Tout d'abord, nous utilisons la boucle `foreach` traditionnelle, qui appelle implicitement la méthode `GetEnumerator()`. Ensuite, nous utilisons notre itérateur nommé `RetrieveItems(true)` pour parcourir `itemList` dans l'ordre inverse.
 
+### All-in-one
+```csharp
+ 
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
+public class Item {
+    public string Name { get; set; }
+
+    public Item(string name) {
+        Name = name;
+    }
+}
+
+public class ItemList : IEnumerable<Item> {
+    private Item[] itemArray;
+
+    public ItemList(Item[] items) {
+        itemArray = items;
+    }
+
+    public IEnumerator<Item> GetEnumerator() {
+        foreach (Item item in itemArray) {
+            yield return item;
+        }
+    }
+
+    IEnumerator IEnumerable.GetEnumerator() {
+        return GetEnumerator();
+    }
+
+    public IEnumerable<Item> RetrieveItems(bool reverseOrder) {
+        // Effectuer la vérification des erreurs ici
+
+        // Déléguer à l'implémentation réelle
+        return ProcessItems();
+
+        IEnumerable<Item> ProcessItems() {
+            // Renvoyer les éléments dans l'ordre inverse si spécifié
+            if (reverseOrder) {
+                for (int i = itemArray.Length; i != 0; i--) {
+                    yield return itemArray[i - 1];
+                }
+            } else {
+                // Renvoyer les éléments tels qu'ils sont
+                foreach (Item item in itemArray) {
+                    yield return item;
+                }
+            }
+        }
+    }
+}
+
+class Program {
+    static void Main(string[] args) {
+        Item[] items = { new Item("Premier"), new Item("Deuxième"), new Item("Troisième") };
+        ItemList itemList = new ItemList(items);
+
+        // Parcourir itemList en utilisant GetEnumerator()
+        Console.WriteLine("Parcourir itemList en utilisant GetEnumerator():");
+        foreach (Item item in itemList) {
+            Console.WriteLine("Élément : {0}", item.Name);
+        }
+
+        Console.WriteLine();
+
+        // Parcourir itemList en utilisant l'itérateur nommé (à l'envers)
+        Console.WriteLine("Parcourir itemList en utilisant l'itérateur nommé (à l'envers):");
+        foreach (Item item in itemList.RetrieveItems(true)) {
+            Console.WriteLine("Élément : {0}", item.Name);
+        }
+    }
+}
+/* 
+Parcourir itemList en utilisant GetEnumerator():
+Élément : Premier
+Élément : Deuxième
+Élément : Troisième
+
+Parcourir itemList en utilisant l'itérateur nommé (à l'envers):
+Élément : Troisième
+Élément : Deuxième
+Élément : Premier
+*/
+```
+
 ## Conclusion
 
 Les itérateurs nommés fournissent un moyen flexible et pratique de définir une logique d'itération personnalisée en C#. En exploitant le mot-clé `yield`, vous pouvez créer des méthodes d'itérateur qui produisent des séquences d'éléments de manière paresseuse, améliorant ainsi l'efficacité et réduisant la surcharge mémoire. Comprendre et maîtriser les itérateurs nommés peut grandement améliorer votre capacité à travailler avec des collections en C#, rendant votre code plus expressif et plus maintenable.

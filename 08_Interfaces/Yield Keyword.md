@@ -1,5 +1,5 @@
 ## Qu'est-ce que le mot-clé Yield ?
-Le type de retour du mot-clé yield renvoie toujours un objet IEnumerable.
+Le type de retour du mot-clé `yield` renvoie toujours un objet `IEnumerable`.
 
 ```csharp
 using System;
@@ -42,15 +42,10 @@ namespace CSharpSpeedrun
 8
 */
 ```
-La raison pour laquelle la méthode Fibonacci semble "entrer et sortir de la méthode" 
-est due à son utilisation de l'instruction `yield return`. 
+La raison pour laquelle la méthode Fibonacci semble "entrer et sortir de la méthode" est due à son utilisation de l'instruction `yield return`. 
 
-En C#, lorsque vous utilisez `yield return` dans une méthode, 
-vous indiquez que la méthode est un itérateur, 
-et elle produira une séquence de valeurs paresseusement à la demande. 
-Chaque fois que vous appelez `yield return`, cela produit une valeur 
-dans la séquence et suspend temporairement l'exécution de la méthode, 
-retournant le contrôle à l'appelant.
+En C#, lorsque vous utilisez `yield return` dans une méthode, vous indiquez que la méthode est un itérateur, et elle produira une séquence de valeurs paresseusement à la demande. 
+Chaque fois que vous appelez `yield return`, cela produit une valeur dans la séquence et suspend temporairement l'exécution de la méthode, retournant le contrôle à l'appelant.
 
 Voici comment cela fonctionne dans votre méthode Fibonacci :
 

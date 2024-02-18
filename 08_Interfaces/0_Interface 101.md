@@ -1,6 +1,6 @@
 # Travailler avec les Interfaces
 
-En développement logiciel, les interfaces jouent un rôle crucial dans la définition des contrats auxquels les classes doivent adhérer. Elles permettent la mise en œuvre du polymorphisme, permettant à des objets de types différents d'être traités de manière interchangeable s'ils implémentent la même interface. Ce document markdown explore le concept des interfaces en C#, leur implémentation, et les avantages qu'elles offrent.
+En développement logiciel, les interfaces jouent un rôle crucial dans la définition des contrats auxquels les classes doivent adhérer. Elles permettent la mise en œuvre du polymorphisme, permettant à des objets de types différents d'être traités de manière interchangeable s'ils implémentent la même interface. On va explorer le concept des interfaces en C#, leur implémentation, et les avantages qu'elles offrent.
 
 ## Introduction aux Interfaces
 
@@ -19,7 +19,7 @@ Dans l'exemple ci-dessus, `IDbConnection` est une interface qui déclare deux m�
 
 ## Implémentation des Interfaces
 
-Pour implémenter une interface, une classe doit utiliser le mot-clé `implements` suivi du nom de l'interface.
+Pour implémenter une interface, une classe doit utiliser le  `:` suivi du nom de l'interface.
 
 ```csharp
 public class MySqlConnection : IDbConnection

@@ -64,3 +64,20 @@ Dans cet exemple :
 ## Notes supplémentaires
 - L'utilisation du mot-clé `as` élimine le besoin de blocs try/catch lors de la tentative de conversion d'objets en interfaces.
 - Il est important de vérifier `null` après l'utilisation du mot-clé `as` pour éviter les exceptions de référence nulle lors de la manipulation du résultat.
+
+Dans le contexte donné, les deux lignes réalisent le même résultat, qui est de créer une instance de `Rectangle` et de l'assigner à une variable de type `IShape`. Cependant, examinons chaque approche :
+
+1. **Utilisation d'une variable explicite pour l'instance de Rectangle puis conversion en IShape :**
+   ```csharp
+   Rectangle instanceRectangle = new Rectangle(5, 10);
+   IShape interfaceForme = instanceRectangle as IShape;
+   ```
+   Cette approche est plus explicite et lisible. Elle montre clairement que vous créez une instance de `Rectangle` puis la convertissez en une interface `IShape`.
+
+2. **Création directe d'une instance de Rectangle et attribution à une variable IShape :**
+   ```csharp
+   IShape interfaceForme = new Rectangle(5, 10);
+   ```
+   Cette approche est plus concise car elle combine à la fois l'instanciation et l'attribution en une seule ligne. Elle est plus courte et peut être préférée dans les situations où la concision est souhaitée.
+
+Les deux approches donneront le même résultat. Le choix entre elles dépend de facteurs tels que la lisibilité, les normes de codage et les préférences personnelles. En général, privilégiez la lisibilité et la clarté dans votre code, sauf s'il existe une raison impérieuse de privilégier la concision.

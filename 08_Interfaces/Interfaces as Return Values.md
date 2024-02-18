@@ -1,6 +1,5 @@
+### Interfaces en tant que valeurs de retour
 ```csharp
-// Interfaces en tant que valeurs de retour
-
 // Définir une méthode qui recherche la première forme prenant en charge une interface spécifique dans un tableau de formes.
 static ISharp TrouverPremièreFormeTranchante(Sharp[] listeFormes)
 {
