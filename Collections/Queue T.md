@@ -1,6 +1,6 @@
-### Comment itérer une Queue<T>?
+### Comment itérer une `Queue<T>`?
 
-La classe Queue<T> implémente également l'interface IEnumerable. Par conséquent, nous pouvons utiliser la boucle foreach pour itérer son contenu.
+La classe `Queue<T>` implémente également l'interface `IEnumerable`. Par conséquent, nous pouvons utiliser la boucle `foreach` pour itérer son contenu.
 
 ```csharp
 using System;

@@ -1,4 +1,6 @@
 ### Qu'est-ce qu'une boucle foreach?
+- classe IEnumerable ou
+- method return IEnumerab;le
 
 La boucle foreach est l'une des variations de boucle les plus populaires disponibles en C#. Elle est une version simplifiée de la boucle for et est largement utilisée dans de nombreux scénarios de programmation.
 
