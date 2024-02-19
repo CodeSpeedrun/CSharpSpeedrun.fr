@@ -29,5 +29,7 @@
 // Visual Studio et Visual Studio Code ajoutent tous les deux une ampoule, qui peut également être invoquée avec la combinaison de touches Ctrl+point (.).
 
 
+When you see a generic item listed in the .NET Core documentation or the Visual Studio Object
+Browser
 
 ```
