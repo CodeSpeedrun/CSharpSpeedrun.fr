@@ -30,10 +30,10 @@ object boiteEntier = monEntier;
 int deboiteEntier = (int)boiteEntier;
 ```
 
+Implementation interne de la class ArrayList en .NET
 ```csharp
 public class ArrayList : IList, ICloneable
 {
-...
 public virtual int Add(object? value);
 ```
  

@@ -1,11 +1,6 @@
-# Notes sur les Types Anonymes Contenant des Types Anonymes
+# Les Types Anonymes Contenant des Types Anonymes
 
 Les types anonymes contenant d'autres types anonymes ont des champs et des propriétés en lecture seule.
-
-## Limitations des Types Anonymes
-Les types anonymes ne peuvent pas prendre en charge les événements, les méthodes personnalisées, les opérateurs personnalisés ou les remplacements personnalisés.
-
-## Exemples et Explications
 
 ### Champs et Propriétés en Lecture Seule
 Les types anonymes en C# permettent de créer des objets sans avoir à définir explicitement un type. Cependant, les champs et les propriétés de ces types anonymes sont en lecture seule, ce qui signifie qu'une fois définis, ils ne peuvent plus être modifiés.

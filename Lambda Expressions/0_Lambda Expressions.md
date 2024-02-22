@@ -4,14 +4,15 @@ Les expressions lambda permettent de manipuler des événements "en ligne" en as
 
 ```csharp
 // Méthode de la classe System.Collections.Generic.List<T>
-public List<T> TrouverTout(Predicate<T> condition)
+public List<T> FindAll(Predicate<T> condition)
 ```
 
 ```csharp
-// Ce délégué est utilisé par la méthode TrouverTout()
+// Ce délégué est utilisé par la méthode FindAll()
 // pour extraire le sous-ensemble.
 public delegate bool Predicate<T>(T obj);
 ```
+### Syntaxe du délégué traditionnelle 
 
 ```csharp
 using System;
@@ -32,9 +33,9 @@ class Program
         List<int> liste = new List<int>();
         liste.AddRange(new int[] { 20, 1, 4, 8, 9, 44 });
 
-        // Appel de TrouverTout() en utilisant la syntaxe du délégué traditionnelle.
+        // Appel de FindAll() en utilisant la syntaxe du délégué traditionnelle.
         Predicate<int> rappel = EstNombrePair;
-        List<int> nombresPairs = liste.TrouverTout(rappel);
+        List<int> nombresPairs = liste.FindAll(rappel);
 
         Console.WriteLine("Voici vos nombres pairs :");
         foreach (int nombrePair in nombresPairs)
@@ -52,7 +53,7 @@ class Program
     }
 }
 ```
-
+### Methode Anonyme
 ```csharp
 static void SyntaxeMethodeAnonyme()
 {
@@ -61,7 +62,7 @@ static void SyntaxeMethodeAnonyme()
     liste.AddRange(new int[] { 20, 1, 4, 8, 9, 44 });
 
     // Maintenant, utilisez une méthode anonyme.
-    List<int> nombresPairs = liste.TrouverTout(delegate(int i) { return (i % 2) == 0; });
+    List<int> nombresPairs = liste.FindAll(delegate(int i) { return (i % 2) == 0; });
 
     Console.WriteLine("Voici vos nombres pairs :");
     foreach (int nombrePair in nombresPairs)
@@ -71,7 +72,7 @@ static void SyntaxeMethodeAnonyme()
     Console.WriteLine();
 }
 ```
-
+### Expression Lambda
 ```csharp
 static void SyntaxeExpressionLambda()
 {
@@ -80,7 +81,7 @@ static void SyntaxeExpressionLambda()
     liste.AddRange(new int[] { 20, 1, 4, 8, 9, 44 });
 
     // Maintenant, utilisez une expression lambda C#.
-    List<int> nombresPairs = liste.TrouverTout(i => (i % 2) == 0);
+    List<int> nombresPairs = liste.FindAll(i => (i % 2) == 0);
 
     Console.WriteLine("Voici vos nombres pairs :");
     foreach (int nombrePair in nombresPairs)
@@ -94,7 +95,7 @@ static void SyntaxeExpressionLambda()
 L'expression lambda `i => (i % 2) == 0` est compilée en une méthode anonyme équivalente :
 
 ```csharp
-List<int> nombresPairs = liste.TrouverTout(delegate (int i)
+List<int> nombresPairs = liste.FindAll(delegate (int i)
 {
     return (i % 2) == 0;
 });
@@ -102,8 +103,25 @@ List<int> nombresPairs = liste.TrouverTout(delegate (int i)
 
 Dans les exemples ci-dessus :
 
-- `SyntaxeDelegateTraditionnelle()` utilise la syntaxe de délégué traditionnelle pour appeler la méthode `TrouverTout()`.
-- `SyntaxeMethodeAnonyme()` utilise une méthode anonyme pour filtrer les nombres pairs dans la liste.
-- `SyntaxeExpressionLambda()` utilise une expression lambda pour le même but.
+- `SyntaxeDelegateTraditionnelle()` utilise la syntaxe de délégué traditionnelle pour appeler la méthode `FindAll()`.
+ 
+```csharp
+Predicate<int> rappel = EstNombrePair;
+List<int> nombresPairs = liste.FindAll(rappel);
 
+static bool EstNombrePair(int i)
+{ 
+    return (i % 2) == 0;
+}
+```
+- `SyntaxeMethodeAnonyme()` utilise une méthode anonyme pour filtrer les nombres pairs dans la liste.
+```csharp
+List<int> nombresPairs = 
+    liste.FindAll(delegate(int i) { return (i % 2) == 0; });
+```
+
+- `SyntaxeExpressionLambda()` utilise une expression lambda pour le même but.
+```csharp
+List<int> nombresPairs = liste.FindAll(i => (i % 2) == 0);
+```
 Les expressions lambda offrent une syntaxe plus concise et expressive pour définir des fonctions anonymes, ce qui rend le code plus lisible et maintenable. Elles sont largement utilisées dans le développement C# pour simplifier les opérations sur les collections et le traitement des événements.

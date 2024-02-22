@@ -15,26 +15,42 @@ Ce qui rend la classe ObservableCollection<T> unique, c'est que cette classe pre
 Pour illustrer cela, considérons un exemple de création d'une collection d'objets Personne et de gestion de l'événement CollectionChanged.
 
 ```csharp
-// Créer une collection à observer et ajouter quelques objets Personne.
-ObservableCollection<Personne> personnes = new ObservableCollection<Personne>()
-{
-    new Personne{ Prénom = "Pierre", Nom = "Dupont", Age = 30 },
-    new Personne{ Prénom = "Marie", Nom = "Lambert", Age = 25 },
-};
+using System;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 
-// Connecter l'événement CollectionChanged.
-personnes.CollectionChanged += Personnes_CollectionChanged;
-
-// Méthode de gestion de l'événement CollectionChanged.
-static void Personnes_CollectionChanged(object sender,
-System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+class Program
 {
-    // Traitement à effectuer lorsqu'un changement se produit dans la collection.
-    // Par exemple, mise à jour de l'interface utilisateur, enregistrement des données, etc.
+    static void Main(string[] args)
+    {
+        // Créer une collection à observer et ajouter quelques objets Personne.
+        ObservableCollection<Personne> personnes = new ObservableCollection<Personne>()
+        {
+            new Personne{ Prénom = "Pierre", Nom = "Dupont", Age = 30 },
+            new Personne{ Prénom = "Marie", Nom = "Lambert", Age = 25 },
+        };
+
+        // Connecter l'événement CollectionChanged.
+        personnes.CollectionChanged += Personnes_CollectionChanged;
+
+        // Méthode de gestion de l'événement CollectionChanged.
+        static void Personnes_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            // Traitement à effectuer lorsqu'un changement se produit dans la collection.
+            // Par exemple, mise à jour de l'interface utilisateur, enregistrement des données, etc.
+            Console.WriteLine("La collection a été modifiée !");
+        }
+    }
+}
+
+class Personne
+{
+    public string Prénom { get; set; }
+    public string Nom { get; set; }
+    public int Age { get; set; }
 }
 ```
 
 Dans cet exemple, chaque fois qu'un élément est ajouté, supprimé ou déplacé dans la collection de personnes, la méthode `Personnes_CollectionChanged` est appelée pour gérer cet événement.
 
 Cela offre une grande flexibilité dans la gestion des données dynamiques, notamment dans les applications où les utilisateurs peuvent ajouter ou supprimer des éléments de manière interactive.
- 
