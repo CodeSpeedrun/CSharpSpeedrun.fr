@@ -1,0 +1,20 @@
+The System.Threading Namespace
+
+Core Types of the System.Threading Namespace
+Type Meaning in Life
+Interlocked This type provides atomic operations for variables that are shared by multiple
+threads.
+Monitor This type provides the synchronization of threading objects using locks and
+wait/signals. The C# lock keyword uses a Monitor object under the hood.
+Mutex This synchronization primitive can be used for synchronization between
+application domain boundaries.
+ParameterizedThreadStart This delegate allows a thread to call methods that take any number of
+arguments.
+Semaphore This type allows you to limit the number of threads that can access a resource
+concurrently.
+Thread This type represents a thread that executes within the .NET Core Runtime.
+Using this type, you can spawn additional threads in the originating
+AppDomain.
+ThreadPool This type allows you to interact with the .NET Core Runtime–maintained
+thread pool within a given process.
+

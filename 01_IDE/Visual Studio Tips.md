@@ -32,4 +32,10 @@
 When you see a generic item listed in the .NET Core documentation or the Visual Studio Object
 Browser
 
+Visual Studio, you may access the Threads window
+during a debugging session (select Debug ➤ Windows ➤ Threads when the program is running). As you can
+see from Figure 15-1, you can quickly identify the thread you want to diagnose.
+
+
+
 ```

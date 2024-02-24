@@ -1,3 +1,18 @@
+LINQ is a set of related technologies that attempts to provide a single, symmetrical manner to interact
+with diverse forms of data. As explained over the course of this chapter, LINQ can interact with any type
+implementing the IEnumerable<T> interface, including simple arrays as well as generic and nongeneric
+collections of data.
+As you have seen, working with LINQ technologies is accomplished using several C# language features.
+For example, given that LINQ query expressions can return any number of result sets, it is common to
+make use of the var keyword to represent the underlying data type. As well, lambda expressions, object
+initialization syntax, and anonymous types can all be used to build functional and compact LINQ queries.
+More importantly, you have seen how the C# LINQ query operators are simply shorthand notations
+for making calls on static members of the System.Linq.Enumerable type. As shown, most members of
+Enumerable operate on Func<T> delegate types, which can take literal method addresses, anonymous
+methods, or lambda expressions as input to evaluate the query.
+
+
+
 data can be found in numerous
 locations, including XML files, relational databases, in-memory collections, and primitive arrays.
 
