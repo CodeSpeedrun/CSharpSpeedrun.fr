@@ -1,0 +1,11 @@
+Assembly-Level Attributes
+
+// List "using" statements first.
+using System;
+// Now list any assembly- or module-level attributes.
+// Enforce CLS compliance for all public types in this
+// assembly.
+[assembly: CLSCompliant(true)]
+If you now add a bit of code that falls outside the CLS specification (such as an exposed point of
+unsigned data), you will be issued a compiler warning.
+
