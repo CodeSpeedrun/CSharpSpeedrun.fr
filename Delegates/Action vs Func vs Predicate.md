@@ -76,6 +76,13 @@ List<int> nombres = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 List<int> nombresPairs = nombres.FindAll(EstPair);
 ```
 
+```csharp
+//Classe List
+public List<T> FindAll(Predicate<T> match);
+```
+
+![alt text](_Images/Predicate.png)
+
 Dans cet exemple, la méthode `EstPair` est passée en tant que paramètre à la méthode `FindAll` de la liste, qui utilise le délégué Predicate pour filtrer les nombres pairs de la liste initiale.
 
 Les délégués Action, Func et Predicate offrent une flexibilité et une puissance significatives dans le langage C#, ce qui les rend indispensables pour de nombreux développeurs. Bien qu'il existe des alternatives, leur utilisation reste répandue et pertinente dans de nombreux cas d'utilisation.

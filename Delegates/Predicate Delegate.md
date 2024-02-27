@@ -147,6 +147,15 @@ class Program
 
 Dans cet exemple, une expression lambda est utilisée pour filtrer les nombres supérieurs à 5.
 
+Exemple
+```csharp
+var fruitsStartingWithA = 
+    fruits.FindAll(fruit => fruit.StartsWith("a"));
+```
+En C#, un prédicat est généralement un délégué qui représente une méthode prenant un paramètre d'entrée et renvoyant une valeur booléenne indiquant si l'entrée satisfait une certaine condition. Dans la méthode FindAll, vous utilisez une expression lambda comme prédicat. 
+
+Dans le contexte de FindAll, le prédicat doit renvoyer une valeur bool car FindAll attend un prédicat qui définit la condition de filtrage des éléments.
+
 ## Alternatives
 
 Bien que les délégués prédicats soient utiles, il existe des alternatives à considérer selon les besoins spécifiques de votre application :

@@ -1,6 +1,6 @@
-# Notes sur l'utilisation des Discards avec les Expressions Lambda en C#
+# L'utilisation des Discards avec les Expressions Lambda en C#
 
-Les discards peuvent être utilisés avec les expressions lambda de la même manière qu'avec les délégués (et C# 9.0). Les variables d'entrée d'une expression lambda peuvent être remplacées par des discards si ces variables ne sont pas nécessaires. La même règle s'applique qu'avec les délégués. Puisque le tiret bas (_) était un identificateur de variable valide dans les versions précédentes de C#, il doit y avoir au moins deux discards utilisés avec l'expression lambda.
+Les discards peuvent être utilisés avec les expressions lambda de la même manière qu'avec les délégués. Les variables d'entrée d'une expression lambda peuvent être remplacées par des discards si ces variables ne sont pas nécessaires. La même règle s'applique qu'avec les délégués. Puisque le tiret bas (_) était un identificateur de variable valide dans les versions précédentes de C#, il doit y avoir au moins deux discards utilisés avec l'expression lambda.
 
 ```csharp
 int variableExterne = 0;

@@ -59,4 +59,17 @@ Console.WriteLine(simpleDelegate());
 
 Dans cet exemple, l'expression lambda ne prend aucun paramètre et retourne directement la chaîne de caractères "Profitez de votre chaîne de caractères !".
 
+```csharp
+using System;
+
+class Program {
+    public delegate void DelegueSimple();
+    static void Main(string[] args) {
+        DelegueSimple simpleDelegate 
+            = () => Console.WriteLine("Profitez de votre chaîne de caractères!!!");
+        simpleDelegate();
+    }
+}
+```
+
 Les expressions lambda offrent une flexibilité et une concision accrues lors de la définition de fonctions anonymes en C#. Elles sont largement utilisées dans divers contextes, notamment pour les gestionnaires d'événements, le traitement de collections et la programmation asynchrone.

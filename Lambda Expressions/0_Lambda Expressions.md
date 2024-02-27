@@ -53,6 +53,10 @@ class Program
     }
 }
 ```
+
+Dans ce cas, "Predicate<int> rappel" est déclaré avec le type `int` parce que la liste sur laquelle vous appliquez la méthode `FindAll` est une liste d'entiers (`List<int>`). Le délégué `Predicate<T>` est utilisé pour représenter une méthode qui prend un argument de type `T` et renvoie un booléen, et dans votre exemple, `T` est `int`.
+
+Cela signifie que votre prédicat `EstNombrePair` doit également prendre un argument de type `int`, car il doit correspondre à la signature requise par le délégué `Predicate<int>`. Et comme vous le définissez, `EstNombrePair` prend un `int` en argument et renvoie un booléen pour indiquer si l'entier est pair ou non.
 ### Methode Anonyme
 ```csharp
 static void SyntaxeMethodeAnonyme()
