@@ -1,4 +1,4 @@
-# Notes sur les méthodes d'extension et l'utilisation de GetEnumerator dans LINQ
+# L'utilisation de GetEnumerator dans LINQ
 
 Les méthodes d'extension jouent un rôle essentiel dans les API LINQ.
 
