@@ -1,101 +1,69 @@
 
+## Typage implicite des variables locales
 
+Le mot clé `var` de C# permet de définir une variable locale sans spécifier explicitement le type de données sous-jacent. La variable est toutefois fortement typée, car le compilateur déterminera le bon type de données en fonction de l'assignation initiale.
 
-Implicit Typing of Local Variables
-var keyword of C#. This keyword allows you to define a local variable
-without explicitly specifying the underlying data type. The variable, however, is strongly typed, as the
-compiler will determine the correct data type based on the initial assignment
-Console.WriteLine("myInt is a: {0}", myInt.GetType().Name);
+```csharp
+var monEntier = 10;
+Console.WriteLine("monEntier est de type : {0}", monEntier.GetType().Name);
+```
 
-many LINQ queries will return a sequence of data types, which are not known until compile time.
-Given that the underlying data type is not known until the application is compiled, you obviously can’t
-declare a variable explicitly!
+Dans de nombreux cas, les requêtes LINQ renverront une séquence de types de données qui ne sont pas connus avant le temps de compilation. Par conséquent, vous ne pouvez pas déclarer une variable de manière explicite.
 
+## Syntaxe d'initialisation d'objet et de collection
 
+La syntaxe d'initialisation d'objet vous permet de créer une variable de classe ou de structure et de définir un nombre quelconque de ses propriétés publiques en une seule fois.
 
-
-
-Object and Collection Initialization Syntax
-object initialization syntax, which allows you to create a class or structure
-variable and to set any number of its public properties in one fell swoop.
-List<Rectangle> myListOfRects = new List<Rectangle>
+```csharp
+List<Rectangle> maListeDeRectangles = new List<Rectangle>
 {
-new Rectangle {TopLeft = new Point { X = 10, Y = 10 },
-BottomRight = new Point { X = 200, Y = 200}},
+    new Rectangle {TopLeft = new Point { X = 10, Y = 10 },
+    BottomRight = new Point { X = 200, Y = 200}}
+};
+```
 
+## Expressions Lambda
 
+Les expressions lambda de C# (=>) peuvent être utilisées chaque fois que vous invoquez une méthode nécessitant un délégué fortement typé en argument. Les lambdas simplifient considérablement la manière dont vous travaillez avec les délégués, en réduisant la quantité de code que vous devez écrire manuellement.
 
-Lambda Expressions
-C# lambda operator (=>)
-which can be used any time you invoke a method that requires a strongly typed delegate
-as an argument. Lambdas greatly simplify how you work with delegates, in that they reduce the amount of
-code you must author by hand.
-( ArgumentsToProcess ) => { StatementsToProcessThem }
+```csharp
+List<int> liste = new List<int>();
+liste.AddRange(new int[] { 20, 1, 4, 8, 9, 44 });
+List<int> nombresPairs = liste.FindAll(i => (i % 2) == 0);
+```
 
-static void LambdaExpressionSyntax()
+Les expressions lambda sont utiles lorsque vous travaillez avec le modèle objet sous-jacent de LINQ. Les opérateurs de requête LINQ en C# ne sont en fait qu'une notation abrégée pour appeler des méthodes sur une classe appelée `System.Linq.Enumerable`. Ces méthodes nécessitent généralement des délégués (en particulier le délégué `Func<>`) en tant que paramètres, et les expressions lambda vous permettent de simplifier votre code.
+
+## Méthodes d'extension
+
+Les méthodes d'extension de C# vous permettent d'ajouter de nouvelles fonctionnalités à des classes existantes sans avoir besoin de créer une sous-classe. Le premier paramètre est qualifié avec le mot clé `this` et marque le type étendu.
+
+```csharp
+namespace MesExtensions
 {
-// Make a list of integers.
-List<int> list = new List<int>();
-list.AddRange(new int[] { 20, 1, 4, 8, 9, 44 });
-// C# lambda expression.
-List<int> evenNumbers = list.FindAll(i => (i % 2) == 0);
+    static class ExtensionsObjet
+    {
+        public static void AfficherAssemblyDefinissant(this object obj)
+        {
+            // Code pour afficher l'assembly définissant.
+        }
+    }
+}
+```
 
-Lambdas will be useful when working with the underlying object model of LINQ. As you will soon
-find out, the C# LINQ query operators are simply a shorthand notation for calling true-blue methods on a
-class named System.Linq.Enumerable. These methods typically require delegates (the Func<> delegate in
-particular) as parameters, which are used to process your data to yield the correct result set. Using lambdas,
-you can streamline your code and allow the compiler to infer the underlying delegate.
-
-
+Lorsque vous travaillez avec LINQ, vous n'aurez que rarement besoin de créer vos propres méthodes d'extension. En effet, chaque opérateur de requête LINQ en C# est une notation abrégée pour appeler une méthode d'extension sous-jacente, généralement définie par la classe utilitaire `System.Linq.Enumerable`.
 
 
-Extension Methods
-C# extension methods allow you to tack on new functionality to existing classes without the need to subclass.
+## Types anonymes
 
-the first parameter is qualified with the this keyword and marks the type being extended.
+Cette fonctionnalité permet de modéliser rapidement la "forme" des données en permettant au compilateur de générer une nouvelle définition de classe au moment de la compilation, en fonction d'un ensemble fourni de paires nom-valeur.
 
-namespace MyExtensions
-{
-static class ObjectExtensions
-{
-// Define an extension method to System.Object.
-public static void DisplayDefiningAssembly(
-this object obj)
-{
-When you are working with LINQ, you will seldom, if ever, be required to manually build your own
-extension methods. However, as you create LINQ query expressions, you will be making use of numerous
-extension methods already defined by Microsoft. In fact, each C# LINQ query operator is a shorthand
-notation for making a manual call on an underlying extension method, typically defined by the System.
-Linq.Enumerable utility class.
+```csharp
+var achat = new {
+    HeureAchat = DateTime.Now,
+    ArticleAcheté = new {Couleur = "Rouge", Marque = "Saab", VitesseActuelle = 55},
+    Prix = 34.000
+};
+```
 
-
-
-
-Anonymous Types
-This feature can be used to quickly model the “shape” of data by allowing the compiler to
-generate a new class definition at compile time, based on a supplied set of name-value pairs
-To define an anonymous type, declare an implicitly typed variable and specify the
-data’s shape using object initialization syntax.
-// Make an anonymous type that is composed of another.
-var purchaseItem = new {
-TimeBought = DateTime.Now,
-ItemBought =
-new {Color = "Red", Make = "Saab", CurrentSpeed = 55},
-Price = 34.000};
-
-LINQ makes frequent use of anonymous types when you want to project new forms of data on the fly.
-For example, assume you have a collection of Person objects and want to use LINQ to obtain information on
-the age and Social Security number of each. Using a LINQ projection, you can allow the compiler to generate
-a new anonymous type that contains your information
-
-
-
-
-
-
-
-
-
-
-
-
+LINQ fait souvent usage de types anonymes lorsque vous souhaitez projeter de nouvelles formes de données à la volée. Par exemple, supposons que vous ayez une collection d'objets `Personne` et que vous souhaitiez utiliser LINQ pour obtenir des informations sur l'âge et le numéro de sécurité sociale de chacun. En utilisant une projection LINQ, vous pouvez permettre au compilateur de générer un nouveau type anonyme contenant vos informations.

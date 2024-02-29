@@ -1,45 +1,66 @@
-Sorting Expressions
-By default, the order will be ascending; thus, ordering by a string
-would be alphabetical, ordering by numerical data would be lowest to highest, and so forth
+# Sorting Expressions
 
-static void AlphabetizeProductNames(ProductInfo[] products)
+L'expression de tri par défaut est ascendante ; ainsi, le tri par une chaîne de caractères serait alphabétique, le tri par des données numériques serait du plus bas au plus haut, et ainsi de suite.
+
+```csharp
+static void TrierNomsProduits(InfoProduit[] produits)
 {
-// Get names of products, alphabetized.
-var subset = from p in products orderby p.Name select p;
+    // Obtenir les noms des produits, triés par ordre alphabétique.
+    var sous-ensemble = from prod in produits orderby prod.Nom select prod;
+}
+```
 
-Except() extension method, which will return a LINQ result set that contains the difference between two
-containers, which, in this case, is the value Yugo.
+## Except() Extension Method
 
-var carDiff =
-(from c in myCars select c)
-.Except(from c2 in yourCars select c2);
-Console.WriteLine("Here is what you don't have, but I do:");
-foreach (string s in carDiff)
+La méthode d'extension `Except()` retournera un ensemble de résultats LINQ qui contient la différence entre deux conteneurs, qui, dans ce cas, est la valeur Yugo.
 
+```csharp
+var differenceVoiture =
+    (from voiture in mesVoitures select voiture)
+    .Except(from voiture2 in tesVoitures select voiture2);
 
-
-The Intersect() method will return a result set that contains the common data items in a set of
-containers. For example, the following method returns the sequence Aztec and BMW:
-static void DisplayIntersection()
+Console.WriteLine("Voici ce que vous n'avez pas, mais que j'ai :");
+foreach (string item in differenceVoiture)
 {
-List<string> myCars = new List<String> { "Yugo", "Aztec", "BMW" };
-List<string> yourCars = new List<String> { "BMW", "Saab", "Aztec" };
-// Get the common members.
-var carIntersect =
-(from c in myCars select c)
-.Intersect(from c2 in yourCars select c2);
+    Console.WriteLine(item);
+}
+```
 
+## Intersect() Method
 
-// Get the union of these containers.
-var carUnion =
-(from c in myCars select c)
-.Union(from c2 in yourCars select c2);
+La méthode `Intersect()` retournera un ensemble de résultats qui contient les éléments de données communs dans un ensemble de conteneurs. Par exemple, la méthode suivante renvoie la séquence Aztec et BMW :
 
+```csharp
+static void AfficherIntersection()
+{
+    List<string> mesVoitures = new List<string> { "BYD", "Aztec", "BMW" };
+    List<string> tesVoitures = new List<string> { "BMW", "Toyota", "Aztec" };
 
+    // Obtenir les membres communs.
+    var intersectionVoiture =
+        (from voiture in mesVoitures select voiture)
+        .Intersect(from voiture2 in tesVoitures select voiture2);
+}
+```
 
-var carConcat =
-(from c in myCars select c)
-.Concat(from c2 in yourCars select c2);
+## Union() Method
 
+La méthode `Union()` retournera un ensemble de résultats qui contient tous les éléments distincts de deux conteneurs.
 
+```csharp
+var unionVoiture =
+    (from voiture in mesVoitures select voiture)
+    .Union(from voiture2 in tesVoitures select voiture2);
+```
 
+## Concat() Method
+
+La méthode `Concat()` retournera un ensemble de résultats qui contient la concaténation de deux conteneurs.
+
+```csharp
+var concatVoiture =
+    (from voiture in mesVoitures select voiture)
+    .Concat(from voiture2 in tesVoitures select voiture2);
+```
+
+Chaque méthode de cet exemple utilise des opérations LINQ pour manipuler des ensembles de données dans le langage C#. Ces opérations sont puissantes et permettent des manipulations flexibles et expressives des données. La connaissance de ces méthodes est essentielle pour travailler efficacement avec LINQ dans le cadre du développement logiciel en C#.
