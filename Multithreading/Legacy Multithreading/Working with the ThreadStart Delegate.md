@@ -1,59 +1,74 @@
-Working with the ThreadStart Delegate
+# Travailler avec le délégué ThreadStart
 
-public class Printer
+```csharp
+public class Imprimeur
 {
-public void PrintNumbers()
-{
-// Display Thread info.
-Console.WriteLine("-> {0} is executing PrintNumbers()",
-Thread.CurrentThread.Name);
-// Print out numbers.
-Console.Write("Your numbers: ");
-for(int i = 0; i < 10; i++)
-{
-Console.Write("{0}, ", i);
-Thread.Sleep(2000);
+    public void ImprimerNombres()
+    {
+        // Afficher les informations sur le thread.
+        Console.WriteLine("-> {0} est en train d'exécuter ImprimerNombres()",
+        Thread.CurrentThread.Name);
+        // Afficher les nombres.
+        Console.Write("Vos nombres : ");
+        for(int i = 10; i < 20; i++)
+        {
+            Console.Write("{0}, ", i);
+            Thread.Sleep(1500);
+        }
+        Console.WriteLine();
+    }
 }
-Console.WriteLine();
+```
 
+Lorsque vous travaillez avec des threads en C#, vous pouvez utiliser le délégué `ThreadStart` pour démarrer l'exécution d'une méthode sur un thread séparé. Le délégué `ThreadStart` est conçu pour encapsuler une méthode ne prenant pas d'arguments et ne renvoyant pas de valeur. Dans cet exemple, nous avons une classe `Imprimeur` avec une méthode `ImprimerNombres()` qui affiche une séquence de nombres de 10 à 19 avec un délai de 1,5 seconde entre chaque nombre.
 
-if the
-user specifies two threads, you will create a ThreadStart delegate that points to PrintNumbers(), pass
-this delegate object into the constructor of a new Thread object, and call Start() to inform the .NET Core
-Runtime this thread is ready for processing.
-
+```csharp
 using System;
 using System.Threading;
-using SimpleMultiThreadApp;
-Console.WriteLine("***** The Amazing Thread App *****\n");
-Console.Write("Do you want [1] or [2] threads? ");
-string threadCount = Console.ReadLine();
-// Name the current thread.
-Thread primaryThread = Thread.CurrentThread;
-primaryThread.Name = "Primary";
-// Display Thread info.
-Console.WriteLine("-> {0} is executing Main()",
-Thread.CurrentThread.Name);
-// Make worker class.
-Printer p = new Printer();
-switch(threadCount)
+
+class ProgrammePrincipal
 {
-case "2":
-// Now make the thread.
-Thread backgroundThread =
-new Thread(new ThreadStart(p.PrintNumbers));
-backgroundThread.Name = "Secondary";
-backgroundThread.Start();
-break;
+    static void Main()
+    {
+        Console.WriteLine("***** L'application de gestion de threads *****\n");
+        Console.Write("Combien de threads souhaitez-vous utiliser ? [1] ou [2] : ");
+        string nombreDeThreads = Console.ReadLine();
 
-case "1":
-p.PrintNumbers();
-break;
-default:
-Console.WriteLine("I don't know what you want...you get 1 thread.");
-goto case "1";
+        // Nommer le thread principal.
+        Thread threadPrincipal = Thread.CurrentThread;
+        threadPrincipal.Name = "Principal";
+
+        // Afficher les informations sur le thread.
+        Console.WriteLine("-> {0} est en train d'exécuter Main()", Thread.CurrentThread.Name);
+
+        // Créer une instance de la classe Imprimeur.
+        Imprimeur imprimeur = new Imprimeur();
+
+        switch(nombreDeThreads)
+        {
+            case "2":
+                // Créer un nouveau thread pour imprimer les nombres.
+                Thread threadSecondaire = new Thread(new ThreadStart(imprimeur.ImprimerNombres));
+                threadSecondaire.Name = "Secondaire";
+                threadSecondaire.Start();
+                break;
+                
+            case "1":
+                imprimeur.ImprimerNombres();
+                break;
+                
+            default:
+                Console.WriteLine("Je ne comprends pas votre choix... vous obtiendrez 1 thread.");
+                goto case "1";
+        }
+
+        // Effectuer des tâches supplémentaires.
+        Console.WriteLine("Ceci est sur le thread principal, et nous avons fini.");
+        Console.ReadLine();
+    }
 }
-// Do some additional work.
-Console.WriteLine("This is on the main thread, and we are finished.");
-Console.ReadLine();
+```
 
+Dans la méthode `Main()`, nous donnons à l'utilisateur le choix d'exécuter le programme avec un ou deux threads. Selon le choix de l'utilisateur, nous instancions la classe `Imprimeur` et appelons la méthode `ImprimerNombres()` sur le thread principal ou sur un thread secondaire.
+
+En utilisant le délégué `ThreadStart`, nous avons la flexibilité de contrôler l'exécution des méthodes sur des threads séparés, ce qui peut être utile pour des tâches telles que le traitement parallèle, l'exécution de tâches en arrière-plan ou la gestion des opérations longues sans bloquer l'interface utilisateur dans une application graphique.

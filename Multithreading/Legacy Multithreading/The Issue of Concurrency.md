@@ -1,57 +1,68 @@
-The Issue of Concurrency
+# La problématique de la concurrence
 
-ensure that any piece of shared data
-is protected against the possibility of numerous threads changing its value.
+Lorsque plusieurs threads manipulent des données partagées, il est crucial de garantir la cohérence de ces données en les protégeant contre les modifications concurrentes.
 
-As the thread scheduler will force threads to
-suspend their work at random, what if thread A is kicked out of the way before it has fully completed its
-work? Thread B is now reading unstable data.
+Le planificateur de threads peut interrompre l'exécution d'un thread à tout moment, ce qui peut conduire à des situations où un thread accède à des données incohérentes, voire corrompues, si aucune mesure de protection n'est mise en place.
 
+## Exemple de code
+
+Considérons une classe `GestionnaireStock` qui simule la gestion d'un stock de produits. Cette classe dispose d'une méthode `ModifierStock()` permettant de mettre à jour la quantité de produits en stock.
+
+```csharp
 using System;
 using System.Threading;
-namespace MultiThreadedPrinting
+
+namespace GestionStockMultiThread
 {
-public class Printer
-{
-public void PrintNumbers()
-{
-// Display Thread info.
-Console.WriteLine("-> {0} is executing PrintNumbers()",
-Thread.CurrentThread.Name);
-// Print out numbers.
-for (int i = 0; i < 10; i++)
-{
-// Put thread to sleep for a random amount of time.
-Random r = new Random();
-Thread.Sleep(1000 * r.Next(5));
-Console.Write("{0}, ", i);
+    public class GestionnaireStock
+    {
+        private int quantiteProduits;
+
+        public void ModifierStock(int quantite)
+        {
+            // Simuler un traitement prenant du temps
+            Thread.Sleep(1000);
+
+            // Mettre à jour la quantité de produits en stock
+            quantiteProduits += quantite;
+
+            // Afficher le nouveau stock
+            Console.WriteLine($"Stock mis à jour. Nouvelle quantité : {quantiteProduits}");
+        }
+    }
 }
-Console.WriteLine();
+```
 
+Dans cet exemple, la méthode `ModifierStock()` est susceptible d'être appelée par plusieurs threads simultanément pour mettre à jour la quantité de produits en stock.
 
+## Synchronisation des threads
+
+Lorsque plusieurs threads accèdent à une méthode ou à des ressources partagées, il est impératif de synchroniser leur accès pour éviter les conflits et garantir la cohérence des données.
+
+Considérons un scénario où plusieurs threads tentent de modifier le stock en parallèle sans aucune synchronisation :
+
+```csharp
 using System;
 using System.Threading;
-using MultiThreadedPrinting;
-Console.WriteLine("*****Synchronizing Threads *****\n");
-Printer p = new Printer();
-// Make 10 threads that are all pointing to the same
-// method on the same object.
-Thread[] threads = new Thread[10];
-for (int i = 0; i < 10; i++)
+using GestionStockMultiThread;
+
+Console.WriteLine("***** Synchronisation des Threads *****\n");
+GestionnaireStock gestionnaireStock = new GestionnaireStock();
+
+Thread[] threads = new Thread[5];
+for (int i = 0; i < 5; i++)
 {
-threads[i] = new Thread(new ThreadStart(p.PrintNumbers))
-{
-Name = $"Worker thread #{i}"
-};
+    int quantite = i + 1; // Quantité de produits à ajouter
+    threads[i] = new Thread(() => gestionnaireStock.ModifierStock(quantite))
+    {
+        Name = $"Thread {i + 1}"
+    };
 }
-// Now start each one.
-foreach (Thread t in threads)
+
+foreach (Thread thread in threads)
 {
-t.Start();
+    thread.Start();
+}
+```
 
-
-have taken no precautions to lock
-down this object’s shared resources (the console), there is a good chance that the current thread will be
-kicked out of the way before the PrintNumbers() method is able to print the complete results. Because
-you do not know exactly when (or if ) this might happen, you are bound to get unpredictable results.
-
+Dans cet exemple, cinq threads sont créés pour modifier le stock en ajoutant différentes quantités de produits simultanément. Sans aucune synchronisation, les threads pourraient interagir de manière imprévisible, entraînant des résultats incorrects ou corrompus.

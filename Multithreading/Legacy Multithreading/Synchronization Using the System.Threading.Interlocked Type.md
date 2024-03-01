@@ -1,36 +1,42 @@
-Synchronization Using the System.Threading.Interlocked Type
+**Utilisation de la Synchronisation avec le Type System.Threading.Interlocked**
 
-a type that
-allows you to operate on a single point of data atomically with less overhead than with the Monitor type. The
-Interlocked class defines the key static members shown in Table 15-4.
-Table 15-4. Select Static Members of the System.Threading.Interlocked Type
-Member Meaning in Life
-CompareExchange() Safely tests two values for equality and, if equal, exchanges one of the values with a third
-Decrement() Safely decrements a value by 1
-Exchange() Safely swaps two values
+Le type `System.Threading.Interlocked` offre une alternative efficace à la synchronisation traditionnelle, permettant de réaliser des opérations atomiques sur une seule donnée avec moins de surcharge que le type `Monitor`. La classe `Interlocked` propose des membres statiques clés, comme illustré dans le tableau ci-dessous :
 
-int intVal = 5;
-object myLockToken = new();
-lock(myLockToken)
-{
-intVal++;
-}
+| Membre            | Description                                                                                     |
+|-------------------|-------------------------------------------------------------------------------------------------|
+| CompareExchange() | Teste de manière sécurisée l'égalité de deux valeurs et échange l'une des valeurs avec une troisième. |
+| Decrement()       | Décrémente de manière sécurisée une valeur de 1.                                                |
+| Exchange()        | Échange de manière sécurisée deux valeurs.                                                      |
 
-you can simplify your code via the static Interlocked.Increment() method. Simply pass in the variable to
-increment by reference. Do note that the Increment() method not only adjusts the value of the incoming
-parameter but also returns the new value.
-intVal = Interlocked.Increment(ref intVal);
+Par exemple, considérons une application où nous souhaitons incrémenter une variable entière `valeurEntiere` de manière sécurisée. Au lieu d'utiliser un verrou (`lock`), nous pouvons utiliser la méthode `Interlocked.Increment()`, ce qui réduit la complexité du code et les risques liés à la synchronisation :
 
+```csharp
+int valeurEntiere = 10;
+int nouvelleValeur = Interlocked.Increment(ref valeurEntiere);
+Console.WriteLine($"La nouvelle valeur de valeurEntiere est : {nouvelleValeur}");
+```
 
-For example, if you want to assign the value of a member variable to the
-value 83, you can avoid the need to use an explicit lock statement (or explicit Monitor logic) and use the
-Interlocked.Exchange() method, like so:
-Interlocked.Exchange(ref myInt, 83);
+Dans cet exemple, `Interlocked.Increment()` incrémente de manière atomique la valeur de `valeurEntiere` et renvoie la nouvelle valeur, garantissant ainsi une opération sûre et sans conflit.
 
-public void CompareAndExchange()
-{
-// If the value of i is currently 83, change i to 99.
-Interlocked.CompareExchange(ref i, 99, 83);
-}
+De même, pour remplacer une valeur de variable sans nécessiter de verrou (`lock`) explicite, nous pouvons utiliser `Interlocked.Exchange()`. Par exemple :
 
+```csharp
+int valeurAChanger = 20;
+int nouvelleValeur = Interlocked.Exchange(ref valeurAChanger, 30);
+Console.WriteLine($"La valeur changée est : {nouvelleValeur}");
+```
 
+Ici, la valeur de `valeurAChanger` est échangée de manière sécurisée avec la nouvelle valeur spécifiée, 30 dans cet exemple.
+
+Enfin, la méthode `CompareExchange()` permet de comparer et d'échanger une valeur si une condition est remplie. Par exemple :
+
+```csharp
+int valeurComparee = 40;
+int ancienneValeur = Interlocked.CompareExchange(ref valeurComparee, 50, 40);
+Console.WriteLine($"La valeur comparée est : {valeurComparee}");
+Console.WriteLine($"L'ancienne valeur est : {ancienneValeur}");
+```
+
+Dans ce cas, si la valeur de `valeurComparee` est égale à 40, elle est remplacée par 50 de manière sécurisée, sinon la valeur reste inchangée.
+
+En résumé, le type `System.Threading.Interlocked` offre des mécanismes sûrs et efficaces pour effectuer des opérations atomiques sur des données partagées, réduisant ainsi la complexité et les risques associés à la synchronisation traditionnelle.

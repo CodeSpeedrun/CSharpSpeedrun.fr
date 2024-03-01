@@ -1,38 +1,50 @@
-Local Functions (New 7.0)
+# Notes sur les Fonctions Locales
 
-static async Task MethodWithProblems(int firstParam, int secondParam)
-{
-Console.WriteLine("Enter");
-await Task.Run(() =>
-{
-//Call long running method
-Thread.Sleep(4_000);
-Console.WriteLine("First Complete");
-//Call another long running method that fails because
-//the second parameter is out of range
-Console.WriteLine("Something bad happened");
+Les fonctions locales permettent de définir des fonctions à l'intérieur d'une méthode, ce qui peut améliorer la clarté et la structure du code en regroupant du code associé dans une seule méthode.
 
-second long-running task fails because of invalid input data. You can (and
-should) add checks to the beginning of the method, but since the entire method is asynchronous, there is no
-guarantee when the checks will be executed.
+## Problèmes rencontrés dans une méthode
 
-static async Task MethodWithProblemsFixed(int firstParam, int secondParam)
+```csharp
+static async Task MethodeAvecProblemes(int parametre1, int parametre2)
 {
-Console.WriteLine("Enter");
-if (secondParam < 0)
-{
-Console.WriteLine("Bad data");
-return;
+    Console.WriteLine("Début");
+    await Task.Run(() =>
+    {
+        // Appel d'une opération longue
+        Thread.Sleep(6_000); // Exemple: simulation d'une opération longue de 6 secondes
+        Console.WriteLine("Première étape terminée");
+        // Appel d'une autre opération longue qui échoue en cas de paramètre hors limite
+        Console.WriteLine("Erreur: paramètre invalide");
+    });
 }
-await actualImplementation();
-async Task actualImplementation()
-{
-await Task.Run(() =>
-{
-//Call long running method
-Thread.Sleep(4_000);
-Console.WriteLine("First Complete");
-//Call another long running method that fails because
-//the second parameter is out of range
+```
 
+Dans cet exemple, nous avons une méthode asynchrone `MethodeAvecProblemes` qui prend deux paramètres. Elle exécute deux tâches longues de manière asynchrone. Cependant, le deuxième appel échoue si le deuxième paramètre est en dehors de la plage autorisée. Comme la méthode est asynchrone, il n'y a aucune garantie que les vérifications seront exécutées avant l'exécution de la tâche.
 
+## Correction des problèmes avec une fonction locale
+
+```csharp
+static async Task MethodeAvecProblemesCorriges(int parametre1, int parametre2)
+{
+    Console.WriteLine("Début");
+    if (parametre2 < 0)
+    {
+        Console.WriteLine("Données invalides");
+        return;
+    }
+    await ImplementationReelle();
+    
+    async Task ImplementationReelle()
+    {
+        await Task.Run(() =>
+        {
+            // Appel d'une opération longue
+            Thread.Sleep(6_000); // Exemple: simulation d'une opération longue de 6 secondes
+            Console.WriteLine("Première étape terminée");
+            // Appel d'une autre opération longue qui échoue en cas de paramètre hors limite
+        });
+    }
+}
+```
+
+Dans cette version corrigée, nous avons introduit une fonction locale `ImplementationReelle` pour encapsuler la partie de la logique qui nécessite la validation du deuxième paramètre. Cela améliore la lisibilité et la maintenabilité du code en séparant les préoccupations. Maintenant, la vérification du deuxième paramètre est effectuée avant l'exécution de la tâche longue, garantissant ainsi que les données en entrée sont valides.

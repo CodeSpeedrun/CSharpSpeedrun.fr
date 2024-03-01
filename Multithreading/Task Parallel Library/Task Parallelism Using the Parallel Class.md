@@ -1,93 +1,104 @@
-Task Parallelism Using the Parallel Class
+# Parallélisme des Tâches avec la Classe Parallel en C#
 
+Le parallélisme des tâches est une technique essentielle pour exploiter efficacement les ressources de calcul disponibles. En utilisant la classe `Parallel` en C#, vous pouvez exécuter des tâches simultanément, améliorant ainsi les performances de votre application. Dans cet exemple, nous allons voir comment utiliser la classe `Parallel` pour traiter un texte et extraire des statistiques sur celui-ci.
+
+```csharp
 using System;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Net;
 using System.Text;
-string _theEBook = "";
-GetBook();
-Console.WriteLine("Downloading book...");
+
+string _leTexte = "";
+
+TelechargerTexte();
+Console.WriteLine("Téléchargement du texte...");
 Console.ReadLine();
-void GetBook()
+
+void TelechargerTexte()
 {
-WebClient wc = new WebClient();
-wc.DownloadStringCompleted += (s, eArgs) =>
-{
-_theEBook = eArgs.Result;
-Console.WriteLine("Download complete.");
-GetStats();
-};
-// The Project Gutenberg EBook of A Tale of Two Cities, by Charles Dickens
-// You might have to run it twice if you’ve never visited the site before, since the first
-// time you visit there is a message box that pops up, and breaks this code.
-wc.DownloadStringAsync(new Uri("http://www.gutenberg.org/files/98/98-8.txt"));
+    WebClient webClient = new WebClient();
+    webClient.DownloadStringCompleted += (sender, e) =>
+    {
+        _leTexte = e.Result;
+        Console.WriteLine("Téléchargement terminé.");
+        ExtraireStatistiques();
+    };
+
+    webClient.DownloadStringAsync(new Uri("https://mon-site.com/mon-texte.txt"));
 }
 
+void ExtraireStatistiques()
+{
+    string[] mots = _leTexte.Split(new char[]
+    { ' ', '\u000A', ',', '.', ';', ':', '-', '?', '/' },
+    StringSplitOptions.RemoveEmptyEntries);
 
+    string[] dixMotsFrequents = TrouverDixMotsFrequents(mots);
+    string motLePlusLong = TrouverMotLePlusLong(mots);
 
-void GetStats()
-{
-// Get the words from the ebook.
-string[] words = _theEBook.Split(new char[]
-{ ' ', '\u000A', ',', '.', ';', ':', '-', '?', '/' },
-StringSplitOptions.RemoveEmptyEntries);
-// Now, find the ten most common words.
-string[] tenMostCommon = FindTenMostCommon(words);
-// Get the longest word.
-string longestWord = FindLongestWord(words);
-// Now that all tasks are complete, build a string to show all stats.
-StringBuilder bookStats = new StringBuilder("Ten Most Common Words are:\n");
-foreach (string s in tenMostCommon)
-{
-bookStats.AppendLine(s);
-}
-bookStats.AppendFormat("Longest word is: {0}", longestWord);
-bookStats.AppendLine();
-Console.WriteLine(bookStats.ToString(), "Book info");
-}
-The FindTenMostCommon() method uses a LINQ query to obtain a list of string objects that occur most
-often in the string array, while FindLongestWord() locates, well, the longest word.
-string[] FindTenMostCommon(string[] words)
-{
-var frequencyOrder = from word in words
-where word.Length > 6
-group word by word into g
-orderby g.Count() descending
-select g.Key;
-string[] commonWords = (frequencyOrder.Take(10)).ToArray();
-return commonWords;
-}
-string FindLongestWord(string[] words)
-{
-return (from w in words orderby w.Length descending select w).FirstOrDefault();
+    StringBuilder stats = new StringBuilder("Les dix mots les plus fréquents sont :\n");
+    foreach (string mot in dixMotsFrequents)
+    {
+        stats.AppendLine(mot);
+    }
+    stats.AppendFormat("Le mot le plus long est : {0}", motLePlusLong);
+    stats.AppendLine();
+    Console.WriteLine(stats.ToString(), "Statistiques du Texte");
 }
 
-
-void GetStats()
+string[] TrouverDixMotsFrequents(string[] mots)
 {
-// Get the words from the ebook.
-string[] words = _theEBook.Split(
-new char[] { ' ', '\u000A', ',', '.', ';', ':', '-', '?', '/' },
-StringSplitOptions.RemoveEmptyEntries);
-string[] tenMostCommon = null;
-string longestWord = string.Empty;
-Parallel.Invoke(
-() =>
+    var frequenceOrdre = from mot in mots
+                         where mot.Length > 5
+                         group mot by mot into g
+                         orderby g.Count() descending
+                         select g.Key;
+
+    string[] motsFrequents = (frequenceOrdre.Take(10)).ToArray();
+    return motsFrequents;
+}
+
+string TrouverMotLePlusLong(string[] mots)
 {
-// Now, find the ten most common words.
-tenMostCommon = FindTenMostCommon(words);
-},
-() =>
+    return (from m in mots orderby m.Length descending select m).FirstOrDefault();
+}
+
+void ExtraireStatistiques()
 {
-// Get the longest word.
-longestWord = FindLongestWord(words);
-});
-// Now that all tasks are complete, build a string to show all stats.
+    string[] mots = _leTexte.Split(
+        new char[] { ' ', '\u000A', ',', '.', ';', ':', '-', '?', '/' },
+        StringSplitOptions.RemoveEmptyEntries);
 
+    string[] dixMotsFrequents = null;
+    string motLePlusLong = string.Empty;
 
-The Parallel.Invoke() method expects a parameter array of Action<> delegates, which you have
-supplied indirectly using lambda expressions.
+    Parallel.Invoke(
+        () =>
+        {
+            dixMotsFrequents = TrouverDixMotsFrequents(mots);
+        },
+        () =>
+        {
+            motLePlusLong = TrouverMotLePlusLong(mots);
+        });
 
+    StringBuilder stats = new StringBuilder();
 
+    // Concaténation des statistiques
+}
+```
+
+### Explication des Snippets de Code
+
+- `TelechargerTexte()`: Cette méthode utilise un objet WebClient pour télécharger un texte à partir d'une URL de manière asynchrone. Une fois le téléchargement terminé, l'événement `DownloadStringCompleted` est déclenché, où le contenu du texte est assigné à la variable `_leTexte`.
+
+- `ExtraireStatistiques()`: Cette méthode divise le contenu du texte en mots, puis utilise des méthodes pour trouver les dix mots les plus fréquents et le mot le plus long. Les résultats sont ensuite affichés à l'utilisateur.
+
+- `TrouverDixMotsFrequents(string[] mots)`: Cette méthode utilise une requête LINQ pour regrouper les mots par fréquence, en ne conservant que ceux dont la longueur dépasse 5 caractères. Enfin, elle sélectionne les dix mots les plus fréquents.
+
+- `TrouverMotLePlusLong(string[] mots)`: Cette méthode utilise une requête LINQ pour trier les mots par longueur de manière décroissante et renvoie le premier élément de la liste, c'est-à-dire le mot le plus long.
+
+- `Parallel.Invoke()`: Cette méthode exécute les deux actions fournies en parallèle, permettant ainsi de rechercher les dix mots les plus fréquents et le mot le plus long simultanément pour améliorer les performances.
+
+Ces snippets de code illustrent l'utilisation efficace de la classe `Parallel` en C# pour traiter des tâches en parallèle et améliorer les performances lors du traitement de grandes quantités de données.
