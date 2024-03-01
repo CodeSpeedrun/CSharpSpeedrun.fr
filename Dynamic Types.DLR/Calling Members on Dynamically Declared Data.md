@@ -1,23 +1,38 @@
-Calling Members on Dynamically Declared Data
+# L'utilisation des Données Dynamiquement Déclarées en C#
 
-the validity of the members you specify will not be checked
-by the compiler! Remember, unlike a variable defined as a System.Object, dynamic data is not statically
-typed. It is not until runtime that you will know whether the dynamic data you invoked supports a specified
-member, whether you passed in the correct parameters,
+## Introduction
+En C#, l'utilisation des données déclarées de manière dynamique offre une flexibilité dans la gestion des types au moment de l'exécution. Cette note explore les implications et les considérations lors de l'utilisation de données déclarées de manière dynamique.
 
+## Appel de Membres sur des Données Dynamiquement Déclarées
 
+Lorsque vous travaillez avec des données déclarées de manière dynamique, il est essentiel de comprendre que le compilateur ne valide pas les membres auxquels vous accédez. Contrairement aux variables typées statiquement, les données dynamiques ne bénéficient pas d'une vérification de type lors de la compilation. Cela signifie que la validité des membres invoqués n'est pas confirmée avant l'exécution.
+
+```csharp
 static void InvokeMembersOnDynamicData()
 {
-dynamic textData1 = "Hello";
-Console.WriteLine(textData1.ToUpper());
-// You would expect compiler errors here!
-// But they compile just fine.
-Console.WriteLine(textData1.toupper());
-Console.WriteLine(textData1.Foo(10, "ee", DateTime.Now));
+    dynamic donneeDynamique = 10;
+    Console.WriteLine(donneeDynamique.ToString());
+    // Pas d'erreurs de compilation, mais des vérifications sont nécessaires à l'exécution.
+    Console.WriteLine(donneeDynamique.Toto());
+    Console.WriteLine(donneeDynamique.Bar(10, "ee", DateTime.Now));
 }
+```
 
-IntelliSense is not possible with dynamic data. However, remember that
-this means you need to be extremely careful when you are typing C# code on such data points. Any
-misspelling or incorrect capitalization of a member will throw a runtime error, specifically an instance of the
-RuntimeBinderException clas
+Dans l'exemple de code fourni, `donneeDynamique` est une variable dynamiquement déclarée de type entier. La méthode `ToString()` est invoquée, ce qui est une opération valide sur les entiers. Cependant, la deuxième ligne de `Console.WriteLine` tente d'appeler `Toto()` (orthographe incorrecte), ce qui entraînerait une erreur à l'exécution. De même, tenter d'appeler une méthode inexistante comme `Bar` provoquera également une erreur à l'exécution.
+
+## Implications de la Typage Dynamique
+
+1. **Absence de Support IntelliSense**: En raison de la nature dynamique des données, IntelliSense n'est pas disponible. Les développeurs doivent être prudents lors de la saisie du code, car des erreurs peuvent entraîner des erreurs à l'exécution.
+
+2. **Erreurs à l'Exécution**: Les erreurs telles que les fautes d'orthographe ou les utilisations incorrectes des membres entraînent des erreurs à l'exécution, spécifiquement des instances de `RuntimeBinderException`.
+
+## Considérations
+
+- **Saisie Soigneuse**: Les développeurs doivent être méticuleux lors de la rédaction de code avec des données dynamiques, en veillant à utiliser correctement les noms et les membres.
+
+- **Validation à l'Exécution**: Comme la vérification des types est reportée à l'exécution, des tests approfondis sont nécessaires pour garantir le bon fonctionnement.
+
+## Conclusion
+
+Travailler avec des données déclarées de manière dynamique en C# offre une flexibilité mais nécessite de la vigilance. Les développeurs doivent faire preuve de prudence pour éviter les erreurs à l'exécution et garantir la correction de leur code.
 

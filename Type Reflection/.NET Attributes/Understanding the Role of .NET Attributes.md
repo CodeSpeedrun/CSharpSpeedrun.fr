@@ -1,36 +1,46 @@
-Understanding the Role of .NET Attributes
+# Compréhension du rôle des attributs .NET
 
-.NET Core platform provides a way for programmers to embed additional metadata into
-an assembly using attributes.
+## Introduction
+Le framework .NET Core offre aux développeurs la possibilité d'ajouter des métadonnées supplémentaires à leurs assemblies à l'aide d'attributs.
 
-. In a nutshell, attributes are nothing more than code annotations that can
-be applied to a given type (class, interface, structure, etc.), member (property, method, etc.), assembly, or
-module.
+## Qu'est-ce qu'un attribut?
+En substance, un attribut est une annotation de code qui peut être appliquée à divers éléments tels que des types (classes, interfaces, structures, etc.), des membres (propriétés, méthodes, etc.), des assemblies ou des modules.
 
+## Utilité des attributs
+Les attributs fournissent des informations supplémentaires sur le code qui peuvent être utilisées par les outils de développement, les frameworks, ou même par le code lui-même pour modifier son comportement.
 
-If you have a field that should not be exported to JSON,
-you can apply the [JsonIgnore] attribute.
-public class Motorcycle
+## Exemple d'attribut: [JsonIgnore]
+Supposons que nous ayons une classe représentant un vélo, et nous voulons exclure un attribut spécifique lors de la sérialisation JSON.
+
+```csharp
+public class Velo
 {
-[JsonIgnore]
-public float weightOfCurrentPassengers;
-// These fields are still serializable.
-public bool hasRadioSystem;
+    [JsonIgnore]
+    public float PoidsPassagersActuel;
+    // D'autres propriétés...
+}
+```
 
+Dans cet exemple, l'attribut `[JsonIgnore]` est utilisé pour exclure la propriété `PoidsPassagersActuel` de la sérialisation JSON.
 
-namespace ApplyingAttributes
+## Exemple d'attribut: [Obsolete]
+L'attribut `[Obsolete]` est utilisé pour marquer du code comme obsolète. Par exemple, considérons une classe représentant une calèche:
+
+```csharp
+namespace ExemplesAttributs
 {
-[XmlRoot(Namespace = "http://www.MyCompany.com"), Obsolete("Use another vehicle!")]
-public class HorseAndBuggy
+    [Obsolete("Utilisez un autre moyen de transport !")]
+    public class Calèche
+    {
+        // Implémentation de la classe...
+    }
+}
+```
 
-public sealed class ObsoleteAttribute : Attribute
-{
-public ObsoleteAttribute(string message, bool error);
-public ObsoleteAttribute(string message);
+Ici, la classe `Calèche` est marquée comme obsolète, avec un message conseillant d'utiliser un autre moyen de transport.
 
+## Discussion sur l'attribut `[Obsolete]`
+L'utilisation de l'attribut `[Obsolete]` permet de signaler aux développeurs que certaines parties du code sont dépréciées et qu'elles devraient être évitées au profit de nouvelles alternatives.
 
-HorseAndBuggy mule = new HorseAndBuggy();
-you would find that a compiler warning is issued. The warning is specifically CS0618, and the message
-includes the information passed into the attribute.
-‘HorseAndBuggy’ is obsolete: ‘Use another vehicle!'
-
+## Conclusion
+Les attributs .NET sont des outils puissants pour annoter le code avec des métadonnées supplémentaires. Ils permettent d'améliorer la compréhension du code, d'orienter son comportement, et de faciliter son utilisation. Il est important de comprendre comment et quand utiliser les attributs de manière appropriée pour tirer le meilleur parti de cette fonctionnalité.

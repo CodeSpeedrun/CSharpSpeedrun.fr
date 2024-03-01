@@ -1,92 +1,89 @@
+ # Construction d'une Application Extensible
 
-Building an Extendable Application
+## Introduction
 
+L'extensibilité d'une application se réfère à sa capacité à accueillir et à intégrer des modules additionnels ou des fonctionnalités tierces sans nécessiter de modifications majeures de son code source initial. Dans cet article, nous explorerons les principes et les techniques pour créer une application extensible en utilisant le langage de programmation C#.
 
-What exactly is meant by extendable? Well, consider the Visual Studio IDE. When this application was
-developed, various “hooks” were inserted into the code base to allow other software vendors to “snap” (or
-plug in) custom modules into the IDE. Obviously, the Visual Studio development team had no way to set
+## Compréhension de l'Extensibilité
 
+Avant de plonger dans les détails techniques, il est important de comprendre le concept d'extensibilité dans le contexte du développement logiciel. L'extensibilité permet à une application d'évoluer et de s'adapter aux besoins changeants sans nécessiter une refonte complète de son architecture. Cela permet aux développeurs d'ajouter de nouvelles fonctionnalités de manière modulaire, ce qui favorise la réutilisabilité du code et la maintenance à long terme.
 
-references to external .NET assemblies it had not developed yet (thus, no early binding), so how exactly
-would an application provide the required hooks? Here is one possible way to solve this problem:
-1. First, an extendable application must provide some input mechanism to allow
-the user to specify the module to plug in (such as a dialog box or command-line
-flag). This requires dynamic loading.
-2. Second, an extendable application must be able to determine whether the
-module supports the correct functionality (such as a set of required interfaces) to
-be plugged into the environment. This requires reflection.
-3. Finally, an extendable application must obtain a reference to the required
-infrastructure (such as a set of interface types) and invoke the members to trigger
-the underlying functionality. This may require late binding.
+## Méthodes pour Rendre une Application Extensible
 
+Il existe plusieurs méthodes pour rendre une application extensible en C#. Dans cet article, nous explorerons trois approches clés :
 
-CommonSnappableTypes.dll: This assembly contains type definitions that will be
-used by each snap-in object and will be directly referenced by the Windows Forms
-application.
-• CSharpSnapIn.dll: A snap-in written in C#, which leverages the types of
-CommonSnappableTypes.dll.
-• VBSnapIn.dll: A snap-in written in Visual Basic, which leverages the types of
-CommonSnappableTypes.dll.
-• MyExtendableApp.exe: A console application that may be extended by the
-functionality of each snap-in.
-This application will use dynamic loading, reflection, and late binding to dynamically gain the
-functionality of assemblies it has no prior knowledge of.
+1. **Chargement Dynamique des Modules**
+2. **Réflexion (Reflection)**
+3. **Appel Tardif (Late Binding)**
 
+Chacune de ces techniques joue un rôle essentiel dans la création d'une architecture extensible et flexible.
 
-// Get all IAppFunctionality compatible classes in assembly.
-var theClassTypes = theSnapInAsm
-.GetTypes()
-.Where(t => t.IsClass && (t.GetInterface("IAppFunctionality") != null))
-.ToList();
-if (!theClassTypes.Any())
+## Chargement Dynamique des Modules
+
+Le chargement dynamique des modules permet à une application d'incorporer de nouvelles fonctionnalités à la volée, sans avoir besoin de les connaître à l'avance. Cela est particulièrement utile pour les plugins ou les extensions tierces. Voici un exemple de code illustrant le chargement dynamique des modules :
+
+```csharp
+// Charger tous les types compatibles avec IExtension dans l'assembly.
+var typesModules = assemblyModules
+    .GetTypes()
+    .Where(type => type.IsClass && (type.GetInterface("IExtension") != null))
+    .ToList();
+    
+if (!typesModules.Any())
 {
-Console.WriteLine("Nothing implements IAppFunctionality!");
-}
-// Now, create the object and call DoIt() method.
-foreach (Type t in theClassTypes)
-{
-// Use late binding to create the type.
-IAppFunctionality itfApp = (IAppFunctionality) theSnapInAsm.CreateInstance(t.FullName,
-true);
-itfApp?.DoIt();
-// Show company info.
-DisplayCompanyData(t);
-}
+    Console.WriteLine("Aucune implémentation de IExtension trouvée !");
 }
 
-
-static void DisplayCompanyData(Type t)
+// Créer l'objet et appeler la méthode Run().
+foreach (var type in typesModules)
 {
-// Get [CompanyInfo] data.
-var compInfo = t
-.GetCustomAttributes(false)
-.Where(ci => (ci is CompanyInfoAttribute));
-// Show data.
-foreach (CompanyInfoAttribute c in compInfo)
-
-
-Console.WriteLine("***** Welcome to MyTypeViewer *****");
-string typeName = "";
-do
-{
-Console.WriteLine("\nEnter a snapin to load");
-Console.Write("or enter Q to quit: ");
-// Get name of type.
-typeName = Console.ReadLine();
-// Does user want to quit?
-if (typeName.Equals("Q", StringComparison.OrdinalIgnoreCase))
-{
-break;
+    // Utiliser l'appel tardif (late binding) pour créer le type.
+    IExtension extension = (IExtension) assemblyModules.CreateInstance(type.FullName, true);
+    extension?.Run();
+    
+    // Afficher les informations sur l'extension.
+    DisplayExtensionData(type);
 }
-// Try to display type.
-try
-{
-LoadExternalModule(typeName);
-}
-catch (Exception ex)
-{
-Console.WriteLine("Sorry, can't find snapin");
-}
-}
+```
 
+Dans cet exemple, nous recherchons tous les types dans un assembly qui implémentent l'interface `IExtension`. Nous créons ensuite une instance de chaque type trouvé et appelons la méthode `Run()`, qui représente la fonctionnalité spécifique du module.
 
+## Réflexion (Reflection)
+
+La réflexion en C# permet à une application d'examiner et de manipuler sa propre structure à l'exécution. Cela est particulièrement utile pour découvrir dynamiquement les types, les propriétés et les méthodes d'un objet. Dans le contexte de l'extensibilité, la réflexion est souvent utilisée pour vérifier si un module externe implémente certaines interfaces requises. Voici un exemple de code illustrant l'utilisation de la réflexion :
+
+```csharp
+static void DisplayExtensionData(Type type)
+{
+    // Obtenir les données personnalisées de l'extension.
+    var extensionData = type
+        .GetCustomAttributes(false)
+        .Where(attribute => (attribute is ExtensionDataAttribute));
+    
+    // Afficher les données.
+    foreach (ExtensionDataAttribute data in extensionData)
+    {
+        Console.WriteLine("***** Informations sur l'extension *****");
+        // Afficher les informations sur l'extension.
+    }
+}
+```
+
+Dans cet exemple, nous utilisons la réflexion pour obtenir les attributs personnalisés d'un type donné. Cela nous permet d'accéder aux métadonnées associées à ce type, telles que les informations sur l'extension qui pourraient être incluses à des fins de documentation ou de suivi.
+
+## Appel Tardif (Late Binding)
+
+L'appel tardif est une technique qui permet d'appeler dynamiquement des méthodes ou d'accéder à des membres d'un objet sans avoir une référence statique à ces membres à l'avance. Cela est utile lorsque les détails spécifiques des objets sont inconnus jusqu'à l'exécution. Voici un exemple de code illustrant l'appel tardif :
+
+```csharp
+static void LoadExternalModule(string typeName)
+{
+    // Charger le module externe avec l'appel tardif.
+}
+```
+
+Dans cet exemple, nous utilisons l'appel tardif pour charger un module externe dont le nom est spécifié par l'utilisateur à l'exécution. Cela permet à l'application d'intégrer dynamiquement de nouveaux modules sans avoir besoin de les connaître à l'avance.
+
+## Conclusion
+
+Dans cet article, nous avons exploré les principes fondamentaux de l'extensibilité des applications en C#. En comprenant les techniques telles que le chargement dynamique des modules, la réflexion et l'appel tardif, les développeurs peuvent créer des applications flexibles et modulaires qui peuvent s'adapter aux besoins changeants des utilisateurs et de l'entreprise. L'extensibilité est un aspect essentiel de la conception logicielle moderne, et sa maîtrise permet de créer des solutions logicielles robustes et évolutives.

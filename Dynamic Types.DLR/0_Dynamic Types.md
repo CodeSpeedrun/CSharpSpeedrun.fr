@@ -1,52 +1,63 @@
-Dynamic Types and the Dynamic
-Language Runtime
+# Types Dynamiques et le Runtime Dynamique du Langage en C#
 
-dynamic. This keyword allows you to
-incorporate scripting-like behaviors into the strongly typed world of type safety, semicolons, and curly
-brackets. Using this loose typing, you can greatly simplify some complex coding tasks and also gain the
-ability to interoperate with a number of dynamic languages that are .NET Core savvy.
+Les types dynamiques en C# permettent d'intégrer des comportements semblables à du scripting dans le monde fortement typé de la sécurité des types, des points-virgules et des accolades. Cette flexibilité facilite grandement certaines tâches de codage complexes et offre la possibilité d'interopérer avec plusieurs langages dynamiques compatibles avec .NET Core.
 
-how loosely typed
-calls are mapped to the correct in-memory object using the Dynamic Language Runtime (DLR).
+## Introduction aux Types Dynamiques
 
-Don’t confuse the C# dynamic keyword with the concept of a dynamic assembly
+Le mot-clé `dynamic` en C# permet de définir des types dynamiques. Contrairement aux types statiques, les types dynamiques autorisent un typage plus souple, où les appels sont associés à l'objet en mémoire correct via le Runtime Dynamique du Langage (DLR). Il est important de ne pas confondre le mot-clé `dynamic` avec le concept d'assemblage dynamique.
 
-implicit typing is useful
-with LINQ, as many LINQ queries return enumerations of anonymous classes (via projections) that you
-cannot directly declare in your C# code.
+## Avantages des Types Dynamiques
 
+L'inférence de type implicite est particulièrement utile, notamment avec LINQ, où de nombreuses requêtes LINQ retournent des énumérations de classes anonymes (via des projections) qui ne peuvent pas être déclarées directement dans le code C#.
 
-From a high level, you can consider the dynamic keyword a
-specialized form of System.Object, in that any value can be assigned to a dynamic data type.
+## Utilisation des Types Dynamiques
 
+D'un point de vue élevé, le mot-clé `dynamic` peut être considéré comme une forme spécialisée de `System.Object`, dans la mesure où n'importe quelle valeur peut lui être assignée.
 
-static void PrintThreeStrings()
+## Exemples de Codes
+
+### Affichage de Trois Chaînes de Caractères
+
+```csharp
+static void AfficherTroisChaines()
 {
-var s1 = "Greetings";
-object s2 = "From";
-dynamic s3 = "Minneapolis";
-Console.WriteLine("s1 is of type: {0}", s1.GetType());
-Console.WriteLine("s2 is of type: {0}", s2.GetType());
-Console.WriteLine("s3 is of type: {0}", s3.GetType());
-
-s1 is of type: System.String
-s2 is of type: System.String
-s3 is of type: System.String
-
-
-static void ChangeDynamicDataType()
-{
-// Declare a single dynamic data point
-// named "t".
-dynamic t = "Hello!";
-Console.WriteLine("t is of type: {0}", t.GetType());
-t = false;
-Console.WriteLine("t is of type: {0}", t.GetType());
-t = new List<int>();
-Console.WriteLine("t is of type: {0}", t.GetType());
+    var chaine1 = "Bonjour";
+    object chaine2 = "de la part de";
+    dynamic chaine3 = "Montréal";
+    
+    Console.WriteLine("chaine1 est de type : {0}", chaine1.GetType());
+    Console.WriteLine("chaine2 est de type : {0}", chaine2.GetType());
+    Console.WriteLine("chaine3 est de type : {0}", chaine3.GetType());
 }
-t is of type: System.String
-t is of type: System.Boolean
-t is of type: System.Collections.Generic.List`1[System.Int32]
+```
 
+Dans cet exemple, nous avons trois variables `chaine1`, `chaine2`, et `chaine3`. Les deux premières sont typées de manière implicite (`var` et `object`), tandis que la troisième est typée dynamiquement avec `dynamic`. Cependant, lors de l'exécution, toutes les variables contiennent des chaînes de caractères et sont de type `System.String`.
 
+### Changement du Type Dynamique
+
+```csharp
+static void ChangerTypeDynamique()
+{
+    // Déclarer un point de données dynamique nommé "variable".
+    dynamic variable = "Bonjour !";
+    Console.WriteLine("La variable est de type : {0}", variable.GetType());
+    
+    variable = false;
+    Console.WriteLine("La variable est de type : {0}", variable.GetType());
+    
+    variable = new List<string>();
+    Console.WriteLine("La variable est de type : {0}", variable.GetType());
+}
+```
+
+Dans cet exemple, nous avons une variable dynamique `variable` qui est d'abord initialisée avec une chaîne de caractères, puis avec un booléen, et enfin avec une liste de chaînes de caractères. À chaque réaffectation, le type de la variable change dynamiquement pour correspondre au type de la nouvelle valeur assignée.
+
+```
+La variable est de type : System.String
+La variable est de type : System.Boolean
+La variable est de type : System.Collections.Generic.List`1[System.String]
+```
+
+## Conclusion
+
+Les types dynamiques offrent une flexibilité supplémentaire dans la programmation en C#, facilitant l'interopérabilité avec des langages dynamiques et simplifiant certains scénarios de développement.
