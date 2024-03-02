@@ -1,4 +1,4 @@
-# Notes sur l'utilisation de code non sécurisé en C#
+# L'utilisation de code non sécurisé en C#
 
 Dans le développement de projets .NET Core, il est peu probable que vous utilisiez fréquemment l'une des fonctionnalités les moins utilisées de C#.
 

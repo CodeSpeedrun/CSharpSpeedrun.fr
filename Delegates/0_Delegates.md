@@ -1,4 +1,4 @@
-# Notes on Callback Mechanisms in C#
+# Mécanisme de rappel en C#
 
 Les applications requièrent souvent qu'un objet puisse communiquer avec l'entité qui l'a créé en utilisant un mécanisme de rappel.
 
