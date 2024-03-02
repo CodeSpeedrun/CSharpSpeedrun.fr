@@ -54,15 +54,7 @@ En suivant le principe de la responsabilité unique, chaque méthode ne s'occupe
 - **Réutilisabilité :** Les modules qui accomplissent une seule tâche peuvent être réutilisés dans d'autres parties du code ou dans d'autres projets.
 
 En respectant ce principe, les développeurs peuvent améliorer la qualité de leur code, réduire sa complexité et aboutir à des systèmes logiciels plus robustes et évolutifs.
-
-
-# Principes SOLID en C#
-
-## Principe de Responsabilité Unique
-
-Le principe de Responsabilité Unique est l'un des cinq principes SOLID, fondamentaux pour concevoir des logiciels maintenables et évolutifs. Ce principe stipule qu'une classe ne devrait être responsable que d'une seule tâche ou d'un seul comportement.
-
-### Importance du principe
+  
 
 Lors de la conception d'un système logiciel, il est crucial que chaque composant ait une responsabilité claire et limitée. Cela facilite la compréhension du code, sa maintenance et son évolution. Une classe ayant plusieurs responsabilités devient difficile à gérer et peut entraîner des effets secondaires indésirables.
 
@@ -99,12 +91,7 @@ public class GestionMembres
 ```
 
 Dans cet exemple, nous avons séparé les responsabilités de gestion des livres et de gestion des membres en deux classes distinctes, conformément au principe de Responsabilité Unique.
-
-### Avantages
-
-- **Facilité de maintenance :** Des classes avec une seule responsabilité sont plus faciles à comprendre et à modifier, ce qui facilite la maintenance du code.
-- **Réutilisabilité :** En respectant ce principe, les classes deviennent plus génériques et peuvent être réutilisées dans d'autres parties de l'application sans modification.
-- **Testabilité :** Les classes avec une seule responsabilité sont plus faciles à tester car leur comportement est plus prévisible et elles ont moins de dépendances.
+ 
 
 ### Conclusion
 

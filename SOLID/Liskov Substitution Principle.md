@@ -11,6 +11,8 @@ Le PSL, proposé par Barbara Liskov en 1987, est l'un des cinq principes SOLID d
 Considérons un exemple de géométrie avec une classe parente `Forme` et deux sous-classes `Carré` et `Triangle`. La classe `Forme` contient une méthode `CalculerAire()` pour calculer l'aire de la forme.
 
 ```csharp
+using System;
+
 public abstract class Forme
 {
     public abstract double CalculerAire();
@@ -18,13 +20,28 @@ public abstract class Forme
 
 public class Carré : Forme
 {
-    public double Côté { get; set; }
+    private double côté;
+
+    public double Côté
+    {
+        get => côté;
+        set
+        {
+            if (value <= 0)
+            {
+                throw new ArgumentException("La longueur du côté doit être positive et non nulle.");
+            }
+
+            côté = value;
+        }
+    }
 
     public override double CalculerAire()
     {
         return Côté * Côté;
     }
 }
+
 
 public class Triangle : Forme
 {
@@ -36,6 +53,39 @@ public class Triangle : Forme
         return (Base * Hauteur) / 2;
     }
 }
+
+class Program
+{
+    static void AfficherAire(Forme forme)
+    {
+        try
+        {
+            Console.WriteLine($"L'aire de la forme est : {forme.CalculerAire()}");
+        }
+        catch (ArgumentException ex)
+        {
+            Console.WriteLine($"Erreur : {ex.Message}");
+        }
+    }
+
+    static void Main(string[] args)
+    {
+        try
+        {
+            Carré carré = new Carré { Côté = 5 };
+            Triangle triangle = new Triangle { Base = 4, Hauteur = 3 };
+
+            AfficherAire(carré);
+            AfficherAire(triangle);
+        }
+        catch (ArgumentException ex)
+        {
+            Console.WriteLine($"Erreur : {ex.Message}");
+        }
+    }
+}
+
+
 ```
 
 Dans cet exemple, les classes `Carré` et `Triangle` héritent de `Forme` et implémentent la méthode `CalculerAire()` pour leurs propres calculs. Ainsi, on peut utiliser des instances de `Carré` ou `Triangle` là où une instance de `Forme` est attendue, respectant ainsi le principe de substitution de Liskov.

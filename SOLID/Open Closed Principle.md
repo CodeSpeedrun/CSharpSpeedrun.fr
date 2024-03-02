@@ -11,11 +11,15 @@ Le principe OCP repose sur la modularité et l'extensibilité des logiciels. Il 
 Prenons l'exemple d'un système de gestion de formes géométriques. Initialement, le système ne traitait que les cercles et les rectangles pour le calcul de l'aire. En utilisant le principe OCP, nous pouvons étendre ce système pour inclure de nouveaux types de formes, comme les triangles, sans toucher au code existant.
 
 ```csharp
+using System;
+
+// Classe abstraite représentant une forme géométrique
 public abstract class Forme
 {
     public abstract double CalculerAire();
 }
 
+// Classe concrète représentant un cercle
 public class Cercle : Forme
 {
     public double Rayon { get; set; }
@@ -26,6 +30,7 @@ public class Cercle : Forme
     }
 }
 
+// Classe concrète représentant un rectangle
 public class Rectangle : Forme
 {
     public double Largeur { get; set; }
@@ -37,6 +42,7 @@ public class Rectangle : Forme
     }
 }
 
+// Classe concrète représentant un triangle
 public class Triangle : Forme
 {
     public double Base { get; set; }
@@ -47,6 +53,45 @@ public class Triangle : Forme
         return (Base * Hauteur) / 2;
     }
 }
+
+// Factory pour créer les instances de Forme
+public class FabriqueFormes
+{
+    public Forme CreerForme(Type type)
+    {
+        if (type == typeof(Cercle))
+            return new Cercle();
+        else if (type == typeof(Rectangle))
+            return new Rectangle();
+        else if (type == typeof(Triangle))
+            return new Triangle();
+        else
+            throw new NotSupportedException("Ce type de forme n'est pas pris en charge.");
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Utilisation de la FabriqueFormes pour créer les instances
+        FabriqueFormes fabrique = new FabriqueFormes();
+        Forme cercle = fabrique.CreerForme(typeof(Cercle));
+        ((Cercle)cercle).Rayon = 5;
+        Console.WriteLine("Aire du cercle: " + cercle.CalculerAire());
+
+        Forme rectangle = fabrique.CreerForme(typeof(Rectangle));
+        ((Rectangle)rectangle).Largeur = 4;
+        ((Rectangle)rectangle).Hauteur = 6;
+        Console.WriteLine("Aire du rectangle: " + rectangle.CalculerAire());
+
+        Forme triangle = fabrique.CreerForme(typeof(Triangle));
+        ((Triangle)triangle).Base = 3;
+        ((Triangle)triangle).Hauteur = 4;
+        Console.WriteLine("Aire du triangle: " + triangle.CalculerAire());
+    }
+}
+
 ```
 
 Dans cet exemple, la classe abstraite `Forme` définit une méthode abstraite `CalculerAire()`, que chaque forme (cercle, rectangle, triangle, etc.) doit implémenter. Ainsi, si nous voulons ajouter une nouvelle forme géométrique, nous pouvons simplement créer une nouvelle classe dérivée de `Forme` sans toucher au code existant.
@@ -72,44 +117,103 @@ Le modèle de stratégie est un modèle de conception permettant de définir une
 ### Exemple d'Utilisation du Modèle de Stratégie
 
 ```csharp
-public interface ICalculAire
+using System;
+using System.Collections.Generic;
+
+// Classe abstraite représentant une stratégie de calcul d'aire
+public interface IAireCalculStrategy
 {
     double CalculerAire();
 }
 
-public class CalculAireCercle : ICalculAire
+// Stratégie de calcul d'aire pour un cercle
+public class CercleAireCalculStrategy : IAireCalculStrategy
 {
-    private readonly Cercle _cercle;
+    private readonly double _rayon;
 
-    public CalculAireCercle(Cercle cercle)
+    public CercleAireCalculStrategy(double rayon)
     {
-        _cercle = cercle;
+        _rayon = rayon;
     }
 
     public double CalculerAire()
     {
-        return Math.PI * Math.Pow(_cercle.Rayon, 2);
+        return Math.PI * Math.Pow(_rayon, 2);
     }
 }
 
-public class CalculAireRectangle : ICalculAire
+// Stratégie de calcul d'aire pour un rectangle
+public class RectangleAireCalculStrategy : IAireCalculStrategy
 {
-    private readonly Rectangle _rectangle;
+    private readonly double _largeur;
+    private readonly double _hauteur;
 
-    public CalculAireRectangle(Rectangle rectangle)
+    public RectangleAireCalculStrategy(double largeur, double hauteur)
     {
-        _rectangle = rectangle;
+        _largeur = largeur;
+        _hauteur = hauteur;
     }
 
     public double CalculerAire()
     {
-        return _rectangle.Largeur * _rectangle.Hauteur;
+        return _largeur * _hauteur;
     }
 }
+
+// Stratégie de calcul d'aire pour un triangle
+public class TriangleAireCalculStrategy : IAireCalculStrategy
+{
+    private readonly double _base;
+    private readonly double _hauteur;
+
+    public TriangleAireCalculStrategy(double @base, double hauteur)
+    {
+        _base = @base;
+        _hauteur = hauteur;
+    }
+
+    public double CalculerAire()
+    {
+        return (_base * _hauteur) / 2;
+    }
+}
+
+// Classe représentant une forme géométrique
+public class Forme
+{
+    private readonly IAireCalculStrategy _aireCalculStrategy;
+
+    public Forme(IAireCalculStrategy aireCalculStrategy)
+    {
+        _aireCalculStrategy = aireCalculStrategy;
+    }
+
+    public double CalculerAire()
+    {
+        return _aireCalculStrategy.CalculerAire();
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        var formes = new List<Forme>
+        {
+            new Forme(new CercleAireCalculStrategy(5)),
+            new Forme(new RectangleAireCalculStrategy(4, 6)),
+            new Forme(new TriangleAireCalculStrategy(3, 4))
+        };
+
+        foreach (var forme in formes)
+        {
+            Console.WriteLine("Aire de la forme: " + forme.CalculerAire());
+        }
+    }
+}
+
 ```
-
-Dans cet exemple, les classes `CalculAireCercle` et `CalculAireRectangle` implémentent l'interface `ICalculAire`, qui définit une méthode `CalculerAire()`. Chaque classe encapsule le calcul de l'aire pour une forme spécifique, permettant ainsi l'ajout de nouvelles formes géométriques sans modifier le code existant.
-
+ 
 ## Conclusion
 
 Le principe ouvert/fermé est un concept essentiel en génie logiciel, qui favorise la création de systèmes flexibles, extensibles et faciles à maintenir. En suivant ce principe et en utilisant des techniques telles que l'Inversion de Contrôle et les modèles de conception, les développeurs peuvent concevoir des logiciels évolutifs qui répondent efficacement aux besoins changeants des utilisateurs.
