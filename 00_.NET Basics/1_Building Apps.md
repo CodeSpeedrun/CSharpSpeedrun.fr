@@ -1,4 +1,4 @@
-## Notes de développement en C# avec .NET 5 et Visual Studio 2019
+## Développement en C# avec .NET 5 et Visual Studio 2019
 
 Ces notes couvrent la configuration de votre environnement pour le développement en C# avec .NET 5 et Visual Studio 2019. Nous passerons en revue les outils essentiels, la création de projets et comment exécuter votre application.
 
