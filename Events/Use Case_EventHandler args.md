@@ -250,3 +250,148 @@ public class Program {
     }
 }
 ```
+
+Type `int`
+```csharp
+using System;
+
+public class Niveau {
+    public event EventHandler<int> OnFinNiveau;
+
+    public void TerminerNiveau(int numéroNiveau) {
+        Console.WriteLine($"Niveau {numéroNiveau} terminé !");
+
+        OnFinNiveau?.Invoke(this, numéroNiveau);
+    }
+}
+
+public class Jeu {
+    public void GérerFinNiveau(object sender, int numéroNiveau) {
+        Console.WriteLine($"Félicitations ! Niveau {numéroNiveau} terminé !");
+    }
+}
+
+public class Program {
+    public static void Main(string[] args) {
+        Niveau niveau = new Niveau();
+        Jeu jeu = new Jeu();
+
+        niveau.OnFinNiveau += jeu.GérerFinNiveau;
+        niveau.TerminerNiveau(1);
+    }
+}
+```
+
+Pas de type
+```csharp
+using System;
+
+public class Niveau {
+    public event EventHandler OnFinNiveau;
+
+    public void TerminerNiveau(int numéroNiveau) {
+        Console.WriteLine($"Niveau {numéroNiveau} terminé !");
+        OnFinNiveau?.Invoke(this, EventArgs.Empty);
+    }
+}
+
+public class Jeu {
+    public void GérerFinNiveau(object sender, EventArgs e) {
+        if (sender is Niveau niveau) {
+            Console.WriteLine($"Félicitations ! Niveau {niveau} terminé !");
+        }
+    }
+}
+
+public class Program {
+    public static void Main(string[] args) {
+        Niveau niveau = new Niveau();
+        Jeu jeu = new Jeu();
+
+        niveau.OnFinNiveau += jeu.GérerFinNiveau;
+        niveau.TerminerNiveau(1);
+    }
+}
+```
+
+Lambda Expression
+```csharp
+using System;
+
+public class Niveau {
+    public event EventHandler OnFinNiveau;
+
+    public void TerminerNiveau(int numéroNiveau) {
+        Console.WriteLine($"Niveau {numéroNiveau} terminé !");
+        OnFinNiveau?.Invoke(this, EventArgs.Empty);
+    }
+}
+
+public class Program {
+    public static void Main(string[] args) {
+        Niveau niveau = new Niveau();
+
+        niveau.OnFinNiveau += (sender, e) => {
+            if (sender is Niveau n) {
+                Console.WriteLine($"Félicitations ! Niveau {n} terminé !");
+            }
+        };
+
+        niveau.TerminerNiveau(1);
+    }
+}
+```
+### Les différences
+Voici toutes les différences et les changements dans le code pour les différentes déclarations d'événements :
+
+1. Déclaration d'événement sans type spécifique :
+```csharp
+public event EventHandler OnFinNiveau;
+```
+Dans cette déclaration, aucun argument spécifique n'est passé lors de l'invocation de l'événement `OnFinNiveau`.
+
+2. Déclaration d'événement avec un argument de type `int` :
+```csharp
+public event EventHandler<int> OnFinNiveau;
+```
+Dans cette déclaration, un entier est passé en tant qu'argument lors de l'invocation de l'événement `OnFinNiveau`.
+
+3. Déclaration d'événement avec un argument de type `FinNiveauEventArgs` :
+```csharp
+public event EventHandler<FinNiveauEventArgs> OnFinNiveau;
+```
+Dans cette déclaration, un objet de type `FinNiveauEventArgs` est passé en tant qu'argument lors de l'invocation de l'événement `OnFinNiveau`.
+
+En plus de ces déclarations d'événements, d'autres changements sont nécessaires dans le code pour prendre en compte ces différences. Voici les autres changements possibles :
+
+- Dans la méthode `TerminerNiveau` de la classe `Niveau`, l'objet événement doit être instancié en conséquence :
+```csharp
+// Pour la déclaration d'événement sans type spécifique
+OnFinNiveau?.Invoke(this, EventArgs.Empty);
+
+// Pour la déclaration d'événement avec un argument de type `int`
+OnFinNiveau?.Invoke(this, numéroNiveau);
+
+// Pour la déclaration d'événement avec un argument de type `FinNiveauEventArgs`
+OnFinNiveau?.Invoke(this, new FinNiveauEventArgs { Niveau = numéroNiveau });
+```
+
+- Dans la méthode `GérerFinNiveau` de la classe `Jeu`, la signature et l'utilisation des arguments doivent être adaptées en fonction du type d'argument de l'événement :
+```csharp
+// Pour la déclaration d'événement sans type spécifique
+public void GérerFinNiveau(object sender, EventArgs e) {
+    Console.WriteLine("Félicitations ! Niveau terminé !");
+}
+
+// Pour la déclaration d'événement avec un argument de type `int`
+public void GérerFinNiveau(object sender, int numéroNiveau) {
+    Console.WriteLine($"Félicitations ! Niveau {numéroNiveau} terminé !");
+}
+
+// Pour la déclaration d'événement avec un argument de type `FinNiveauEventArgs`
+public void GérerFinNiveau(object sender, FinNiveauEventArgs e) {
+    Console.WriteLine($"Félicitations ! Niveau {e.Niveau} terminé !");
+}
+```
+
+En prenant en compte ces changements, le code est modifié pour fonctionner correctement avec les différentes déclarations d'événements.

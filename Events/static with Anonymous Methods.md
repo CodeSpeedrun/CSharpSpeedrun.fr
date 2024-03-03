@@ -1,4 +1,4 @@
-# Notes sur l'utilisation de méthodes anonymes avec la portée statique en C#
+# L'utilisation de méthodes anonymes avec la portée statique en C#
 
 Les méthodes anonymes, lorsqu'elles sont utilisées avec la portée statique en C#, offrent des avantages en termes d'encapsulation et de préservation de la pureté des fonctions. Cette approche permet d'isoler les fonctions locales du code contenant, assurant ainsi qu'elles ne peuvent pas introduire d'effets secondaires indésirables.
 

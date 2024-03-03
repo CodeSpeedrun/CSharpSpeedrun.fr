@@ -1,6 +1,7 @@
 1. **Approche avec Délégué** :
 ```csharp
-public delegate void GestionnaireEvenementCommandeProduit(object sender, EventArgsCommandeProduit e);
+public delegate void GestionnaireEvenementCommandeProduit
+    (object sender, EventArgsCommandeProduit e);
 
 public event GestionnaireEvenementCommandeProduit CommandeProduit;
 ```
@@ -16,7 +17,8 @@ En ce qui concerne les autres façons d'atteindre le même objectif, vous pouvez
 
 ```csharp
 // S'abonner en utilisant une expression lambda
-voiture.SurLePointDExploser += (sender, e) => Console.WriteLine($"Voiture presque morte : {e.Message}");
+voiture.SurLePointDExploser += 
+    (sender, e) => Console.WriteLine($"Voiture presque morte : {e.Message}");
 ```
 
 Et en utilisant des conversions de groupes de méthodes :

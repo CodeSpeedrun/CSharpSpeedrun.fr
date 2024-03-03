@@ -1,4 +1,4 @@
-# Notes sur la Delegate générique EventHandler<T>
+# La Delegate générique EventHandler<T>
 
 Dans la programmation orientée objet en C#, les délégués sont des types de données qui permettent de référencer des méthodes avec la même signature que celle du délégué. La classe `EventHandler<T>` est une déléguée générique utilisée pour représenter les méthodes qui manipulent des événements.
 
