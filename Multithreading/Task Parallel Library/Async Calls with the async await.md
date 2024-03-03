@@ -1,6 +1,6 @@
-# Appels asynchrones avec async/await
+# Appels asynchrones avec `async/await`
 
-Lorsque vous utilisez les mots-clés async et await, le compilateur génère une quantité importante de code de gestion des threads pour vous, en utilisant de nombreux membres des espaces de noms System.Threading et System.Threading.Tasks.
+Lorsque vous utilisez les mots-clés `async` et `await`, le compilateur génère une quantité importante de code de gestion des threads pour vous, en utilisant de nombreux membres des espaces de noms `System.Threading` et `System.Threading.Tasks`.
 
 Le modificateur async permet au runtime .NET Core de créer un nouveau thread d'exécution pour gérer la tâche en cours.
 
