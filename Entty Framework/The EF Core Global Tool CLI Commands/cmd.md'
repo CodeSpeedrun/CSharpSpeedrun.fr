@@ -1,0 +1,6 @@
+The dotnet-ef global CLI tool EF Core tooling contains the commands needed to scaffold existing databases
+into code, to create/remove database migrations, and to operate on a database (update, drop, etc.).
+
+
+skipped
+c23 skipped
