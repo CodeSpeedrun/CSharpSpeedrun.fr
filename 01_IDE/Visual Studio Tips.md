@@ -37,5 +37,8 @@ during a debugging session (select Debug ➤ Windows ➤ Threads when the progra
 see from Figure 15-1, you can quickly identify the thread you want to diagnose.
 
 
+using Visual Studio, right-click the project, select Properties, and then go to the Build tab to
+enter the “Conditional compiler symbols” values.
+
 
 ```
