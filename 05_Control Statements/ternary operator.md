@@ -20,7 +20,9 @@ namespace CSharpSpeedrun
             int noteEtudiant = 52;
             string resultat;
 
-            resultat = (noteEtudiant < 40) ? "L'étudiant a échoué le module." : "L'étudiant a réussi le module !";
+            resultat = (noteEtudiant < 40) ? 
+                "L'étudiant a échoué le module." : 
+                    "L'étudiant a réussi le module !";
             Console.WriteLine(resultat);
         }
     }

@@ -18,7 +18,8 @@ public class Person
     public int Age { get; set; }
 
     // Surcharge de ToString() pour fournir une représentation de chaîne personnalisée
-    public override string ToString() => $"[Prénom : {FirstName}; Nom : {LastName}; Âge : {Age}]";
+    public override string ToString() => 
+        $"[Prénom : {FirstName}; Nom : {LastName}; Âge : {Age}]";
 }
 ```
 

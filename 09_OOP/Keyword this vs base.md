@@ -75,9 +75,9 @@ Le mot-clé `base` est utilisé pour accéder aux membres de la classe de base �
 
 ### Comparaison entre `this` et `base`
 
-- **`this` est utilisé pour faire référence aux membres de la classe actuelle, tandis que `base` est utilisé pour accéder aux membres de la classe de base.**
+- *`this` est utilisé pour faire référence aux membres de la classe actuelle, tandis que `base` est utilisé pour accéder aux membres de la classe de base.**
   
-- **`this` est souvent utilisé pour éviter les ambiguïtés entre les paramètres et les champs de la classe actuelle, tandis que `base` est utilisé pour accéder aux membres de la classe de base, notamment les constructeurs, les propriétés et les méthodes.**
+- *`this` est souvent utilisé pour éviter les ambiguïtés entre les paramètres et les champs de la classe actuelle, tandis que `base` est utilisé pour accéder aux membres de la classe de base, notamment les constructeurs, les propriétés et les méthodes.**
 
 En comprenant la distinction entre `this` et `base`, vous pouvez écrire un code plus clair et mieux structuré, en tirant pleinement parti de la hiérarchie des classes en POO.
 

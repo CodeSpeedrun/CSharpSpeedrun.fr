@@ -1,5 +1,7 @@
+
+## Implémentations par défaut d'interfaces
 ```csharp
-// Implémentations par défaut d'interfaces
+// 
 
 // Définir une interface pour les formes pointues régulières
 interface IPointy
