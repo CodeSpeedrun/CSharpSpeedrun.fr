@@ -21,3 +21,5 @@ dotnet build
 To run your project without debugging, execute in the same directory as the project file (CSharpConsoleApp.csproj):
 dotnet run
 */
+
+dotnetnew //get template lsts
